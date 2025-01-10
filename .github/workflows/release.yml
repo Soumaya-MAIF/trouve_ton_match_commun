@@ -1,0 +1,114 @@
+on:
+  push:
+    # Déclenche le workflow lorsque des modifications sont poussées sur les branches 'main' ou 'beta'
+    branches:
+      - main
+      - dev
+      - 53-24-mise-en-place-de-la-ci
+
+permissions:
+  # Accord de permission pour écrire des contenus dans le dépôt
+  contents: write
+
+jobs:
+  get-version:
+    # Utilise un workflow externe pour obtenir la version actuelle basée sur les branches de release et prerelease
+    uses: shiipou/github-actions/.github/workflows/get-version.yml@main
+    with:
+      # Définir la branche 'main' pour les releases officielles
+      release-branches: '^(main)$'
+      # Définir la branche 'beta' pour les pre-releases
+      prerelease-branches: '^(dev|53-24-mise-en-place-de-la-ci)$'
+
+  # Job pour construire le back-end Java
+  build-backend:
+    name: Build Java Backend
+    runs-on: ubuntu-latest
+    if: ${{ needs.get-version.outputs.will-release == 'true' }}
+    needs:
+      - get-version
+    steps:
+      # Étape 1 : Récupérer le code source
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Étape 2 : Configurer JDK 17
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.4.0
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Étape 3 : Construire le projet Java avec Maven
+      - name: Build backend with Maven
+        run: mvn clean install
+
+      # Étape 4 : Sauvegarder les artefacts du back-end (le fichier JAR)
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend
+          path: target/*.jar
+
+  # Job pour construire le front-end React
+  build-frontend:
+    name: Build React Frontend
+    runs-on: ubuntu-latest
+    if: ${{ needs.get-version.outputs.will-release == 'true' }}
+    needs:
+      - get-version
+    steps:
+      # Étape 1 : Récupérer le code source
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Étape 2 : Configurer Node.js
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.4
+
+      # Étape 3 : Changer de répertoire vers le bon dossier du projet React
+      - name: Change directory to frontend
+        working-directory: ./front
+        run: |
+          npm install
+          npm run build
+
+      # Étape 4 : Sauvegarder les artefacts du front-end (fichiers de build)
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend
+          path: ./front/build/
+
+  # Job pour publier la release sur GitHub
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend, get-version]
+    steps:
+      # Étape 1 : Télécharger les artefacts
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+
+      # Étape 2 : Créer une archive ZIP des artefacts pour les inclure dans la release
+      - name: Zip files artifacts
+        run: zip -r frontend.zip artifacts/frontend/*
+
+      # Étape 3 : Créer la release sur GitHub
+      - name: Create GitHub Release
+        env:
+          VERSION: "${{ needs.get-version.outputs.version }}"
+          REPO: "${{ github.repository }}"
+          COMMIT: "${{ github.sha }}"
+          GH_TOKEN: "${{ github.token }}"
+          PRERELEASE: ${{ needs.get-version.outputs.is-prerelease }}
+          CHANGELOG: ${{ needs.get-version.outputs.changelogs }}
+        run: |
+          echo "$CHANGELOG" > changelog.md
+          if [ "$PRERELEASE" == "true" ]; then
+            gh release create --prerelease --repo $REPO --target $COMMIT -F changelog.md "v$VERSION" artifacts/backend/*.jar frontend.zip
+          else
+            gh release create --repo $REPO --target $COMMIT -F changelog.md "v$VERSION" artifacts/backend/*.jar frontend.zip
+
