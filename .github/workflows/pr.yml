@@ -1,0 +1,38 @@
+on:
+  pull_request:
+
+jobs:
+  test:
+    name: Spring test
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    services:
+      # Label used pour accéder au conteneur de service
+      db:
+        # Image Docker Hub
+        image: postgres
+        # Fournir le mot de passe pour postgres
+        env:
+          POSTGRES_DB: app
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: securePassword
+        # Définir les vérifications de santé pour attendre que postgres ait démarré
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with Maven
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/app
+          SPRING_DATASOURCE_USERNAME: user
+          SPRING_DATASOURCE_PASSWORD: securePassword
+        run: mvn clean test
