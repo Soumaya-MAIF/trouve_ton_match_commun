@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: trouve_ton_match_commun
+
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT}/ttm_commun
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
