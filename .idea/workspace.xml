@@ -4,7 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="" />
+    <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/back/trouve_ton_match/TrouveTonMatchApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/back/trouve_ton_match/TrouveTonMatchApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/Design sans titre (1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/Design sans titre (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/Design sans titre (3).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/Design sans titre.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/Nouvelle_Aquitaine-Logo-Reseau_Initiative.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/facebook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/favicon_TTM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/instagram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/linkedin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/logo_TTM_vert.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/logo_TTM_vert_init.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/send.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/send2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/send_blanc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/media/images/logos/tic-tac.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/setupTests.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,9 +60,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2rRcmMY6LZ48t6qjwdmHHRKJMmK" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -27,6 +71,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Maven.trouve_ton_match [clean,install].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
@@ -37,6 +82,18 @@
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="TrouveTonMatchApplication" type="Application" factoryName="Application">
+      <envs>
+        <env name="POSTGRES_PORT" value="5432" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="back.trouve_ton_match.TrouveTonMatchApplication" />
+      <module name="trouve_ton_match" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
