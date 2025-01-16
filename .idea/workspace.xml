@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="" />
+    <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,9 +18,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2rRcmMY6LZ48t6qjwdmHHRKJMmK" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -27,16 +29,32 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.TrouveTonMatchApplication.executor": "Run",
+    "Maven.trouve_ton_match [clean,install].executor": "Run",
+    "Maven.trouve_ton_match [clean,test,install].executor": "Run",
+    "Maven.trouve_ton_match [clean,test].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/workspaces/trouve_ton_match_commun",
+    "last_opened_file_path": "C:/workspaces/INITIATIVE-DEUX-SEVRES-Trouve-Ton-Match",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="TrouveTonMatchApplication" type="Application" factoryName="Application">
+      <envs>
+        <env name="POSTGRES_PORT" value="5432" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="back.trouve_ton_match.TrouveTonMatchApplication" />
+      <module name="trouve_ton_match" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
