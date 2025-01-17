@@ -15,12 +15,17 @@
 
 .msgAccueil h1, .msgAccueil h2, .msgAccueil h3 {
     margin: 20px 0; /* Espacement uniforme au-dessus et en dessous de chaque titre */
+    font-size: 1.5rem;
 }
 
 .msgAccueil h1 {
     color: #FF165D;
+    font-size: 3rem;
+
 }
 
 .msgAccueil h3 {
     color: #71c920;
+    font-size: 2rem;
+
 }

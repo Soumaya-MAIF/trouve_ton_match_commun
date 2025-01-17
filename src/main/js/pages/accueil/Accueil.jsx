@@ -1,5 +1,5 @@
 import "./accueil.css";
-import Wrapper from '../../Wrapper/index'
+import Wrapper from '../../wrapper/Index.jsx'
 
 
 const Accueil = () => {

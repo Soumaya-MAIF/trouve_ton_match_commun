@@ -1,0 +1,64 @@
+.footer {
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column; /* Changer en column pour aligner avec la structure du composant */
+    align-items: center;
+    justify-content: center;
+    /* font-size: calc(10px + 2vmin); */
+    color: rgb(7, 7, 7);
+    margin: 0 15px; /* Ajuster les marges pour centrer le contenu */
+}
+
+.img-footer {
+    height: 30px;
+    width: auto;
+    margin-right: 20px; /* Ajouter une marge pour espacer les images */
+}
+
+.Initiative79 {
+    padding-bottom: 10px;
+    font-weight: bold; /* Assurer que le texte est en gras */
+}
+
+.mentionsLégales {
+    display: flex;
+    justify-content: center; 
+    font-size: 0.8rem;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 10px;
+    align-items: center;
+}
+
+
+/* Applique le flex, l'alignement à gauche, et l'espacement entre les éléments */
+.col {
+    display: flex;
+    flex: 1;
+    flex-direction: column;   /* Empile les éléments verticalement */
+    align-items: flex-start;  /* Aligne le contenu à gauche */
+    gap: 10px;                /* Espacement de 10px entre chaque ligne */
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-left: 10vh;
+}
+
+.horaires {
+    margin-left: 10vh;
+    display: flex;      /* Activer Flexbox */
+    flex-direction: column; /* Empiler les éléments verticalement */
+    gap: 10px;          /* Espacement entre les lignes */
+}
