@@ -1,0 +1,19 @@
+body {
+    background-color: #e7ffcc;
+}
+
+main {
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../../../public/images/background.jpg");
+    background-position-y: center;
+    background-size: cover;
+}
+
+.App {
+    text-align: start;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
