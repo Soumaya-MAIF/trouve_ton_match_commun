@@ -1,0 +1,26 @@
+.msgAccueil {
+    background-color: rgb(255, 255, 255);
+    opacity: 0.7;
+    min-height: 300px; /* Hauteur minimale de la section */
+    height: 100%; /* La section occupe toute la hauteur de la fenêtre */
+    width: 45vw;
+    padding: 20px; /* Espace uniforme autour de tout le contenu */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.msgAccueil h1, .msgAccueil h2, .msgAccueil h3 {
+    margin: 20px 0; /* Espacement uniforme au-dessus et en dessous de chaque titre */
+}
+
+.msgAccueil h1 {
+    color: #FF165D;
+}
+
+.msgAccueil h3 {
+    color: #71c920;
+}
