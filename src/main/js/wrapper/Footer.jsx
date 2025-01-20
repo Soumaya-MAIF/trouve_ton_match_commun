@@ -36,7 +36,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="mentionsLégales">
-                    <div>© 2020 Initiative France - Intranet</div>  
+                    <div>© 2025 Initiative France - Intranet</div>  
                 </div>
             </div>
         </footer>
