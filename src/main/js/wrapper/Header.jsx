@@ -1,5 +1,3 @@
-import logo from '../../medias/images/logos/Nouvelle_Aquitaine-Logo-Reseau_Initiative.webp';
-import logo_TTM_vert from '../../medias/images/logos/logo_TTM_vert.png';
 import './header.css';
 import { Link } from "react-router-dom";
 // import { useAuth } from '../AuthContext';
@@ -61,14 +59,10 @@ const Header = () => {
                 </div>
                 <div className="header-row">
                     <div className="header-col">
-                        <div className="logo-container">
-                            <img src={logo_TTM_vert} className="logo ttm" alt="logo_TTM" />
-                        </div>
+                        <div className="logo-ttm" alt="logo_TTM" />
                     </div>
                     <div className="header-col">
-                        <div className="logo-container">
-                            <img src={logo} className="logo" alt="logo" />
-                        </div>
+                        <div className="logo-reseau" alt="logo_reseau" />
                     </div>
                 </div>
                 <div class="line" />
