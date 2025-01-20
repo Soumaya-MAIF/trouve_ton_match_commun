@@ -7,9 +7,9 @@ import './footer.css';
 const Footer = () => {
     return (
         <footer className='footer'>
-            <div className="container">
-                <div className="row">
-                    <div className="col">
+            <div className="footer-container">
+                <div className="footer-row">
+                    <div className="footer-col">
                         <div className="social-icons">
                             <div><img src={instagram} className="img-footer" alt="instagram" /></div>
                             <div><img src={facebook} className="img-footer" alt="facebook" /></div>
@@ -17,17 +17,17 @@ const Footer = () => {
                             <div><img src={linkedin} className="img-footer" alt="linkedin" /></div>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="footer-col">
                         <div className='Initiative79'><b>INITIATIVE DEUX SEVRES</b></div>
                         <div>Pépinière d'Entreprises du Niortais</div>
                         <div>4, BD Louis Tardy</div>
                         <div>79000 Niort</div>
                     </div>
-                    <div className="col">
+                    <div className="footer-col">
                         <div>Téléphone : +33 6 79 87 56 09</div>
                         <div>accompagnement@initiativedeuxsevres.fr</div>
                     </div>
-                    <div className="col">
+                    <div className="footer-col">
                         <div className='horaires'>
                             <div>Du lundi au vendredi</div>
                             <div>de 08h30 à 12h30</div>
