@@ -1,0 +1,118 @@
+/* import favicon_TTM from '../../medias/images/logos/favicon_TTM_rose.png'; */
+
+.header {
+    height: 12vh;
+    width: 100%;
+    padding-top: 1.2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-size: calc(10px + 2vmin); */
+    /* color: rgb(7, 7, 7); */
+}
+
+.header-container {
+    width: 100%;
+    margin: 0 auto;
+    padding-right: 70px;
+}
+
+
+.header-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header-col {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: wrap;
+    flex: 1;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+}
+
+.menu {
+    display: flex;
+    font-size: 1.05rem;
+    color: rgb(7, 7, 7);
+    text-decoration-line: none;
+    padding-top: 5px;
+}
+
+.menu:hover {
+    color: #FF165D;
+}
+
+.bouton .btn-connexion {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #FF165D;
+    color: #fff;
+    cursor: pointer;
+}
+
+.bouton .btn-creer {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.bouton .btn-creer:hover {
+    background-color: #fff;
+    /* Couleur de fond blanche au survol */
+    color: #000;
+    /* Couleur du texte noire au survol */
+}
+
+.bouton .btn-connexion:hover {
+    background-color: #fff;
+    /* Couleur de fond blanche au survol */
+    color: #000;
+    /* Couleur du texte noire au survol */
+}
+
+.logo {
+    max-height: 8vh;
+    width: auto;/* La largeur s'ajustera automatiquement pour garder les proportions */
+    object-fit: contain; /* Le logo sera contenu dans le header sans être étiré */
+}
+/* 
+.logo ttm {
+    background-image: url('../../medias/images/logos/logo_TTM_vert.png');
+} */
+
+.favicon {
+    background-image: url('../../medias/images/logos/favicon_TTM.png');
+    width: 6vh;
+    height: 6vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.favicon:hover {
+    background-image: url('../../medias/images/logos/favicon_TTM_rose.png');
+}
+
+.favicon-container { 
+    padding-top: 20px;
+    /* display: flex;  */
+    /* justify-content: center; */
+    /* align-items: flex-end; */
+    /* height: 0%; */
+}
+
+.line {
+    width: 90%; /*Elle occupe 90% de la largeur disponible*/
+    margin: 5px auto 0 ; /* Espace au-dessus de la ligne */
+    border-top: 3px solid #71c920; /* Vous pouvez changer la couleur et l'épaisseur */
+}
