@@ -1,0 +1,75 @@
+.row-champ {
+    display: flex;
+    flex-direction: column; /* Disposer les éléments en colonne */
+    margin: 0px;
+}
+
+.col-champ {
+    display: flex;
+    flex-direction: column; /* Disposer les éléments en colonne */
+    padding: 0px;
+}
+
+.form-label-type {
+    background-color: #e7ffcc;
+    padding: 10px 20px 10px 15px;
+    border-radius: 5px;
+    display: inline-block; /* Assurez-vous que le label est un bloc en ligne pour s'adapter au contenu */
+    width: 600px; /* Assurez-vous que la largeur s'adapte au contenu */
+    margin-bottom: 0; /* Supprimez toutes les marges */
+}
+
+
+.custom-container {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0px 0px 20px 0px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.custom-input {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: black;
+    border: 1px solid transparent; /* Ajoutez une bordure par défaut */
+    border-radius: 5px; /* Ajoutez un arrondi */
+    padding: 0.5rem 1rem; /* Ajoutez du padding pour un meilleur style */
+    width: 100%; /* Pour qu'il prenne toute la largeur */
+    box-sizing: border-box; /* Assurez-vous que le padding n'affecte pas la taille */
+    outline: none; /* Supprimez la bordure par défaut du focus */
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1rem; /* Taille spécifique pour les champs */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Ajoutez une transition pour un effet fluide */
+}
+
+.custom-container .custom-input.is-valid {
+    border-color: rgb(6, 233, 6, 0.5); /* Bordure verte pour un état valide */
+    box-shadow: 0 0 10px rgba(0, 160, 8, 0.5); /* Effet lumineux pour un état valide */
+}
+
+.custom-container .custom-input.is-invalid {
+    border-color: red; /* Bordure rouge pour un état invalide */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Effet lumineux pour un état invalide */
+}
+
+.custom-container .custom-id {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.alert-format {
+    color: #FF165D;
+    background-color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 200px;;
+    font-size: 0.875em;
+    margin-top: -15px;
+}

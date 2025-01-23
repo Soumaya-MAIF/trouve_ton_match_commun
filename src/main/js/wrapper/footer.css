@@ -32,7 +32,7 @@
     padding-top: 10px;
 }
 
-.row {
+.row-footer {
     display: flex;
     flex-wrap: wrap;
     margin: 0 10px;
@@ -41,7 +41,7 @@
 
 
 /* Applique le flex, l'alignement à gauche, et l'espacement entre les éléments */
-.col {
+.col-footer {
     display: flex;
     flex: 1;
     flex-direction: column;   /* Empile les éléments verticalement */
