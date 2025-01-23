@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import './champSaisie.css';
+import './champ-saisie.css';
 
 export function ChampSaisie({ setValue, label, name, value, regex }) {
 
