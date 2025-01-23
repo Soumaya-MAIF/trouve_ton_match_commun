@@ -15,7 +15,7 @@
     padding: 10px 20px 10px 15px;
     border-radius: 5px;
     display: inline-block; /* Assurez-vous que le label est un bloc en ligne pour s'adapter au contenu */
-    width: 600px; /* Assurez-vous que la largeur s'adapte au contenu */
+    /* width: 600px; Assurez-vous que la largeur s'adapte au contenu */
     margin-bottom: 0; /* Supprimez toutes les marges */
 }
 
@@ -65,11 +65,9 @@
 .alert-format {
     color: #FF165D;
     background-color: white;
-    padding-right: 10px;
-    padding-left: 10px;
-    border: 1px solid;
+    padding: 1px 10px 1px 10px;
     border-radius: 5px;
     width: 200px;;
     font-size: 0.875em;
-    margin-top: -15px;
+    margin-top: -18px;
 }

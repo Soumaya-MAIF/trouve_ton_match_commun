@@ -49,20 +49,17 @@
 .erreur-manquant {
     color: white;
     background-color: #FF165D;
-    padding-right: 10px;
-    padding-left: 10px;
-    border: 1px solid;
+    padding: 1px 10px 1px 10px;
     border-radius: 5px;
     width: 200px;;
     font-size: 0.875em;
-    margin-top: -15px;
+    margin-top: -18px;
 }
 
 
 .position-bouton {
     display: flex;
-    justify-content: center;
-    margin-left: 100px;
+    justify-content: end;
 }
 
 .bouton-envoyer {

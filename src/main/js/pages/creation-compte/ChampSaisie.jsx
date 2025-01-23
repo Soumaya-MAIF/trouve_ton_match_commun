@@ -31,11 +31,11 @@ export function ChampSaisie({ setValue, label, name, value, regex }) {
     return (
         <div className='row-champ'>
             <div className="col-champ">
-                    {
-                        (!validInput && value && !focusInput) && <div className="alert-format" role="alert">
-                            {errMsg}
-                        </div>
-                    }
+                {
+                    (!validInput && value && !focusInput) && <div className="alert-format" role="alert">
+                        {errMsg}
+                    </div>
+                }
                 <label htmlFor={name} className="form-label-type">{label}</label>
                 <div className="custom-container">
                     <input 

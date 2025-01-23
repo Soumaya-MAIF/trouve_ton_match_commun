@@ -131,7 +131,7 @@ const CreationCompte = () => {
             </div>
             <form onSubmit={handleSubmit} className='form-container'>
 
-                {errors.nomUtilisateur && <div className="error">{errors.nomUtilisateur}</div>}
+                {errors.nomUtilisateur && <div className="erreur-manquant">{errors.nomUtilisateur}</div>}
                 <ChampSaisie
                     setValue={(value) => handleChange('nomUtilisateur', value)}
                     label="Nom :"
