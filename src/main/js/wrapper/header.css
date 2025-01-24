@@ -1,7 +1,7 @@
 .header {
     height: 12vh;
     width: 100%;
-    padding-top: 1.2%;
+    padding-top: 0.8%;
     padding-left: 2%;
     padding-right: 2%;
     padding-bottom: 2%;
@@ -19,13 +19,11 @@
 
 .header-row {
     display: flex;
-    flex-wrap: wrap;
 }
 
 .header-col {
     padding: 0 15px;
     display: flex;
-    flex-direction: wrap;
     flex: 1;
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
@@ -87,7 +85,7 @@
 
 
 .logo-ttm {
-    max-height: 8vh;
+    max-height: 7vh;
     width: 100vh;
     height: 8vh;
     background-image: url('../../medias/images/logos/logo_TTM_vert.png');
@@ -97,9 +95,10 @@
 }
 
 .logo-reseau {
-    max-height: 8vh;
+    max-height: 7vh;
     width: 100vh;
     height: 8vh;
+    margin-top: -10px;
     background-repeat: no-repeat; /* Évite la répétition de l'image */
     background-size: contain; /* Utilisez 'contain' pour préserver les proportions */
     background-position: center; /* Centre l'image dans le conteneur */

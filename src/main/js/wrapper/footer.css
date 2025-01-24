@@ -1,5 +1,6 @@
 .footer {
     min-height: 10vh;
+    width: 100%;
     display: flex;
     flex-direction: column; /* Changer en column pour aligner avec la structure du composant */
     align-items: center;
