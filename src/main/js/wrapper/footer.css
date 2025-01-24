@@ -7,6 +7,7 @@
     /* font-size: calc(10px + 2vmin); */
     color: rgb(7, 7, 7);
     margin: 0 15px; /* Ajuster les marges pour centrer le contenu */
+    font-size: 0.9rem;
 }
 
 .img-footer {
@@ -26,13 +27,13 @@
     font-size: 0.8rem;
 }
 
-.container {
+.footer-container {
     width: 100%;
     margin: 0 auto;
     padding-top: 10px;
 }
 
-.row {
+.footer-row {
     display: flex;
     flex-wrap: wrap;
     margin: 0 10px;
@@ -41,7 +42,7 @@
 
 
 /* Applique le flex, l'alignement à gauche, et l'espacement entre les éléments */
-.col {
+.footer-col {
     display: flex;
     flex: 1;
     flex-direction: column;   /* Empile les éléments verticalement */
