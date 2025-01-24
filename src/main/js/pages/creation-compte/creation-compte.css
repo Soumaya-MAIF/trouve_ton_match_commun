@@ -1,0 +1,176 @@
+.titre {
+    margin-top: 15px;
+    max-height: 50px;
+}
+
+.titre-text {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: normal;
+    background-color: #FF165D;
+    padding: 10px 40px 10px 40px;
+    border-radius: 10px;
+    margin: 0;
+}
+    
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-radio-type {
+    background-color: #e7ffcc;
+    padding: 5px 50px 5px 10px;
+    margin-bottom: 0px;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.radio-label {
+    margin-right: 20px;
+}
+
+.radio-input {
+    margin-right: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000000;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
+}
+
+.erreur-manquant {
+    color: white;
+    background-color: #FF165D;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    width: 200px;;
+    font-size: 0.875em;
+    margin-top: -18px;
+}
+
+
+.position-bouton {
+    display: flex;
+    justify-content: end;
+}
+
+.bouton-envoyer {
+    position: relative;
+    display: inline-flex; /* Pour aligner texte et image */
+    align-items: center;
+    justify-content: center;
+    background-color: #FF165D; /* Fond du bouton */
+    color: white; /* Couleur du texte */
+    padding: 5px 10px; /* Espacement interne */
+    border: 2px solid transparent;
+    border-radius: 5px; /* Coins arrondis (optionnel) */
+    cursor: pointer; /* Curseur interactif */
+    font-size: 14px;
+}
+
+.bouton-envoyer::after {
+    content: "";
+    display: inline-block;
+    background-image: url('../../../medias/images/logos/send_blanc.png'); /* Image initiale */
+    background-size: contain; /* Ajuste la taille de l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    width: 15px; /* Largeur de l'image */
+    height: 15px; /* Hauteur de l'image */
+    margin-left: 10px; /* Espace entre le texte et l'image */
+    transition: background-image 0.3s ease, transform 0.3s ease; /* Transition fluide */
+}
+
+.bouton-envoyer:hover::after {
+    background-image: url('../../../medias/images/logos/send_rose.png'); /* Image au survol */
+    transform: scale(1.1); /* Effet d'agrandissement optionnel */
+}
+
+input:checked {
+    border: 6px solid black;
+}
+
+button,
+legend {
+    color: white;
+    background-color: black;
+    padding: 5px 10px;
+    border-radius: 0;
+    border: 0;
+    font-size: 14px;
+
+}
+
+button:hover,
+button:focus {
+    color: #FF165D;
+    font-weight: bold;
+    border: 2px solid;
+    background-color: white;
+}
+
+.bouton-envoyer:hover .img-send {
+    content: url('../../../medias/images/logos/send2.png'); /* Remplace l'image par une autre */
+    transform: scale(1.1); /* Optionnel : Agrandit légèrement l'image au survol */
+    transition: transform 0.3s ease, content 0.3s ease; /* Ajoute une animation fluide */
+}
+
+button:active {
+    background-color: white;
+    color: black;
+    outline: 1px solid black;
+}
+
+/* Affichage de l'id de l'utilisateur crée */
+.row-creation {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 10px;
+    align-items: center;
+}
+
+.col-id {
+    display: flex;
+    align-items: center;
+}
+
+.custom-label {
+    font-size: 14px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    color: #333; /* Couleur du texte */
+    margin-right: 10px; /* Espace à droite */
+}
+
+.custom-id {
+    background-color: rgba(255, 255, 255, 0.5); /* Fond semi-transparent */
+    padding: 5px; /* Espacement interne */
+    border-radius: 5px; /* Coins arrondis */
+    border: 1px solid #ccc; /* Bordure légère */
+    width: 100%; /* Prend toute la largeur disponible */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+.custom-id {
+    background-color: transparent; /* Fond transparent */
+    border: none; /* Supprime la bordure par défaut */
+    outline: none; /* Supprime l'effet de focus par défaut */
+    font-size: 14px; /* Taille du texte */
+    color: #333; /* Couleur du texte */
+    width: 100%; /* S'adapte à la largeur du conteneur */
+    padding: 5px; /* Ajoute de l'espace interne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+.custom-id:disabled {
+    background-color: #f0f0f0; /* Fond grisé pour un champ désactivé */
+    color: #999; /* Texte grisé */
+    cursor: not-allowed; /* Curseur non interactif */
+}
+
