@@ -1,9 +1,9 @@
 import './header.css';
 import { Link } from "react-router-dom";
-// import { useAuth } from '../AuthContext';
+// import { useAuth } from '../AuthContext'; // ================= A mettre en place
 
 const Header = () => {
-    // const { isAuthenticated, logout } = useAuth();
+    // const { isAuthenticated, logout } = useAuth();  // ================= A mettre en place
 
     return (
         <header className="header">
@@ -17,7 +17,7 @@ const Header = () => {
                         </Link>
                     </div>
                     <div className="header-col">
-                        <Link className="menu" to="/monCompteParrain">Mon compte</Link>
+                        <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
                     </div>
                     <div className="header-col">
                         <Link className="menu" to="/profils">Profils disponibles</Link>
@@ -51,7 +51,7 @@ const Header = () => {
                     </div>
                     <div className="header-col">
                         <div className="bouton">
-                            <Link to="/creationCompte">
+                            <Link to="/creation-compte">
                                 <button type="button" className="btn-creer">Créer un compte</button>
                             </Link>
                         </div>

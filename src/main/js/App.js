@@ -10,11 +10,11 @@ import Indicateurs from './pages/indicateurs/Indicateurs';
 import Connexion from './pages/connexion/Connexion';
 import CreationCompte from './pages/creation-compte/CreationCompte';
 import Filtres from './pages/filtres/Filtres';
-// import { AuthProvider } from './AuthContext';
+// import { AuthProvider } from './AuthContext';  // ================= A mettre en place
 
 function App() {
   return (
-    // <AuthProvider>
+    // <AuthProvider> // ================= A mettre en place
       <Routes>
         <Route path='/' element={<Accueil/>}></Route>
         <Route path='/mon-compte-parrain' element={<MonCompteParrain/>}></Route>

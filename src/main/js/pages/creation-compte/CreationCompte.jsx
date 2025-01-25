@@ -126,9 +126,7 @@ const CreationCompte = () => {
 
     return (
         <Wrapper>
-            <div className='titre'>
-                <h1 className='titre-text'>Creation compte</h1>
-            </div>
+            <div className='titre'>Creation compte</div>
             <form onSubmit={handleSubmit} className='form-container'>
 
                 {errors.nomUtilisateur && <div className="erreur-manquant">{errors.nomUtilisateur}</div>}
