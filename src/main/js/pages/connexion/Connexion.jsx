@@ -129,7 +129,7 @@ const Connexion = () => {
 
                 {errors.codeUtilisateur && <div className="erreur-manquant">{errors.codeUtilisateur}</div>}
                 <ChampSaisie
-                    setValue={(value) => handleChange('nomUtilisateur', value)}
+                    setValue={(value) => handleChange('codeUtilisateur', value)}
                     label="Code d'accès :"
                     name="codeUtilisateur"
                     value={utilisateurDto.codeUtilisateur}
