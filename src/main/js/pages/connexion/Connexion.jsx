@@ -1,12 +1,13 @@
 import Wrapper from '../../wrapper/Index';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 // import { useAuth } from '../../AuthContext';
 
 
-import { ChampSaisie } from './../creation-compte/ChampSaisie.jsx';
+import { ChampSaisie } from './../../components/champ-saisie/ChampSaisie.jsx';
 import './connexion.css';
+import './../../components/global.css'
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
 const nomRegex = /^[A-ZÀ-ÿ\- ]{2,}$/; // NOM en MAJUSCULES
@@ -19,6 +20,19 @@ const Connexion = () => {
         prenomUtilisateur: '',
         codeUtilisateur: '',
     });
+
+    const location = useLocation(); // Pour suivre le changement de route
+
+    // Créer une référence pour le champ 'nomUtilisateur'
+    const nomInputRef = useRef(null);
+
+    // Utiliser useEffect pour appliquer le focus au champ 'Nom' lors du montage du composant
+    useEffect(() => {
+        if (nomInputRef.current) {
+            console.log('Référence du champ Nom :', nomInputRef.current);
+            nomInputRef.current.focus();
+        }
+    }, []);
 
     const [errors, setErrors] = useState({});
     const [userNotFound, setUserNotFound] = useState(false);
@@ -107,18 +121,20 @@ const Connexion = () => {
         <Wrapper>
             <div className='titre'>Connexion</div>
             <div className="espace"></div>
-            <form onSubmit={handleSubmit} className='form-container connexion-form-container'>
+            <form onSubmit={handleSubmit} className='form-container'>
 
-                {errors.nomUtilisateur && <div className="erreur-manquant">{errors.nomUtilisateur}</div>}
+                {errors.nomUtilisateur && <div className="message-erreur">{errors.nomUtilisateur}</div>}
                 <ChampSaisie
                     setValue={(value) => handleChange('nomUtilisateur', value)}
                     label="Nom :"
                     name="nomUtilisateur"
                     value={utilisateurDto.nomUtilisateur}
                     regex={otherRegex}
+                    ref={nomInputRef}  
                 />
+                <div className="espace"></div>
 
-                {errors.prenomUtilisateur && <div className="erreur-manquant">{errors.prenomUtilisateur}</div>}
+                {errors.prenomUtilisateur && <div className="message-erreur">{errors.prenomUtilisateur}</div>}
                 <ChampSaisie
                     setValue={(value) => handleChange('prenomUtilisateur', value)}
                     label="Prénom :"
@@ -126,8 +142,9 @@ const Connexion = () => {
                     value={utilisateurDto.prenomUtilisateur}
                     regex={otherRegex}
                 />
+                <div className="espace"></div>
 
-                {errors.codeUtilisateur && <div className="erreur-manquant">{errors.codeUtilisateur}</div>}
+                {errors.codeUtilisateur && <div className="message-erreur">{errors.codeUtilisateur}</div>}
                 <ChampSaisie
                     setValue={(value) => handleChange('codeUtilisateur', value)}
                     label="Code d'accès :"
@@ -135,6 +152,7 @@ const Connexion = () => {
                     value={utilisateurDto.codeUtilisateur}
                     regex={otherRegex}
                 />
+                <div className="espace"></div>
 
                 <div className="position-bouton">
                     {userNotFound && (
@@ -146,15 +164,13 @@ const Connexion = () => {
                             />
                         </div>
                     )}
-                    <button type="submit" className="bouton-envoyer">
+                    <button 
+                        type="submit" 
+                        className="bouton-bas-page">
                         Suivant
                     </button>
                 </div>
-
             </form>
-
-
-
         </Wrapper>
     )
 }

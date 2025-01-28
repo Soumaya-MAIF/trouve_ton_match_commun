@@ -1,4 +1,5 @@
 import './header.css';
+import './../../../index.css'
 import { Link } from "react-router-dom";
 // import { useAuth } from '../AuthContext'; // ================= A mettre en place
 

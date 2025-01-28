@@ -1,17 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef} from "react";
 import './champ-saisie.css';
+import './../global.css';
 
-export function ChampSaisie({ setValue, label, name, value, regex }) {
+export const ChampSaisie = forwardRef(({ setValue, label, name, value, regex }, ref) => {
 
     const [errMsg, setErrMsg] = useState("");
     const [validInput, setValidInput] = useState(false);
     const [focusInput, setFocusInput] = useState(false);
-
-    const inputRef = useRef();
-
-    useEffect(() => {
-        inputRef.current.focus();
-    }, []);
 
     useEffect(() => {
         const result = regex.test(value);
@@ -32,14 +27,14 @@ export function ChampSaisie({ setValue, label, name, value, regex }) {
         <div className='row-champ'>
             <div className="col-champ">
                 {
-                    (!validInput && value && !focusInput) && <div className="alert-format" role="alert">
+                    (!validInput && value && !focusInput) && <div className="message-erreur" role="alert">
                         {errMsg}
                     </div>
                 }
                 <label htmlFor={name} className="form-label-type">{label}</label>
                 <div className="custom-container">
                     <input 
-                        ref={inputRef}
+                        ref={ref}
                         onChange={handleChange}
                         value={value}
                         name={name}
@@ -54,4 +49,4 @@ export function ChampSaisie({ setValue, label, name, value, regex }) {
             </div>
         </div>
     );
-}
+});

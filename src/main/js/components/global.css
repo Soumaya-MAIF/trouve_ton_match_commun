@@ -1,0 +1,103 @@
+/* Titre de la page */
+.titre {
+    margin-top: 15px;
+    max-height: 50px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: normal;
+    background-color: #FF165D;
+    padding: 7px 40px 7px 40px;
+    border-radius: 10px;
+}
+
+/* Contenu de la page */
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Message d'erreur si champ de saisie non complété OU si le format ne correspond pas à celui attendu*/
+.message-erreur {
+    color: #FF165D ;
+    background-color: white;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    width: 250px;
+    font-size: 0.875em;
+    margin-top: -18px;
+}
+
+/* Bouton de validation en bas de page */
+.position-bouton {
+    display: flex;
+    justify-content: end;
+}
+
+.bouton-bas-page {
+    position: relative;
+    display: inline-flex; /* Pour aligner texte et image */
+    align-items: center;
+    justify-content: center;
+    background-color: #FF165D; /* Fond du bouton */
+    color: white; /* Couleur du texte */
+    padding: 5px 10px; /* Espacement interne */
+    border: 2px solid transparent;
+    border-radius: 5px; /* Coins arrondis (optionnel) */
+    cursor: pointer; /* Curseur interactif */
+    font-size: 0.95rem;
+}
+
+.bouton-bas-page::after {
+    content: "";
+    display: inline-block;
+    background-image: url('../../medias/images/logos/send_blanc.png'); /* Image initiale */
+    background-size: contain; /* Ajuste la taille de l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    width: 15px; /* Largeur de l'image */
+    height: 15px; /* Hauteur de l'image */
+    margin-left: 10px; /* Espace entre le texte et l'image */
+    transition: background-image 0.3s ease, transform 0.3s ease; /* Transition fluide */
+}
+
+.bouton-bas-page:hover {
+    background-color: white;
+    color: #FF165D;
+    border: #FF165D solid 2px;
+}
+
+.bouton-bas-page:hover::after {
+    background-image: url('../../medias/images/logos/send_rose.png'); /* Image au survol */
+    transform: scale(1.1); /* Effet d'agrandissement optionnel */
+}
+
+
+/* input:checked {
+    border: 6px solid black;
+}
+
+button,
+legend {
+    color: white;
+    background-color: black;
+    padding: 5px 10px;
+    border-radius: 0;
+    border: 0;
+    font-size: 14px;
+
+}
+
+button:hover,
+button:focus {
+    color: #FF165D;
+    font-weight: bold;
+    border: 2px solid;
+    background-color: white;
+}
+
+button:active {
+    background-color: white;
+    color: black;
+    outline: 1px solid black;
+} */
+

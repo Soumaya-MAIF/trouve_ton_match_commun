@@ -1,8 +1,9 @@
 import Wrapper from '../../wrapper/Index';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from 'react-router-dom';
-import { ChampSaisie } from './ChampSaisie.jsx';
+import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie.jsx';
 import './creation-compte.css';
+import './../../components/global.css';
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
 const nomRegex = /^[A-ZÀ-ÿ\- ]{2,}$/; // NOM en MAJUSCULES
@@ -20,9 +21,20 @@ const CreationCompte = () => {
         codeUtilisateur: '',
         typeUtilisateur: ''
     });
-    
+
     const [isSubmitted, setIsSubmitted] = useState(false);
     const location = useLocation(); // Ce hook permet d’accéder à l’objet location qui représente l’URL actuelle de l’application 
+
+    // Créer une référence pour le champ 'nomUtilisateur'
+    const nomInputRef = useRef(null);
+
+    // Utiliser useEffect pour appliquer le focus au champ 'Nom' lors du montage du composant
+    useEffect(() => {
+        if (nomInputRef.current) {
+            console.log('Référence du champ Nom :', nomInputRef.current);
+            nomInputRef.current.focus();
+        }
+    }, []); 
 
     // Réinitialisation des états des valeurs de utilisateurDto
     // lorsque le composant est monté (c’est-à-dire lorsque la page est chargée ou actualisée).
@@ -50,12 +62,12 @@ const CreationCompte = () => {
         if (!utilisateurDto.entrepriseUtilisateur) newErrors.entrepriseUtilisateur = 'L\'entreprise est requise';
         if (!utilisateurDto.plateformeUtilisateur) newErrors.plateformeUtilisateur = 'La plateforme est requise';
         if (!utilisateurDto.codeUtilisateur) newErrors.codeUtilisateur = 'Le code d\'accès est requis';
-        if (!utilisateurDto.typeUtilisateur) newErrors.type = 'Le type de profil est requis';
+        if (!utilisateurDto.typeUtilisateur) newErrors.typeUtilisateur = 'Le type de profil est requis';
 
         return newErrors;
     };
 
-    
+
     // Met à jour dynamiquement les propriétés de utilisateurDto à chaque changer de valeur
     const handleChange = (name, value) => {
         setUtilisateurDto({
@@ -79,6 +91,7 @@ const CreationCompte = () => {
         e.preventDefault();
 
         const validationErrors = validate();
+
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
@@ -93,35 +106,35 @@ const CreationCompte = () => {
             },
             body: JSON.stringify(utilisateurDto)
         })
-        .then(response => {
-            console.log("Réponse du serveur:", response);  // reponse du serveur après la requête
-            if (!response.ok) {
-                return response.json().then(err => { throw new Error(err.message || 'Erreur inconnue'); });
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Utilisateur créé:', data);
+            .then(response => {
+                console.log("Réponse du serveur:", response);  // reponse du serveur après la requête
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.message || 'Erreur inconnue'); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Utilisateur créé:', data);
 
-            setUtilisateurDto(prevState => ({
-                ...prevState,
-                idUtilisateur: data.idUtilisateur // Met à jour idUtilisateur tout en conservant les autres propriétés
-            }));
+                setUtilisateurDto(prevState => ({
+                    ...prevState,
+                    idUtilisateur: data.idUtilisateur // Met à jour idUtilisateur tout en conservant les autres propriétés
+                }));
 
-            console.log('id:', utilisateurDto);
-            console.log('Type de idUtilisateur:', typeof data.idUtilisateur);
-            console.log('id:', data.idUtilisateur); // Ok
-            localStorage.setItem('idUtilisateur', data.idUtilisateur); // Stockage de l'id
-            console.log('id:', utilisateurDto.idUtilisateur);
-            console.log('nom:', utilisateurDto.nomUtilisateur);
-            console.log('type:', utilisateurDto.typeUtilisateur);
-    
-            setIsSubmitted(true); // Masquer le bouton après l'envoi
-        })
+                console.log('id:', utilisateurDto);
+                console.log('Type de idUtilisateur:', typeof data.idUtilisateur);
+                console.log('id:', data.idUtilisateur); // Ok
+                localStorage.setItem('idUtilisateur', data.idUtilisateur); // Stockage de l'id
+                console.log('id:', utilisateurDto.idUtilisateur);
+                console.log('nom:', utilisateurDto.nomUtilisateur);
+                console.log('type:', utilisateurDto.typeUtilisateur);
 
-        .catch(error => {
-            console.error('Erreur lors de la soumission du formulaire!', error);
-        });
+                setIsSubmitted(true); // Masquer le bouton après l'envoi
+            })
+
+            .catch(error => {
+                console.error('Erreur lors de la soumission du formulaire!', error);
+            });
     }
 
     return (
@@ -129,48 +142,49 @@ const CreationCompte = () => {
             <div className='titre'>Creation compte</div>
             <form onSubmit={handleSubmit} className='form-container'>
 
-                {errors.nomUtilisateur && <div className="erreur-manquant">{errors.nomUtilisateur}</div>}
+                {errors.nomUtilisateur && <div className="message-erreur">{errors.nomUtilisateur}</div>}
                 <ChampSaisie
                     setValue={(value) => handleChange('nomUtilisateur', value)}
                     label="Nom :"
                     name="nomUtilisateur"
                     value={utilisateurDto.nomUtilisateur}
                     regex={otherRegex}
+                    ref={nomInputRef}
                 />
 
-                {errors.prenomUtilisateur && <div className="erreur-manquant">{errors.prenomUtilisateur}</div>}
+                {errors.prenomUtilisateur && <div className="message-erreur">{errors.prenomUtilisateur}</div>}
                 <ChampSaisie setValue={(value) => handleChange('prenomUtilisateur', value)} label="Prenom :" name="prenomUtilisateur" value={utilisateurDto.prenomUtilisateur} regex={otherRegex} ></ChampSaisie>
 
-                {errors.entrepriseUtilisateur && <div className="erreur-manquant">{errors.entrepriseUtilisateur}</div>}
+                {errors.entrepriseUtilisateur && <div className="message-erreur">{errors.entrepriseUtilisateur}</div>}
                 <ChampSaisie setValue={(value) => handleChange('entrepriseUtilisateur', value)} value={utilisateurDto.entrepriseUtilisateur} label="Entreprise (entreprise représentée en tant que membre d’Initiative Deux-Sèvres) :" name="entrepriseUtilisateur" regex={otherRegex}  ></ChampSaisie>
 
-                {errors.plateformeUtilisateur && <div className="erreur-manquant">{errors.plateformeUtilisateur}</div>}
+                {errors.plateformeUtilisateur && <div className="message-erreur">{errors.plateformeUtilisateur}</div>}
                 <ChampSaisie setValue={(value) => handleChange('plateformeUtilisateur', value)} value={utilisateurDto.plateformeUtilisateur} label="Plateforme Initiative :" name="plateformeUtilisateur" regex={otherRegex}  ></ChampSaisie>
 
-                {errors.codeUtilisateur && <div className="erreur-manquant">{errors.codeUtilisateur}</div>}
+                {errors.codeUtilisateur && <div className="message-erreur">{errors.codeUtilisateur}</div>}
                 <ChampSaisie setValue={(value) => handleChange('codeUtilisateur', value)} label="Code d'accès :" value={utilisateurDto.codeUtilisateur} name="codeUtilisateur" regex={otherRegex}  ></ChampSaisie>
 
-                {errors.type && <div className="erreur-manquant">{errors.type}</div>}
-                <div class="form-radio-type">
-                    <label class="radio-label">
+                {errors.typeUtilisateur && <div className="message-erreur">{errors.typeUtilisateur}</div>}
+                <div className="form-radio-type">
+                    <label className="radio-label">
                         <input
                             type="radio"
                             name="type"
                             value="parrain"
                             checked={utilisateurDto.typeUtilisateur === 'parrain'}
                             onChange={(e) => handleChange('typeUtilisateur', e.target.value)}
-                            class="radio-input"
+                            className="radio-input"
                         />
                         Parrain
                     </label>
-                    <label class="radio-label">
+                    <label className="radio-label">
                         <input
                             type="radio"
                             name="type"
                             value="porteur"
                             checked={utilisateurDto.typeUtilisateur === 'porteur'}
                             onChange={(e) => handleChange('typeUtilisateur', e.target.value)}
-                            class="radio-input"
+                            className="radio-input"
                         />
                         Porteur
                     </label>
@@ -180,7 +194,7 @@ const CreationCompte = () => {
                     {!isSubmitted ? (
                         <button
                             type="submit"
-                            className="bouton-envoyer"
+                            className="bouton-bas-page"
                         >
                             Envoyer
                         </button>

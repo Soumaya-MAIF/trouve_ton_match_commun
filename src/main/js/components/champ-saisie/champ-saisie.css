@@ -12,7 +12,7 @@
 
 .form-label-type {
     background-color: #e7ffcc;
-    padding: 10px 20px 10px 15px;
+    padding: 5px 20px 5px 15px;
     border-radius: 5px;
     display: inline-block; /* Assurez-vous que le label est un bloc en ligne pour s'adapter au contenu */
     /* width: 600px; Assurez-vous que la largeur s'adapte au contenu */
@@ -59,15 +59,4 @@
     padding: 0.5rem 1rem;
     width: 100%;
     box-sizing: border-box;
-
-}
-
-.alert-format {
-    color: #FF165D;
-    background-color: white;
-    padding: 1px 10px 1px 10px;
-    border-radius: 5px;
-    width: 200px;;
-    font-size: 0.875em;
-    margin-top: -18px;
 }
