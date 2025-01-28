@@ -1,18 +1,14 @@
 .titre {
     margin-top: 15px;
     max-height: 50px;
-}
-
-.titre-text {
     color: white;
     font-size: 1.1rem;
     font-weight: normal;
     background-color: #FF165D;
     padding: 10px 40px 10px 40px;
     border-radius: 10px;
-    margin: 0;
 }
-    
+
 .form-container {
     width: 50%;
     margin: 0 auto;
@@ -105,7 +101,6 @@ legend {
     border-radius: 0;
     border: 0;
     font-size: 14px;
-
 }
 
 button:hover,
@@ -114,6 +109,7 @@ button:focus {
     font-weight: bold;
     border: 2px solid;
     background-color: white;
+    font-weight: normal;
 }
 
 .bouton-envoyer:hover .img-send {

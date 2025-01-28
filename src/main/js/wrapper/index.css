@@ -1,22 +1,21 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap'); */
-
 body {
     background-color: #e7ffcc;
+    font-family: 'Fira Sans', sans-serif; /* Définit la police de base pour tout le document */
+    font-weight: normal;
+    box-sizing: border-box; 
+    width: 100%;
+    overflow-x: hidden;
 }
 
 main {
     min-height: 65vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-image: url("../../medias/images/background.jpg");
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
     background-position-y: center;
     background-size: cover;
 }
-
-/* .App {
-    text-align: start;
-    font-family: 'Fira Sans','Roboto', Verdana, Geneva, Tahoma, sans-serif;
-} */
