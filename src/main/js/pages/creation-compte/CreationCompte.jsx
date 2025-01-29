@@ -150,19 +150,47 @@ const CreationCompte = () => {
                     value={utilisateurDto.nomUtilisateur}
                     regex={otherRegex}
                     ref={nomInputRef}
+                    placeholder="DUPONT"
                 />
 
                 {errors.prenomUtilisateur && <div className="message-erreur">{errors.prenomUtilisateur}</div>}
-                <ChampSaisie setValue={(value) => handleChange('prenomUtilisateur', value)} label="Prenom :" name="prenomUtilisateur" value={utilisateurDto.prenomUtilisateur} regex={otherRegex} ></ChampSaisie>
+                <ChampSaisie 
+                    setValue={(value) => handleChange('prenomUtilisateur', value)} 
+                    label="Prenom :" name="prenomUtilisateur" 
+                    value={utilisateurDto.prenomUtilisateur} 
+                    regex={otherRegex}
+                    placeholder="Laurent"
+                />
 
                 {errors.entrepriseUtilisateur && <div className="message-erreur">{errors.entrepriseUtilisateur}</div>}
-                <ChampSaisie setValue={(value) => handleChange('entrepriseUtilisateur', value)} value={utilisateurDto.entrepriseUtilisateur} label="Entreprise (entreprise représentée en tant que membre d’Initiative Deux-Sèvres) :" name="entrepriseUtilisateur" regex={otherRegex}  ></ChampSaisie>
+                <ChampSaisie 
+                    setValue={(value) => handleChange('entrepriseUtilisateur', value)} 
+                    value={utilisateurDto.entrepriseUtilisateur} 
+                    label="Entreprise (entreprise représentée en tant que membre d’Initiative Deux-Sèvres) :" 
+                    name="entrepriseUtilisateur" 
+                    regex={otherRegex}  
+                    placeholder="Tartempion"
+                />
 
                 {errors.plateformeUtilisateur && <div className="message-erreur">{errors.plateformeUtilisateur}</div>}
-                <ChampSaisie setValue={(value) => handleChange('plateformeUtilisateur', value)} value={utilisateurDto.plateformeUtilisateur} label="Plateforme Initiative :" name="plateformeUtilisateur" regex={otherRegex}  ></ChampSaisie>
+                <ChampSaisie 
+                    setValue={(value) => handleChange('plateformeUtilisateur', value)} 
+                    value={utilisateurDto.plateformeUtilisateur} 
+                    label="Plateforme Initiative :" 
+                    name="plateformeUtilisateur" 
+                    regex={otherRegex} 
+                    placeholder="Initiative Deux-Sèvres" 
+                />
 
                 {errors.codeUtilisateur && <div className="message-erreur">{errors.codeUtilisateur}</div>}
-                <ChampSaisie setValue={(value) => handleChange('codeUtilisateur', value)} label="Code d'accès :" value={utilisateurDto.codeUtilisateur} name="codeUtilisateur" regex={otherRegex}  ></ChampSaisie>
+                <ChampSaisie 
+                    setValue={(value) => handleChange('codeUtilisateur', value)} 
+                    value={utilisateurDto.codeUtilisateur} 
+                    label="Code d'accès :" 
+                    name="codeUtilisateur" 
+                    regex={otherRegex}  
+                    placeholder="A123"
+                />
 
                 {errors.typeUtilisateur && <div className="message-erreur">{errors.typeUtilisateur}</div>}
                 <div className="form-radio-type">

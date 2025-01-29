@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, forwardRef} from "react";
 import './champ-saisie.css';
 import './../global.css';
 
-export const ChampSaisie = forwardRef(({ setValue, label, name, value, regex }, ref) => {
+export const ChampSaisie = forwardRef(({ setValue, label, name, value, regex, placeholder }, ref) => {
 
     const [errMsg, setErrMsg] = useState("");
     const [validInput, setValidInput] = useState(false);
@@ -44,6 +44,7 @@ export const ChampSaisie = forwardRef(({ setValue, label, name, value, regex }, 
                         className={`custom-input ${!value ? "" : validInput ? "is-valid" : "is-invalid"}`}
                         disabled={false}
                         id={name}
+                        placeholder={placeholder}
                     />
                 </div>
             </div>

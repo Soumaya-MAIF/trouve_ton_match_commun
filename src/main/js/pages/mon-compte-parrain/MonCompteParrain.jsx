@@ -161,24 +161,27 @@ const MonCompteParrain = () => {
                     value={parrainDto.presentationParcours}
                     regex={otherRegex}
                     ref={nomInputRef}
+                    placeholder="A la retraite depuis 6 mois, j'ai occupé de nombreux postes ..."
                 />
 
                 {errors.branchesReseau && <div className="message-erreur">{errors.branchesReseau}</div>}
                 <ChampSaisie
-                    setValue={(value) => handleChange('presentationParcours', value)}
+                    setValue={(value) => handleChange('branchesReseau', value)}
                     label="Branches sur lesquelles il a un bon réseau :"
                     name="branchesReseau"
                     value={parrainDto.branchesReseau}
                     regex={otherRegex}
+                    placeholder="Métiers de l'automobile..."
                 />
 
                 {errors.domainesExpertise && <div className="message-erreur">{errors.domainesExpertise}</div>}
                 <ChampSaisie
-                    setValue={(value) => handleChange('pdomainesExpertise', value)}
+                    setValue={(value) => handleChange('domainesExpertise', value)}
                     label="Domaine d’expertise particulier :"
                     name="domainesExpertise"
                     value={parrainDto.domainesExpertise}
                     regex={otherRegex}
+                    placeholder="La comptabilté, le droit du travail, le marketing, la vente, les ressources humaines, la logistique, l'infrastructure informatique, ... "
                 />
 
                 {errors.secteurGeographique && <div className="message-erreur">{errors.secteurGeographique}</div>}
@@ -188,15 +191,17 @@ const MonCompteParrain = () => {
                     name="secteurGeographique"
                     value={parrainDto.secteurGeographique}
                     regex={otherRegex}
+                    placeholder="Niort, et ses environs (50km)"
                 />
 
                 {errors.disponibilites && <div className="message-erreur">{errors.disponibilites}</div>}
                 <ChampSaisie
-                    setValue={(value) => handleChange('presentationParcours', value)}
+                    setValue={(value) => handleChange('disponibilites', value)}
                     label="Disponibilités :"
                     name="disponibilites"
                     value={parrainDto.disponibilites}
                     regex={otherRegex}
+                    placeholder="Du lundi au jeudi : 9h-12h / 13h-17h"
                 />
 
                 <div className="position-bouton">

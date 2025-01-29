@@ -131,6 +131,7 @@ const Connexion = () => {
                     value={utilisateurDto.nomUtilisateur}
                     regex={otherRegex}
                     ref={nomInputRef}  
+                    placeholder="DUPONT"
                 />
                 <div className="espace"></div>
 
@@ -141,6 +142,7 @@ const Connexion = () => {
                     name="prenomUtilisateur"
                     value={utilisateurDto.prenomUtilisateur}
                     regex={otherRegex}
+                    placeholder="Laurent"
                 />
                 <div className="espace"></div>
 
@@ -151,6 +153,7 @@ const Connexion = () => {
                     name="codeUtilisateur"
                     value={utilisateurDto.codeUtilisateur}
                     regex={otherRegex}
+                    placeholder="A123"
                 />
                 <div className="espace"></div>
 
