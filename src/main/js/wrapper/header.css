@@ -49,25 +49,6 @@
     padding-top: 20px;
 }
 
-
-/* .bouton .btn-connexion {
-    font-size: 0.95rem;
-    padding: 3px 10px;
-    border-radius: 5px;
-    border: 1px solid #000;
-    background-color: #FF165D;
-    color: #fff;
-}
-
-.bouton .btn-creer {
-    font-size: 0.95rem;
-    padding: 3px 10px;
-    border-radius: 5px;
-    border: 1px solid #000;
-    background-color: #000;
-    color: #fff;
-} */
-
 .bouton button {
     font-size: 0.95rem;
     padding: 3px 10px;
@@ -91,6 +72,11 @@
     border: 1px solid;
     background-color: #fff; /* Couleur de fond blanche au survol */
     color: #000; /* Couleur du texte noire au survol */
+}
+
+.bouton .btn-creer:active,
+.bouton .btn-connexion:active {
+    transform: scale(0.8); 
 }
 
 .logo-ttm {

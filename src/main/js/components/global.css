@@ -71,6 +71,10 @@
     transform: scale(1.1); /* Effet d'agrandissement optionnel */
 }
 
+.bouton-bas-page:active {
+    transform: scale(0.8); 
+}
+
 
 /* input:checked {
     border: 6px solid black;
