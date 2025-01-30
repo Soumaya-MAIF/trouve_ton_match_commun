@@ -2,7 +2,7 @@
     min-height: 10vh;
     width: 100%;
     display: flex;
-    flex-direction: column; /* Changer en column pour aligner avec la structure du composant */
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
     /* font-size: calc(10px + 2vmin); */
@@ -26,25 +26,24 @@
     flex: 1;
     flex-direction: column;   /* Empile les éléments verticalement */
     align-items: flex-start;  /* Aligne le contenu à gauche */
-    gap: 5px;                /* Espacement de 10px entre chaque ligne */
+    gap: 0.3rem;              /* Espacement de 0.3rem entre chaque ligne */
 }
 
 .social-icons {
     display: flex;
     align-items: center;
-    padding-left: 20px;
-    margin-left: 10vh;
+    margin-left: 5rem;
 }
 
 .img-footer {
-    height: 30px;
+    height: 1.8rem;
     width: auto;
-    margin-right: 20px; /* Ajouter une marge pour espacer les images */
+    margin-right: 1.2rem; /* Ajoute une marge pour espacer les images */
 }
 
 .Initiative79 {
-    padding-bottom: 5px;
-    font-weight: bold; /* Assurer que le texte est en gras */
+    padding-bottom: 0.2rem;
+    font-weight: bold;
 }
 
 .mentionsLégales {
@@ -55,8 +54,37 @@
 
 .horaires {
     margin-left: 10vh;
-    display: flex;      /* Activer Flexbox */
-    flex-direction: column; /* Empiler les éléments verticalement */
-    gap: 5px;          /* Espacement entre les lignes */
-    padding-bottom: 10px;
+    display: flex;      
+    flex-direction: column; /* Empile les éléments verticalement */
+    gap: 0.3rem;          /* Espacement entre les lignes */
+    padding-bottom: 0.6rem;
+}
+
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1200px) {
+    .footer {
+        margin: 0 1rem; /* Réduire encore plus les marges */
+        font-size: 0.7rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 1200px) {
+    .img-footer {
+        height: 1.2rem;
+        margin-right: 0.4rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .menu, .favicon-container, .bouton button {
+        margin: 0 0.25rem; /* Réduire encore plus les marges */
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 900px) {
+    .social-icons, .img-footer, .col-footer {
+        margin: 0;
+        margin-right: 3%;
+    }
 }

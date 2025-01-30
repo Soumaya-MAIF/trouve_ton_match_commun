@@ -4,24 +4,33 @@
     padding-top: 0.8%;
     padding-bottom: 2%;
     display: flex;
-    flex-direction: column; /* Ajouté pour aligner les éléments verticalement */
+    flex-direction: column; /* Aligne les éléments verticalement */
     align-items: center;
     justify-content: center;
+    /* flex-wrap: nowrap; */
 }
 
 .header-container {
+    width: 100%;
     display: flex;
+    margin: 0 auto;
+    /* flex: 0 1 auto; */
     justify-content: space-around; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
 }
+
+/* .col-header {
+    display: flex;
+} */
 
 .menu {
     display: flex;
     font-size: 1rem;
     color: rgb(7, 7, 7);
     text-decoration-line: none;
-    padding-top: 5px;
-    margin: 0 40px; /* Ajoute de l'espace entre les liens */
+    padding-top: 0.3rem;
+    margin: 0 2rem; /* Ajoute de l'espace entre les liens */
+    min-width: 30px;
 }
 
 .menu:hover {
@@ -29,8 +38,8 @@
 }
 
 .favicon-container { 
-    padding-top: 20px;
-    margin: 0 40px; /* Ajoute de l'espace entre les liens */
+    padding-top: 1.25rem;
+    margin: 0 2.5rem; /* Ajoute de l'espace entre les liens */
 }
 
 .favicon {
@@ -45,16 +54,12 @@
     background-image: url('../../medias/images/logos/favicon_TTM_rose.png');
 }
 
-.favicon-container { 
-    padding-top: 20px;
-}
-
 .bouton button {
     font-size: 0.95rem;
-    padding: 3px 10px;
-    margin: 0 40px;
-    border-radius: 5px;
-    border: 1px solid #000;
+    padding: 0.1875rem 0.6rem;
+    margin: 0 2.5rem;
+    border-radius: 0.6rem;
+    border: 0.03rem solid #000;
     color: #fff;
 }
 
@@ -69,7 +74,7 @@
 .bouton .btn-creer:hover,
 .bouton .btn-connexion:hover {
     font-size: 0.95rem;
-    border: 1px solid;
+    border: 0.03rem solid;
     background-color: #fff; /* Couleur de fond blanche au survol */
     color: #000; /* Couleur du texte noire au survol */
 }
@@ -84,7 +89,7 @@
     width: 100vh;
     height: 8vh;
     background-image: url('../../medias/images/logos/logo_TTM_vert.png');
-    background-size: contain; /* Utilisez 'contain' pour préserver les proportions */
+    background-size: contain; /* 'contain' pour préserver les proportions */
     background-repeat: no-repeat; /* Évite la répétition de l'image */
     background-position: center; /* Centre l'image dans le conteneur */
 }
@@ -93,15 +98,36 @@
     max-height: 7vh;
     width: 100vh;
     height: 8vh;
-    margin-top: -10px;
-    background-repeat: no-repeat; /* Évite la répétition de l'image */
-    background-size: contain; /* Utilisez 'contain' pour préserver les proportions */
-    background-position: center; /* Centre l'image dans le conteneur */
+    margin-top: -0.6rem;
+    background-repeat: no-repeat;
+    background-size: contain; 
+    background-position: center;
     background-image: url('../../medias/images/logos/Nouvelle_Aquitaine-Logo-Reseau_Initiative.webp');
 }
 
 .line {
-    width: 90%; /*Elle occupe 90% de la largeur disponible*/
-    margin: 5px auto 0 ; /* Espace au-dessus de la ligne */
-    border-top: 3px solid #71c920; /* Vous pouvez changer la couleur et l'épaisseur */
+    width: 90%; /* Elle occupe 90% de la largeur disponible*/
+    margin: 0.3rem auto 0 ; /* Espace au-dessus de la ligne */
+    border-top: 0.1875rem solid #71c920; /* couleur et l'épaisseur */
+}
+
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1200px) {
+    .menu, .favicon-container, .bouton button{
+        margin: 0 1rem; /* Réduire encore plus les marges */
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 1200px) {
+    .logo-ttm, .logo-reseau {
+        height: 5vh;
+    }
+}
+
+@media (max-width: 900px) {
+    .menu, .favicon-container, .bouton button {
+        margin: 0 0.25rem; /* Réduire encore plus les marges */
+        font-size: 0.7rem; /* Réduire la taille de la police */
+    }
 }

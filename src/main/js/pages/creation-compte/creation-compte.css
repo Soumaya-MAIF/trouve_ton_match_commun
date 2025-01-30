@@ -1,28 +1,28 @@
 .form-radio-type {
     background-color: #e7ffcc;
-    padding: 5px 50px 5px 10px;
-    margin-bottom: 0px;
-    border-radius: 5px;
-    width: 200px;
+    padding: 0.3rem 3.1rem 0.3rem 0.6rem;
+    margin-bottom: 0;
+    border-radius: 0.3rem;
+    width: 12.5rem;
 }
 
 .radio-label {
-    margin-right: 20px;
+    margin-right: 1.25rem;
 }
 
 .radio-input {
-    margin-right: 10px;
+    /* supprime le style par défaut du navigateur pour ces éléments -> permet de les styliser entièrement avec CSS */
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
+    appearance: none; 
     border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #000000;
+    width: 1rem;
+    height: 1rem;
+    border: 0.125rem solid #000000;
     transition: 0.2s all linear;
-    margin-right: 5px;
+    margin-right: 0.35rem;
     position: relative;
-    top: 4px;
+    top: 0.1rem;
 }
 
 .radio-input:checked {
@@ -34,7 +34,7 @@
 .row-creation {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 10px;
+    margin: 0 0.6rem;
     align-items: center;
 }
 
@@ -44,17 +44,17 @@
 }
 
 .custom-label {
-    font-size: 14px; /* Taille du texte */
+    font-size: 0.9rem; /* Taille du texte */
     font-weight: bold; /* Texte en gras */
     color: #333; /* Couleur du texte */
-    margin-right: 10px; /* Espace à droite */
+    margin-right: 0.6rem; /* Espace à droite */
 }
 
 .custom-id {
     background-color: rgba(255, 255, 255, 0.5); /* Fond semi-transparent */
-    padding: 5px; /* Espacement interne */
-    border-radius: 5px; /* Coins arrondis */
-    border: 1px solid #ccc; /* Bordure légère */
+    padding: 0.3rem; /* Espacement interne */
+    border-radius: 0.3rem; /* Coins arrondis */
+    border: 0.0625rem solid #ccc; /* Bordure légère */
     width: 100%; /* Prend toute la largeur disponible */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
@@ -63,10 +63,10 @@
     background-color: transparent; /* Fond transparent */
     border: none; /* Supprime la bordure par défaut */
     outline: none; /* Supprime l'effet de focus par défaut */
-    font-size: 14px; /* Taille du texte */
+    font-size: 0.875rem; /* Taille du texte */
     color: #333; /* Couleur du texte */
     width: 100%; /* S'adapte à la largeur du conteneur */
-    padding: 5px; /* Ajoute de l'espace interne */
+    padding: 0.3rem; /* Ajoute de l'espace interne */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
@@ -74,5 +74,18 @@
     background-color: #f0f0f0; /* Fond grisé pour un champ désactivé */
     color: #999; /* Texte grisé */
     cursor: not-allowed; /* Curseur non interactif */
+}
+
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1200px) {
+    .form-radio-type {
+        font-size: 0.9rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 900px) {
+    .form-radio-type {
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
 }
 

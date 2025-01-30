@@ -1,13 +1,13 @@
 /* Titre de la page */
 .titre {
-    margin-top: 15px;
-    max-height: 50px;
+    margin-top: 1rem;
+    max-height: 3rem;
     color: white;
     font-size: 1.1rem;
     font-weight: normal;
     background-color: #FF165D;
-    padding: 7px 40px 7px 40px;
-    border-radius: 10px;
+    padding: 0.4rem 2.5rem;
+    border-radius: 0.6rem;
 }
 
 /* Contenu de la page */
@@ -21,11 +21,11 @@
 .message-erreur {
     color: #FF165D ;
     background-color: white;
-    padding: 1px 10px 1px 10px;
-    border-radius: 5px;
-    width: 250px;
-    font-size: 0.875em;
-    margin-top: -18px;
+    padding: 0.06rem 0.6rem;
+    border-radius: 0.3rem;
+    width: 15rem;
+    font-size: 0.875rem;
+    margin-top: -0.95rem;
 }
 
 /* Bouton de validation en bas de page */
@@ -41,9 +41,9 @@
     justify-content: center;
     background-color: #FF165D; /* Fond du bouton */
     color: white; /* Couleur du texte */
-    padding: 5px 10px; /* Espacement interne */
-    border: 2px solid transparent;
-    border-radius: 5px; /* Coins arrondis (optionnel) */
+    padding: 0.3rem 0.6rem; /* Espacement interne */
+    border: 0.125rem solid transparent;
+    border-radius: 0.6rem; /* Coins arrondis (optionnel) */
     cursor: pointer; /* Curseur interactif */
     font-size: 0.95rem;
 }
@@ -54,16 +54,16 @@
     background-image: url('../../medias/images/logos/send_blanc.png'); /* Image initiale */
     background-size: contain; /* Ajuste la taille de l'image */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
-    width: 15px; /* Largeur de l'image */
-    height: 15px; /* Hauteur de l'image */
-    margin-left: 10px; /* Espace entre le texte et l'image */
+    width: 1rem; /* Largeur de l'image */
+    height: 1rem; /* Hauteur de l'image */
+    margin-left: 0.6rem; /* Espace entre le texte et l'image */
     transition: background-image 0.3s ease, transform 0.3s ease; /* Transition fluide */
 }
 
 .bouton-bas-page:hover {
     background-color: white;
     color: #FF165D;
-    border: #FF165D solid 2px;
+    border: #FF165D solid 0.125rem;
 }
 
 .bouton-bas-page:hover::after {
@@ -75,33 +75,34 @@
     transform: scale(0.8); 
 }
 
-
-/* input:checked {
-    border: 6px solid black;
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1600px) {
+    .form-container {
+        width: 55%;
+    }
 }
 
-button,
-legend {
-    color: white;
-    background-color: black;
-    padding: 5px 10px;
-    border-radius: 0;
-    border: 0;
-    font-size: 14px;
-
+@media (max-width: 1400px) {
+    .form-container {
+        width: 70%;
+    }
 }
 
-button:hover,
-button:focus {
-    color: #FF165D;
-    font-weight: bold;
-    border: 2px solid;
-    background-color: white;
+@media (max-width: 1200px) {
+    .titre, .bouton-bas-page {
+        font-size: 0.9rem; /* Réduire la taille de la police */
+    }
+    .form-container {
+        width: 75%;
+    }
 }
 
-button:active {
-    background-color: white;
-    color: black;
-    outline: 1px solid black;
-} */
+@media (max-width: 900px) {
+    .titre, .bouton-bas-page {
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
+    .form-container {
+        width: 80%;
+    }
+}
 
