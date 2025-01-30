@@ -12,7 +12,7 @@
 
 /* Contenu de la page */
 .form-container {
-    width: 50%;
+    width: 55%;
     margin: 0 auto;
     padding: 20px;
 }
@@ -78,7 +78,7 @@
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1600px) {
     .form-container {
-        width: 55%;
+        width: 60%;
     }
 }
 
@@ -95,6 +95,9 @@
     .form-container {
         width: 75%;
     }
+    .message-erreur {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 900px) {
@@ -103,6 +106,9 @@
     }
     .form-container {
         width: 80%;
+    }
+    .message-erreur {
+        font-size: 0.7rem;
     }
 }
 
