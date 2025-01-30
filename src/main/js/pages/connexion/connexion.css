@@ -1,20 +1,4 @@
-.titre {
-    margin-top: 15px;
-    max-height: 50px;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: normal;
-    background-color: #FF165D;
-    padding: 10px 40px 10px 40px;
-    border-radius: 10px;
-}
-
 .espace {
-    height: 20px; 
+    height: 1rem; 
 }
 
-.connexion-form-container {
-    gap: 20px;
-    display: flex; /* Ajoutez display: flex si vous utilisez gap */
-    flex-direction: column; /* Assurez-vous que les éléments sont en colonne */
-}

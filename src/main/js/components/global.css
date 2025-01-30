@@ -1,0 +1,108 @@
+/* Titre de la page */
+.titre {
+    margin-top: 1rem;
+    max-height: 3rem;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: normal;
+    background-color: #FF165D;
+    padding: 0.4rem 2.5rem;
+    border-radius: 0.6rem;
+}
+
+/* Contenu de la page */
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Message d'erreur si champ de saisie non complété OU si le format ne correspond pas à celui attendu*/
+.message-erreur {
+    color: #FF165D ;
+    background-color: white;
+    padding: 0.06rem 0.6rem;
+    border-radius: 0.3rem;
+    width: 15rem;
+    font-size: 0.875rem;
+    margin-top: -0.95rem;
+}
+
+/* Bouton de validation en bas de page */
+.position-bouton {
+    display: flex;
+    justify-content: end;
+}
+
+.bouton-bas-page {
+    position: relative;
+    display: inline-flex; /* Pour aligner texte et image */
+    align-items: center;
+    justify-content: center;
+    background-color: #FF165D; /* Fond du bouton */
+    color: white; /* Couleur du texte */
+    padding: 0.3rem 0.6rem; /* Espacement interne */
+    border: 0.125rem solid transparent;
+    border-radius: 0.6rem; /* Coins arrondis (optionnel) */
+    cursor: pointer; /* Curseur interactif */
+    font-size: 0.95rem;
+}
+
+.bouton-bas-page::after {
+    content: "";
+    display: inline-block;
+    background-image: url('../../medias/images/logos/send_blanc.png'); /* Image initiale */
+    background-size: contain; /* Ajuste la taille de l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    width: 1rem; /* Largeur de l'image */
+    height: 1rem; /* Hauteur de l'image */
+    margin-left: 0.6rem; /* Espace entre le texte et l'image */
+    transition: background-image 0.3s ease, transform 0.3s ease; /* Transition fluide */
+}
+
+.bouton-bas-page:hover {
+    background-color: white;
+    color: #FF165D;
+    border: #FF165D solid 0.125rem;
+}
+
+.bouton-bas-page:hover::after {
+    background-image: url('../../medias/images/logos/send_rose.png'); /* Image au survol */
+    transform: scale(1.1); /* Effet d'agrandissement optionnel */
+}
+
+.bouton-bas-page:active {
+    transform: scale(0.8); 
+}
+
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1600px) {
+    .form-container {
+        width: 55%;
+    }
+}
+
+@media (max-width: 1400px) {
+    .form-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .titre, .bouton-bas-page {
+        font-size: 0.9rem; /* Réduire la taille de la police */
+    }
+    .form-container {
+        width: 75%;
+    }
+}
+
+@media (max-width: 900px) {
+    .titre, .bouton-bas-page {
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
+    .form-container {
+        width: 80%;
+    }
+}
+

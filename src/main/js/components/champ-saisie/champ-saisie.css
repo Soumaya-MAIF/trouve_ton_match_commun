@@ -1,0 +1,65 @@
+.row-champ {
+    display: flex;
+    flex-direction: column; /* Dispose les éléments en colonne */
+    margin: 0;
+}
+
+.col-champ {
+    display: flex;
+    flex-direction: column; 
+    padding: 0;
+}
+
+.form-label-type {
+    background-color: #e7ffcc;
+    padding: 0.3rem 0.25rem 0.3rem 0.6rem;
+    border-radius: 0.3rem;
+    display: inline-block; /* Assure que le label est un bloc en ligne pour s'adapter au contenu */
+    margin-bottom: 0; /* Supprime toutes les marges */
+}
+
+
+.custom-container {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 1.25rem;
+    border-radius: 0.3rem;
+    width: 100%;
+}
+
+.custom-input {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: black;
+    border: 0.06rem solid transparent; /* Ajoute une bordure par défaut */
+    border-radius: 0.3rem; 
+    padding: 0.5rem 1rem; 
+    width: 100%; /* Pour qu'il prenne toute la largeur */
+    box-sizing: border-box; /* Assure que le padding n'affecte pas la taille */
+    outline: none; /* Supprime la bordure par défaut du focus */
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1rem; /* Taille spécifique pour les champs */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Ajoute une transition pour un effet fluide */
+}
+
+.custom-container .custom-input.is-valid {
+    border-color: rgb(6, 233, 6, 0.5); /* Bordure verte pour un état valide */
+    box-shadow: 0 0 0.6rem rgba(0, 160, 8, 0.5); /* Effet lumineux pour un état valide */
+}
+
+.custom-container .custom-input.is-invalid {
+    border-color: red; /* Bordure rouge pour un état invalide */
+    box-shadow: 0 0 0.6rem rgba(255, 0, 0, 0.5); /* Effet lumineux pour un état invalide */
+}
+
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1200px) {
+    .row-champ, .custom-container, .col-champ, .form-label-type, .custom-input {
+        font-size: 0.9rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 900px) {
+    .row-champ, .custom-container, .col-champ, .form-label-type, .custom-input {
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
+}
+
