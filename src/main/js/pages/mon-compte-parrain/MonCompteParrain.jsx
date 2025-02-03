@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie';
 import './../../components/global.css';
+import './../mon-compte-porteur/mon-compte.css'
 // import { useAuth } from '../../AuthContext';
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
@@ -204,10 +205,17 @@ const MonCompteParrain = () => {
                     placeholder="Du lundi au jeudi : 9h-12h / 13h-17h"
                 />
 
-                <div className="position-bouton">
-                    <button type="submit" className="bouton-bas-page">
-                        Suivant
-                    </button>
+                <div className='btn-row'>
+                    <div className="btn">
+                        <button type="submit" className='btn-enregistrer'>
+                            Enregistrer
+                        </button>
+                    </div>
+                    <div className="btn">
+                        <button type="submit" className='btn-suivant'>
+                            Suivant
+                        </button>
+                    </div>
                 </div>
 
             </form>

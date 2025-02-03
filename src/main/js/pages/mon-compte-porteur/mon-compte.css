@@ -1,0 +1,51 @@
+.btn-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem 0.6rem; /* Espacement interne */
+    border: 0.125rem solid transparent;
+    border-radius: 0.6rem; /* Coins arrondis (optionnel) */
+    cursor: pointer; /* Curseur interactif */
+    font-size: 0.95rem;
+}
+
+.btn .btn-suivant {
+    background-color: #ffffff; /* Fond du bouton */
+    color: #FF165D; /* Couleur du texte */
+    margin-left: 2rem;
+}
+
+.btn .btn-enregistrer{
+    background-color: #FF165D; /* Fond du bouton */
+    color: white; /* Couleur du texte */
+}
+
+.btn-suivant:hover, 
+.btn-enregistrer:hover {
+    background-color:  #e7ffcc; /* Fond du bouton */
+    color: #71c920 ; /* Couleur du texte */
+    border: #FF165D solid 0.125rem;
+}
+
+
+.btn button:active {
+    transform: scale(0.8);
+}
+
+@media (max-width: 1200px) {
+    .btn button {
+        font-size: 0.9rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 900px) {
+    .btn button {
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
+}
+
