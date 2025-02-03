@@ -1,0 +1,141 @@
+/* Assurez-vous que Wrapper prend toute la hauteur */
+.Wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    width: 100%; /* Prend toute la largeur disponible */
+}
+
+.container-messages {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1; /* Prend tout l'espace restant dans <Wrapper> */
+    max-height: 70vh;
+    overflow-y: auto; /* Barre de défilement si nécessaire */
+}
+
+.contacts {
+    position: fixed;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 70%;
+    background-color: #e7ffcc;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+}
+
+.titre-messages {
+    display: flex; /* Utilise flexbox pour aligner l’image et le texte */
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    max-height: 1.2rem;
+    color: white;
+    font-weight: normal;
+    background-color: #FF165D;
+    padding: 0.5rem 1rem;
+    border-radius: 0.6rem;
+    gap: 0.5rem;
+}
+
+/* 🖼️ Insère l’image avant le texte */
+.titre-messages::before {
+    content: ""; /* Nécessaire pour afficher l’image */
+    display: inline-block;
+    width: 1.5rem; /* Ajuste la taille de l’image */
+    height: 1.5rem;
+    background-image: url('./../../../medias/images/bulle_blanc.png');
+    background-size: contain; /* Ajuste la taille */
+    background-repeat: no-repeat;
+}
+
+.nom-contact {
+    margin-bottom: 3rem;
+}
+
+.discussions {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    width: 80%;
+    gap: 0.5rem; /* Espacement entre les messages */
+    margin-top: 2rem;
+  
+}
+
+/* ✅ Styles généraux pour chaque message */
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%; /* Empêche les messages d'être trop larges */
+    padding: 0.5rem 0.5rem;
+    border-radius: 10px;
+}
+
+.message-contenu {
+    background-color: #ffffff;
+    padding: 0.5rem 1rem 1rem;
+    border-radius: 0.3rem;
+    max-width: 60%;
+    min-width: 40%;
+}
+
+/* 📌 Messages du contact (alignés à gauche) */
+.message-contact {
+    align-self: flex-start; /* Aligne à gauche */
+    margin-left: 3rem;
+}
+
+.message-nom {
+    width: 10rem;
+    margin-left: 3rem;
+    padding: 0.2rem 1rem;
+    border-radius: 0.3rem;
+    font-weight: bold;
+}
+
+/* 💬 Nom de l'expéditeur */
+.message-nom, .message-nom-contact {
+    background-color: #e7ffcc;
+    color: black;
+}
+
+/* 📌 Messages de "Moi" (alignés à droite) */
+.message-moi {
+    align-self: flex-end; /* Aligne à droite */
+    margin-right: 3rem;
+}
+
+.message-nom-moi {
+    align-self: flex-end; /* Aligne à droite */
+    text-align: right;
+    background-color: #FF165D;
+    color: white;
+    margin-right: 3rem;
+}
+
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1200px) {
+    .contacts, .titre-messages, .nom-contact, .message-contenu, .message-nom {
+        font-size: 1rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 1200px) {
+    .contacts, .titre-messages, .nom-contact, .message-contenu, .message-nom {
+        font-size: 0.9rem; /* Réduire la taille de la police */
+    }
+}
+
+@media (max-width: 900px) {
+    .contacts, .titre-messages, .nom-contact, .message-contenu, .message-nom {
+        font-size: 0.8rem; /* Réduire la taille de la police */
+    }
+}
