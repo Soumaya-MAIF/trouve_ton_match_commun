@@ -14,7 +14,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
     background-image: url("../../medias/images/background.jpg");
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     background-position-y: center;
