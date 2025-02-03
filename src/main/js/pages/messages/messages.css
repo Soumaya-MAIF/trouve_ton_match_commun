@@ -20,6 +20,7 @@
 .contacts {
     position: fixed;
     margin-top: 0;
+    padding-top: 2rem;
     margin-bottom: 0;
     height: 70%;
     background-color: #e7ffcc;
@@ -76,6 +77,7 @@
     flex-direction: column;
     max-width: 100%; /* Empêche les messages d'être trop larges */
     padding: 0.5rem 0.5rem;
+    margin-top: -1rem;
     border-radius: 10px;
 }
 
