@@ -5,16 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Parrain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Porteur.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Secteurs_reseaux.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Type.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Types_accompagnements.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/js/pages/creation-compte/CreationCompte.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/js/pages/creation-compte/CreationCompte.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/js/pages/creation-compte/creation-compte.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/js/pages/creation-compte/creation-compte.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="46-257-page-mon-compte-en-tant-que-côté-parrain" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -24,28 +42,44 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2rRcmMY6LZ48t6qjwdmHHRKJMmK" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.TrouveTonMatchApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [clean,test,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [clean,test].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/workspaces/INITIATIVE-DEUX-SEVRES-Trouve-Ton-Match&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.TrouveTonMatchApplication.executor": "Run",
+    "Maven.trouve_ton_match [clean,install].executor": "Run",
+    "Maven.trouve_ton_match [clean,test,install].executor": "Run",
+    "Maven.trouve_ton_match [clean,test].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/workspaces/INITIATIVE-DEUX-SEVRES-Trouve-Ton-Match",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Oracle",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RunManager" selected="Application.TrouveTonMatchApplication">
     <configuration name="TrouveTonMatchApplication" type="Application" factoryName="Application">
       <envs>
         <env name="POSTGRES_PORT" value="5432" />
@@ -56,6 +90,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TrouveTonMatchApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="trouve_ton_match" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="back.trouve_ton_match.TrouveTonMatchApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -65,7 +114,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1736525486158</updated>
+      <workItem from="1738833549032" duration="12121000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
