@@ -39,13 +39,14 @@
 
 @media (max-width: 1200px) {
     .btn button {
-        font-size: 0.9rem; /* Réduire la taille de la police */
+        font-size: 0.9rem; 
     }
 }
 
 @media (max-width: 900px) {
     .btn button {
-        font-size: 0.8rem; /* Réduire la taille de la police */
+        font-size: 0.7rem; 
+        padding: 0.2rem 0.4rem; 
     }
 }
 
