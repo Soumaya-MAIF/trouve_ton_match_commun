@@ -27,8 +27,4 @@ public class Parrain extends User{
 
     private Type type;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
 }

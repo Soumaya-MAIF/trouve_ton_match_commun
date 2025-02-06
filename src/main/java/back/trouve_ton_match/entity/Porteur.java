@@ -31,9 +31,5 @@ public class Porteur extends User{
 
     private Type type;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
 
 }

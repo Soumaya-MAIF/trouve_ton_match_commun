@@ -33,12 +33,6 @@ public abstract class  User {
 
     private Role role =  Role.UTILISATEUR;
 
-    @OneToMany(mappedBy = "user")
-    private List<Porteur> porteurs;
-
-    @OneToMany(mappedBy = "user")
-    private List<Parrain> parrains;
-
     @ManyToMany
     @JoinTable(
             name = "users_secteurs_reseaux",
