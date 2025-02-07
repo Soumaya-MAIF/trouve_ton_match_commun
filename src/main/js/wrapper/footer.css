@@ -5,7 +5,6 @@
     flex-direction: column; 
     align-items: center;
     justify-content: center;
-    /* font-size: calc(10px + 2vmin); */
     color: rgb(7, 7, 7);
     margin: 0 2%; /* Ajuster les marges pour centrer le contenu */
     font-size: 0.9rem;
@@ -43,7 +42,6 @@
 
 .Initiative79 {
     padding-bottom: 0.2rem;
-    font-weight: bold;
 }
 
 .mentionsLégales {
@@ -55,16 +53,16 @@
 .horaires {
     margin-left: 10vh;
     display: flex;      
-    flex-direction: column; /* Empile les éléments verticalement */
-    gap: 0.3rem;          /* Espacement entre les lignes */
+    flex-direction: column; 
+    gap: 0.3rem;          
     padding-bottom: 0.6rem;
 }
 
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1200px) {
     .footer {
-        margin: 0 1rem; /* Réduire encore plus les marges */
-        font-size: 0.7rem; /* Réduire la taille de la police */
+        margin: 0 1rem; 
+        font-size: 0.7rem; 
     }
 }
 
@@ -77,8 +75,8 @@
 
 @media (max-width: 900px) {
     .menu, .favicon-container, .bouton button {
-        margin: 0 0.25rem; /* Réduire encore plus les marges */
-        font-size: 0.8rem; /* Réduire la taille de la police */
+        margin: 0 0.25rem; 
+        font-size: 0.8rem; 
     }
 }
 
@@ -88,3 +86,28 @@
         margin-right: 3%;
     }
 }
+
+@media (max-width: 768px) { /* Version mobile */
+    .social-icons, .img-footer, .col-footer {
+        margin: 2rem 0 0 0 ;
+        align-items: center;
+    }
+    .desktop {
+        display: none
+    }
+    .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        width: 100%;
+        margin: 0;
+    }
+
+    .mentionsLégales {
+        margin-top: 1rem;
+        font-size: 0.6rem;
+    }
+}
+

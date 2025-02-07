@@ -1,3 +1,19 @@
+.container-mon-compte {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 70vh;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    overflow-y: auto;
+}
+
 .btn-row {
     display: flex;
     justify-content: flex-end;
@@ -9,26 +25,26 @@
     justify-content: center;
     padding: 0.3rem 0.6rem; /* Espacement interne */
     border: 0.125rem solid transparent;
-    border-radius: 0.6rem; /* Coins arrondis (optionnel) */
+    border-radius: 0.6rem; 
     cursor: pointer; /* Curseur interactif */
     font-size: 0.95rem;
 }
 
 .btn .btn-suivant {
-    background-color: #ffffff; /* Fond du bouton */
-    color: #FF165D; /* Couleur du texte */
+    background-color: #ffffff;
+    color: #FF165D; 
     margin-left: 2rem;
 }
 
 .btn .btn-enregistrer{
-    background-color: #FF165D; /* Fond du bouton */
-    color: white; /* Couleur du texte */
+    background-color: #FF165D;
+    color: white; 
 }
 
 .btn-suivant:hover, 
 .btn-enregistrer:hover {
-    background-color:  #e7ffcc; /* Fond du bouton */
-    color: #71c920 ; /* Couleur du texte */
+    background-color:  #e7ffcc; 
+    color: #71c920 ; 
     border: #FF165D solid 0.125rem;
 }
 
@@ -47,6 +63,17 @@
     .btn button {
         font-size: 0.7rem; 
         padding: 0.2rem 0.4rem; 
+    }
+}
+
+@media (max-width: 768px) { /* Version mobile */
+    .form-container {
+        flex-direction: column;
+        display: flex;
+        margin: 0 auto;
+        justify-content: start;
+        align-items: center;
+        overflow-y: auto;
     }
 }
 

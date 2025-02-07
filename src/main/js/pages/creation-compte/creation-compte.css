@@ -44,17 +44,17 @@
 }
 
 .custom-label {
-    font-size: 0.9rem; /* Taille du texte */
-    font-weight: bold; /* Texte en gras */
-    color: #333; /* Couleur du texte */
-    margin-right: 0.6rem; /* Espace à droite */
+    font-size: 0.9rem; 
+    font-weight: bold; 
+    color: #333; 
+    margin-right: 0.6rem; 
 }
 
 .custom-id {
     background-color: rgba(255, 255, 255, 0.5); /* Fond semi-transparent */
-    padding: 0.3rem; /* Espacement interne */
-    border-radius: 0.3rem; /* Coins arrondis */
-    border: 0.0625rem solid #ccc; /* Bordure légère */
+    padding: 0.3rem; 
+    border-radius: 0.3rem; 
+    border: 0.0625rem solid #ccc; 
     width: 100%; /* Prend toute la largeur disponible */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
@@ -63,8 +63,8 @@
     background-color: transparent; /* Fond transparent */
     border: none; /* Supprime la bordure par défaut */
     outline: none; /* Supprime l'effet de focus par défaut */
-    font-size: 0.875rem; /* Taille du texte */
-    color: #333; /* Couleur du texte */
+    font-size: 0.875rem; 
+    color: #333; 
     width: 100%; /* S'adapte à la largeur du conteneur */
     padding: 0.3rem; /* Ajoute de l'espace interne */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
@@ -79,13 +79,13 @@
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1200px) {
     .form-radio-type {
-        font-size: 0.9rem; /* Réduire la taille de la police */
+        font-size: 0.9rem; 
     }
 }
 
 @media (max-width: 900px) {
     .form-radio-type {
-        font-size: 0.8rem; /* Réduire la taille de la police */
+        font-size: 0.8rem; 
     }
 }
 

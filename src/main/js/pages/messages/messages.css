@@ -8,51 +8,61 @@
 
 .container-messages {
     display: flex;
-    flex-direction: row;
     margin: 0;
     width: 100%;
     height: 100%;
-    flex-grow: 1; /* Prend tout l'espace restant dans <Wrapper> */
     max-height: 70vh;
-    overflow-y: auto; /* Barre de défilement si nécessaire */
 }
 
 .contacts {
-    position: fixed;
     margin-top: 0;
-    padding-top: 2rem;
     margin-bottom: 0;
-    height: 70%;
+    max-height: 100%; /* Limite la hauteur à celle du conteneur parent */
+    height: 70vh; /* prend la même hauteur que le container pour permettre l'affichage de la barre de scroll */
     background-color: #e7ffcc;
-    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:flex-start;
+    overflow-y: auto; /* Ajoute une barre de défilement si le contenu dépasse */
+    flex: 1; /* Prend tout l'espace restant dans le conteneur parent */
+    cursor: pointer; /* Curseur interactif */
+}
+
+.contacts-mobile {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    max-height: 100%; /* Limite la hauteur à celle du conteneur parent */
+    height: 70vh;
+    background-color: #e7ffcc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+    overflow-y: auto; /* Ajoute une barre de défilement si le contenu dépasse */
+    flex: 1; /* Prend tout l'espace restant dans le conteneur parent */
+    cursor: pointer; /* Curseur interactif */
 }
 
 .titre-messages {
-    display: flex; /* Utilise flexbox pour aligner l’image et le texte */
-    align-items: center; /* Centre verticalement */
-    justify-content: center; /* Centre horizontalement */
-    margin-top: 1rem;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     margin-bottom: 3rem;
-    max-height: 1.2rem;
-    color: white;
+    color:#FF165D;
     font-weight: normal;
-    background-color: #FF165D;
-    padding: 0.5rem 1rem;
-    border-radius: 0.6rem;
-    gap: 0.5rem;
+    font-size: 1.3rem;
+    padding-top: 2rem;
+    gap: 0.8rem;
 }
 
-/* 🖼️ Insère l’image avant le texte */
+/* Insère l’image avant le texte */
 .titre-messages::before {
     content: ""; /* Nécessaire pour afficher l’image */
     display: inline-block;
-    width: 1.5rem; /* Ajuste la taille de l’image */
-    height: 1.5rem;
-    background-image: url('./../../../medias/images/bulle_blanc.png');
+    width: 1.7rem; /* Ajuste la taille de l’image */
+    height: 1.7rem;
+    background-image: url('./../../../medias/images/bulle_rose.png');
     background-size: contain; /* Ajuste la taille */
     background-repeat: no-repeat;
 }
@@ -64,14 +74,15 @@
 .discussions {
     display: flex;
     flex-direction: column;
-    margin-left: 20%;
     width: 80%;
-    gap: 0.5rem; /* Espacement entre les messages */
+    gap: 0.5rem; 
     margin-top: 2rem;
-  
+    padding-top: 0.5rem;
+    flex: 3;
+    overflow-y: auto; 
 }
 
-/* ✅ Styles généraux pour chaque message */
+/* Styles généraux pour chaque message */
 .message {
     display: flex;
     flex-direction: column;
@@ -89,9 +100,9 @@
     min-width: 40%;
 }
 
-/* 📌 Messages du contact (alignés à gauche) */
+/* Messages du contact (alignés à gauche) */
 .message-contact {
-    align-self: flex-start; /* Aligne à gauche */
+    align-self: flex-start; 
     margin-left: 3rem;
 }
 
@@ -103,20 +114,20 @@
     font-weight: bold;
 }
 
-/* 💬 Nom de l'expéditeur */
+/* Nom de l'expéditeur */
 .message-nom, .message-nom-contact {
     background-color: #e7ffcc;
     color: black;
 }
 
-/* 📌 Messages de "Moi" (alignés à droite) */
+/* Messages de "Moi" (alignés à droite) */
 .message-moi {
-    align-self: flex-end; /* Aligne à droite */
+    align-self: flex-end; 
     margin-right: 3rem;
 }
 
 .message-nom-moi {
-    align-self: flex-end; /* Aligne à droite */
+    align-self: flex-end; 
     text-align: right;
     background-color: #FF165D;
     color: white;
@@ -126,18 +137,31 @@
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1200px) {
     .contacts, .titre-messages, .nom-contact, .message-contenu, .message-nom {
-        font-size: 1rem; /* Réduire la taille de la police */
+        font-size: 1rem; 
     }
 }
 
 @media (max-width: 1200px) {
     .contacts, .titre-messages, .nom-contact, .message-contenu, .message-nom {
-        font-size: 0.9rem; /* Réduire la taille de la police */
+        font-size: 0.9rem; 
     }
 }
 
 @media (max-width: 900px) {
     .contacts, .titre-messages, .nom-contact, .message-contenu, .message-nom {
-        font-size: 0.8rem; /* Réduire la taille de la police */
+        font-size: 0.8rem; 
+    }
+}
+
+@media (max-width: 768px) { /* Version mobile */
+    .contacts {
+        display: none;
+        flex: 0;
+    }
+    .titre-messages {
+        font-size: 1.3rem;
+    }
+    .nom-contact {
+        font-size: 1rem;
     }
 }

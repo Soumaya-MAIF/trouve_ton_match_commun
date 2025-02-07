@@ -2,10 +2,9 @@
 .titre {
     margin-top: 1rem;
     max-height: 3rem;
-    color: white;
-    font-size: 1.1rem;
+    color: black;
+    font-size: 1.5rem;
     font-weight: normal;
-    background-color: #FF165D;
     padding: 0.4rem 2.5rem;
     border-radius: 0.6rem;
 }
@@ -43,7 +42,7 @@
     color: white; /* Couleur du texte */
     padding: 0.3rem 0.6rem; /* Espacement interne */
     border: 0.125rem solid transparent;
-    border-radius: 0.6rem; /* Coins arrondis (optionnel) */
+    border-radius: 0.6rem; 
     cursor: pointer; /* Curseur interactif */
     font-size: 0.95rem;
 }
@@ -75,10 +74,26 @@
     transform: scale(0.8); 
 }
 
+.menu-mobile {
+    display: flex;
+    font-size: 1.4rem;
+    color:#FF165D;
+    text-decoration-line: none;
+    padding-top: 2rem;
+    margin: 0 2rem; /* Ajoute de l'espace entre les liens */
+    min-width: 30px;
+}
+
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1600px) {
     .form-container {
         width: 60%;
+    }
+    .titre {
+        font-size: 1.4rem;
+    }
+    .bouton-bas-page {
+        font-size: 0.9rem;
     }
 }
 
@@ -86,11 +101,17 @@
     .form-container {
         width: 70%;
     }
+    .titre {
+        font-size: 1.3rem;
+    }
+    .bouton-bas-page {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 1200px) {
     .titre, .bouton-bas-page {
-        font-size: 0.9rem; /* Réduire la taille de la police */
+        font-size: 1.2rem;
     }
     .form-container {
         width: 75%;
@@ -98,11 +119,15 @@
     .message-erreur {
         font-size: 0.8rem;
     }
+    .bouton-bas-page {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.5rem; 
+    }
 }
 
 @media (max-width: 900px) {
     .titre, .bouton-bas-page {
-        font-size: 0.8rem; /* Réduire la taille de la police */
+        font-size: 1rem;
     }
     .form-container {
         width: 80%;
@@ -110,5 +135,22 @@
     .message-erreur {
         font-size: 0.7rem;
     }
+    .bouton-bas-page {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem; 
+    }
 }
 
+@media (max-width: 768px) { /* Version mobile */
+    .titre {
+        font-size: 0.9rem;
+        color: #FF165D;
+    }
+    .bouton-bas-page {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+    main {
+        height: 68vh;
+    }
+}

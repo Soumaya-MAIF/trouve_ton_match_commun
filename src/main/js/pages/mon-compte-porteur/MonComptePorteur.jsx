@@ -154,7 +154,9 @@ const MonCompteParrain = () => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper> 
+            <div className='container-mon-compte'>
+
             <div className='titre'>Mon compte</div>
             <form onSubmit={handleSubmit} className='form-container'>
 
@@ -232,6 +234,7 @@ const MonCompteParrain = () => {
                     </div>
                 </div>
             </form>
+            </div>
         </Wrapper>
     )
 }

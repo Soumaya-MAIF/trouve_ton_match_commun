@@ -19,3 +19,11 @@ main {
     background-position-y: center;
     background-size: cover;
 }
+
+@media (max-width: 768px) {
+    main {
+        background-image: none;
+
+    }
+}
+
