@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 // import { useAuth } from '../AuthContext'; // ================= A mettre en place
 
 let connecter = true;
+// let connecter = false;
+
+// let admin = true;
+let admin = false;
+
 
 const Header = () => {
     // const { isAuthenticated, logout } = useAuth();  // ================= A mettre en place
@@ -17,30 +22,51 @@ const Header = () => {
                             <div className="favicon" alt="favicon_TTM"></div>
                         </div>
                     </Link>
-                    <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
-                    <Link className="menu" to="/profils">Profils disponibles</Link>
+                    { (!connecter && !admin) ? (
+                        <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
+                    ) : null }
+                    { (!connecter && !admin) ? (
+                        <Link className="menu" to="/profils">Profils disponibles</Link>
+                    ) : null }
+                    { (!connecter && !admin) ? (
                     <Link className="menu" to="/messages">Messages</Link>
+                    ) : null }
+                    { (!connecter && !admin) ? (
                     <Link className="menu" to="/matchs">Mes Matchs</Link>
+                    ) : null }
+                    { !connecter ? (
                     <Link className="menu" to="/ressources">Ressources</Link>
+                    ) : null }
+                    { (!connecter && admin)? (
                     <Link className="menu" to="/indicateurs">Indicateurs</Link>
-                    <div className="bouton">
-                        {/* <button type="button" className="btn" onClick={logout}>Se déconnecter</button> */}
-                        <Link to="/connexion">
-                            <button type="button" className="btn-connexion">Se connecter</button>
-                        </Link>
-                            {/* {isAuthenticated ? (
-                                <button type="button" className="btn" onClick={logout}>Se déconnecter</button>
-                            ) : (
+                    ) : null }
+                    { connecter ? (
+                        <>
+                            <div className="bouton">
+                                {/* <button type="button" className="btn" onClick={logout}>Se déconnecter</button> */}
                                 <Link to="/connexion">
-                                    <button type="button" className="btn">Se connecter</button>
+                                    <button type="button" className="btn-connexion">Se connecter</button>
                                 </Link>
-                                )} */}
-                    </div>
-                    <div className="bouton">
-                        <Link to="/creation-compte">
-                            <button type="button" className="btn-creer">Créer un compte</button>
-                        </Link>
-                    </div>
+                                    {/* {isAuthenticated ? (
+                                        <button type="button" className="btn" onClick={logout}>Se déconnecter</button>
+                                        ) : (
+                                            <Link to="/connexion">
+                                            <button type="button" className="btn">Se connecter</button>
+                                            </Link>
+                                            )} */}
+                            </div>
+                        </>
+                    ) : null }
+
+                    { (!connecter && admin) ? (
+                        <>
+                            <div className="bouton">
+                                <Link to="/creation-compte">
+                                    <button type="button" className="btn-creer">Créer un compte</button>
+                                </Link>
+                            </div>
+                        </>
+                    ) : null }
                 </div>
                 <div className="header-container">
                     <div className="logo-ttm" alt="logo_TTM" />

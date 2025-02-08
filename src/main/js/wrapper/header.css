@@ -28,11 +28,11 @@
 }
 
 .header-container {
-    width: 100%;
+    width: 95%;
     display: flex;
     margin: 0 auto;
     flex: 1 2 1;
-    justify-content: space-around; 
+    justify-content:space-between; 
     align-items: center; 
 }
 
