@@ -3,8 +3,8 @@ import './../../../index.css'
 import { Link } from "react-router-dom";
 // import { useAuth } from '../AuthContext'; // ================= A mettre en place
 
-let connecter = true;
-// let connecter = false;
+// let connecter = true;
+let connecter = false;
 
 // let admin = true;
 let admin = false;

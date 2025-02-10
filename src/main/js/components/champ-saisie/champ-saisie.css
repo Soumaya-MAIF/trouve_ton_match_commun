@@ -46,6 +46,8 @@
 }
 
 .custom-container .custom-input.is-invalid {
+    background-color: rgba(180, 70, 70, 0.2);
+    color: #FF165D;
     border-color: red; /* Bordure rouge pour un état invalide */
     box-shadow: 0 0 0.6rem rgba(255, 0, 0, 0.5); /* Effet lumineux pour un état invalide */
 }
