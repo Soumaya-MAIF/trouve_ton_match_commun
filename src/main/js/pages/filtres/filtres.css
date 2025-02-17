@@ -37,13 +37,12 @@
 .checkbox-label {
     display: flex;
     justify-content: space-between; /* Aligne le texte à gauche et la case à cocher à droite */
-    align-items: center; /* Centre verticalement le texte et la case à cocher */
+    align-items: center; 
     background-color: rgb(255, 255, 255, 0.8);
     padding: 0.1rem 0.6rem;
     margin-top: 0.3rem;
     border-radius: 0.3rem;
     width: 90%;
-    /* height: 1.2rem; */
     height: auto; /* Ajouté pour s'assurer que la hauteur s'ajuste automatiquement */
 }
 

@@ -36,24 +36,24 @@
         width: 60%;
     }
     .msgAccueil h1 {
-        font-size: 2rem; /* Réduire la taille de la police */
+        font-size: 2rem; 
     }
     .msgAccueil h2 {
-        font-size: 1.2rem; /* Réduire la taille de la police */
+        font-size: 1.2rem; 
     }
     .msgAccueil h3 {
-        font-size: 1.6rem; /* Réduire la taille de la police */
+        font-size: 1.6rem; 
     }
 }
 
 @media (max-width: 900px) {
     .msgAccueil h1 {
-        font-size: 1.6rem; /* Réduire la taille de la police */
+        font-size: 1.5rem; 
     }
     .msgAccueil h2 {
-        font-size: 1rem; /* Réduire la taille de la police */
+        font-size: 1rem; 
     }
     .msgAccueil h3 {
-        font-size: 1.2rem; /* Réduire la taille de la police */
+        font-size: 1.2rem;
     }
 }

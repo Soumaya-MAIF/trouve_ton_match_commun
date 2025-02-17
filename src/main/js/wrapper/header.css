@@ -1,27 +1,62 @@
-.header {
+.header-desktop {
     height: 12vh;
     width: 100%;
     padding-top: 0.8%;
     padding-bottom: 2%;
     display: flex;
-    flex-direction: column; /* Aligne les éléments verticalement */
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
-    /* flex-wrap: nowrap; */
+}
+
+.header-mobile {
+    height: 12vh;
+    width: 100%;
+    padding-top: 0.8%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+
+}
+
+.header-mobile {
+    display: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .header-container {
-    width: 100%;
+    width: 95%;
     display: flex;
     margin: 0 auto;
-    /* flex: 0 1 auto; */
-    justify-content: space-around; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
+    flex: 1 2 1;
+    justify-content:space-between; 
+    align-items: center; 
 }
 
-/* .col-header {
+.header-container-mobile {
+    width: 100%;
     display: flex;
-} */
+    margin: 1rem auto;
+    align-items: center; 
+    justify-content: space-between; /* Espace égal entre les colonnes */
+}
+
+.colonne {
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+}
+
+.col-1, .col-3 {
+    flex: 1;
+}
+
+.col-2 {
+    flex: 2;
+}
 
 .menu {
     display: flex;
@@ -86,7 +121,7 @@
 
 .logo-ttm {
     max-height: 7vh;
-    width: 100vh;
+    width: 70vh;
     height: 8vh;
     background-image: url('../../medias/images/logos/logo_TTM_vert.png');
     background-size: contain; /* 'contain' pour préserver les proportions */
@@ -96,13 +131,40 @@
 
 .logo-reseau {
     max-height: 7vh;
-    width: 100vh;
+    width: 70vh;
     height: 8vh;
     margin-top: -0.6rem;
     background-repeat: no-repeat;
     background-size: contain; 
     background-position: center;
     background-image: url('../../medias/images/logos/Nouvelle_Aquitaine-Logo-Reseau_Initiative.webp');
+}
+
+.logo-mobile {
+    max-height: 20vh; 
+    width: 50vh; 
+    height: 10vh; 
+    margin-bottom: 0.8rem;
+}
+
+.menu-burger {
+    max-height: 5vh;
+    height: 8vh;
+    margin-top: -0.6rem;
+    background-repeat: no-repeat;
+    background-size: contain; 
+    background-position: center;
+    background-image: url('../../medias/images/menu_burger_rose.png');
+}
+
+.utlisateur {
+    max-height: 10vh;
+    height: 8vh;
+    margin-top: -0.6rem;
+    background-repeat: no-repeat;
+    background-size: contain; 
+    background-position: center;
+    background-image: url('../../medias/images/utilisateur_vert.png');
 }
 
 .line {
@@ -113,21 +175,49 @@
 
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1200px) {
+    .header-mobile {
+        display: none;
+    }
     .menu, .favicon-container, .bouton button{
-        margin: 0 1rem; /* Réduire encore plus les marges */
-        font-size: 0.8rem; /* Réduire la taille de la police */
+        margin: 0 1rem; 
+        font-size: 0.8rem; 
     }
 }
 
 @media (max-width: 1200px) {
+    .header-mobile {
+        display: none;
+    }
     .logo-ttm, .logo-reseau {
         height: 5vh;
     }
 }
 
 @media (max-width: 900px) {
+    .header-mobile {
+        display: none;
+    }
     .menu, .favicon-container, .bouton button {
-        margin: 0 0.25rem; /* Réduire encore plus les marges */
-        font-size: 0.7rem; /* Réduire la taille de la police */
+        margin: 0 0.25rem; 
+        font-size: 0.7rem; 
+    }
+}
+
+@media (max-width: 768px) { /* Version mobile */
+    .header-desktop {
+        display: none;
+    }
+    
+    .header-mobile {
+        display: block;
+        height: 16vh;
+    }
+
+    .logo-ttm {
+        height: 8vh;
+        width: auto;
+    }
+    .logo-mobile {
+        width: auto;
     }
 }
