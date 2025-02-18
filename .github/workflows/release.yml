@@ -68,7 +68,7 @@ jobs:
 
       # Étape 3 : Changer de répertoire vers le bon dossier du projet React
       - name: Change directory to frontend
-        working-directory: ./front
+        working-directory: ./src/main/js/
         run: |
           npm install
           npm run build
@@ -78,7 +78,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend
-          path: ./front/build/
+          path: ./src/main/js/build/
 
   # Job pour publier la release sur GitHub
   release:
