@@ -48,6 +48,6 @@ jobs:
         with:
           name: test-report
           path: target/surefire-reports/
-          if-no-files-found: error
+          # if-no-files-found: error
           retention-days: 1
           compression-level: 0
