@@ -4,7 +4,6 @@ on:
     branches:
       - main
       - dev
-      - 53-24-mise-en-place-de-la-ci
 
 permissions:
   # Accord de permission pour écrire des contenus dans le dépôt
@@ -18,7 +17,7 @@ jobs:
       # Définir la branche 'main' pour les releases officielles
       release-branches: '^(main)$'
       # Définir la branche 'beta' pour les pre-releases
-      prerelease-branches: '^(dev|53-24-mise-en-place-de-la-ci)$'
+      prerelease-branches: '^(dev)$'
 
   # Job pour construire le back-end Java
   build-backend:
@@ -30,7 +29,7 @@ jobs:
     steps:
       # Étape 1 : Récupérer le code source
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Étape 2 : Configurer JDK 17
       - name: Setup Java JDK
@@ -55,20 +54,22 @@ jobs:
     name: Build React Frontend
     runs-on: ubuntu-latest
     if: ${{ needs.get-version.outputs.will-release == 'true' }}
+    defaults: 
+      run: 
+        working-directory: ./src/main/js/
     needs:
       - get-version
     steps:
       # Étape 1 : Récupérer le code source
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Étape 2 : Configurer Node.js
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.4
 
       # Étape 3 : Changer de répertoire vers le bon dossier du projet React
-      - name: Change directory to frontend
-        working-directory: ./src/main/js/
+      - name: Build
         run: |
           npm install
           npm run build
@@ -78,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend
-          path: ./src/main/js/build/
+          path: ./build/
 
   # Job pour publier la release sur GitHub
   release:

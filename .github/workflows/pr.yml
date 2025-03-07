@@ -1,5 +1,12 @@
+name: Validation des Pull Requests
+
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 
 jobs:
   test:
@@ -36,3 +43,11 @@ jobs:
           SPRING_DATASOURCE_USERNAME: user
           SPRING_DATASOURCE_PASSWORD: securePassword
         run: mvn clean test
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: ./build/test-results/test/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
