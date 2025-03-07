@@ -51,3 +51,40 @@ jobs:
           # if-no-files-found: error
           retention-days: 1
           compression-level: 0
+
+  lighthouseci:
+    runs-on: ubuntu-latest
+    defaults:
+      run: 
+        working-directory: front
+        
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+ 
+      - name: Désactiver Nexus et forcer npm public
+        run: |
+          echo "registry=https://registry.npmjs.org/" > ~/.npmrc
+          echo "strict-ssl=false" >> ~/.npmrc
+          npm config list
+ 
+      - name: Supprimer éventuelles dépendances Nexus
+        run: rm -rf node_modules package-lock.json
+ 
+      - name: Installer les dépendances depuis npm public
+        run: npm install --no-cache --prefer-online
+ 
+      - name: Installer Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+ 
+      - name: Build project
+        run: npm run build
+ 
+      - name: Run Lighthouse CI
+        run: lhci autorun
+
