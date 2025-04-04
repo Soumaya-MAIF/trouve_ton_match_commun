@@ -1,6 +1,11 @@
 spring:
   application:
     name: trouve_ton_match_commun
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: ttm
 
   datasource:
     url: jdbc:postgresql://db:5432/ttm_commun

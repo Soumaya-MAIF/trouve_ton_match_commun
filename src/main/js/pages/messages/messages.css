@@ -134,6 +134,11 @@
     margin-right: 3rem;
 }
 
+.discussions .bouton {
+    height: 2rem;
+    width: 10rem;
+}
+
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1200px) {
     .contacts, .titre-messages, .nom-contact, .message-contenu, .message-nom {

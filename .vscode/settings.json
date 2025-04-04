@@ -1,3 +1,11 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+  "java.project.sourcePaths": ["src/main/java/back/trouve_ton_match", "src/main/java", "src"],
+  "maven.terminal.favorites": [
+    {
+      "command": "spring-boot:run",
+      "debug": false
+    }
+  ],
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

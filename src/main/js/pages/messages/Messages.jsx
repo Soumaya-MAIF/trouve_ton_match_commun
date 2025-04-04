@@ -1,8 +1,9 @@
 import Wrapper from '../../wrapper/Index.jsx';
 import Message from './Message.jsx';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
+import { Stomp } from '@stomp/stompjs';
 // import { useAuth } from '../../AuthContext';
 
 import './messages.css';
@@ -11,6 +12,27 @@ import Contact from './Contact.jsx';
 import { Link } from "react-router";
 
 const Messages = ({ isMobile }) => {
+
+  const [loadMessage, setLoadMessages] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const client = useMemo(()=>{
+    return Stomp.client("ws://localhost:8080/ws")
+  }, []);
+
+  useEffect(()=>{
+    setLoader(true);
+    client.connect({}, ()=>{
+      client.subscribe('/getMessages', (e)=>{
+        console.log('Message reçu', e.body)
+        setMessages(JSON.parse(e.body))
+      });
+      client.subscribe('/updateMessages', (e)=>{
+        console.log('Message mis à jour', e.body)
+      });
+    })
+  }, [client, loadMessage, setMessages, setLoader]);
+
 
     const navigate = useNavigate();
 
@@ -26,7 +48,7 @@ const Messages = ({ isMobile }) => {
     return (
         <Wrapper>
             <section className='container-messages'>
-                {!isMobile ? (
+                { !isMobile && (
                     <div className='contacts'>
                         <div className='titre-messages'>Contacts</div>
                         <Contact prenom='Laurent' nom='DUPONT' />
@@ -40,11 +62,20 @@ const Messages = ({ isMobile }) => {
                         <Contact prenom='Paul' nom='LEROY' />
                         <Contact prenom='Paul' nom='LEROY' />
                     </div>
-                ) : (
-                    null
                 )}
                 <div className='discussions'>
-                    <Message
+                    {/* <button class='bouton' onClick={() => client.send('/requestMessages', {}, "")}> */}
+                    <button class='bouton' onClick={() => client.send('/send', {}, JSON.stringify({"sender":{"id": 1, "nom": "toto", "prenom": "tutu", "email": "toto@mail.fr"}, "dest":{"id": 2, "nom": "tata", "prenom": "tutu", "email": "tata@mail.fr"}, "content":"Test3"}))}>
+                    </button>
+                    <ul>
+                    {messages.map((message, index)=>(<li key={`${message._id.timestamp}-${index}`}>
+                        <p>{message.sender}</p>
+                        <p>{message.dest}</p>
+                        <p>{message.content}</p>
+                    </li>))}
+                    </ul>
+
+                    {/* <Message
                         nom='Laurent'
                         contenuMessage='Bonjour Pierre, merci de me consacrer du temps. J’ai bien avancé sur mon projet de plateforme de gestion des stocks pour les petits commerces, mais j’ai encore des doutes sur certains aspects.'
                     />
@@ -71,7 +102,7 @@ const Messages = ({ isMobile }) => {
                     <Message
                         nom='Laurent'
                         contenuMessage='Etc.........'
-                    />
+                    /> */}
                 </div>
             </section>
         </Wrapper>
