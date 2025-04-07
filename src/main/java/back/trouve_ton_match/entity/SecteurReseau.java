@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SecteursReseaux {
+public class SecteurReseau {
     public Long getId() {
         return id;
     }

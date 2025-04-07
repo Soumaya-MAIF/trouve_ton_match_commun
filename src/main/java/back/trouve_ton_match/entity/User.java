@@ -88,20 +88,20 @@ public class  User {
         this.role = role;
     }
 
-    public List<Types_accompagnements> getTypes_accompagnements() {
-        return types_accompagnements;
+    public List<TypeAccompagnement> getType_accompagnement() {
+        return typeAccompagnement;
     }
 
-    public void setTypes_accompagnements(List<Types_accompagnements> types_accompagnements) {
-        this.types_accompagnements = types_accompagnements;
+    public void setTypeAccompagnement(List<TypeAccompagnement> typeAccompagnement) {
+        this.typeAccompagnement = typeAccompagnement;
     }
 
-    public List<SecteursReseaux> getSecteurs_reseaux() {
-        return secteurs_reseaux;
+    public List<SecteurReseau> getSecteurReseau() {
+        return secteursReseaux;
     }
 
-    public void setSecteurs_reseaux(List<SecteursReseaux> secteurs_reseaux) {
-        this.secteurs_reseaux = secteurs_reseaux;
+    public void setSecteurReseau(List<SecteurReseau> secteursReseaux) {
+        this.secteursReseaux = secteursReseaux;
     }
 
     @ManyToMany
@@ -110,7 +110,7 @@ public class  User {
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "secteurs_reseaux_id")
     )
-    private List<SecteursReseaux> secteurs_reseaux;
+    private List<SecteurReseau> secteursReseaux;
 
     @ManyToMany
     @JoinTable(
@@ -118,6 +118,6 @@ public class  User {
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "types_accompagnements_id")
     )
-    private List<Types_accompagnements> types_accompagnements;
+    private List<TypeAccompagnement> typeAccompagnement;
 
 }

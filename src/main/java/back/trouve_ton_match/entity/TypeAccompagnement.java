@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Types_accompagnements {
+public class TypeAccompagnement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
