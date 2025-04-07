@@ -8,12 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@DiscriminatorValue("PARRAIN")
 @Table(name = "parrain")
 public class Parrain extends User{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String presentation_parcours;
 
@@ -25,6 +22,5 @@ public class Parrain extends User{
 
     private String disponibilite;
 
-    private Type type;
 
 }

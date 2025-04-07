@@ -10,12 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@DiscriminatorValue("PORTEUR")
 @Table(name = "porteur")
 public class Porteur extends User{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private Date date_lancement;
 
@@ -28,8 +25,4 @@ public class Porteur extends User{
     private String lieu_activite;
 
     private String disponibilites;
-
-    private Type type;
-
-
 }

@@ -5,8 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/config/JacksonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/SecteursController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/repository/SecteursReseauxRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/service/SecteursReseauxService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Parrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Parrain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Porteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Porteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Secteurs_reseaux.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/SecteursReseaux.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Secteurs_reseaux.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +34,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -44,35 +62,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.TrouveTonMatchApplication.executor": "Debug",
-    "Maven.trouve_ton_match [clean,install].executor": "Run",
-    "Maven.trouve_ton_match [clean,test,install].executor": "Run",
-    "Maven.trouve_ton_match [clean,test].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "5-12-initialisation-de-la-base-de-données",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/workspaces/INITIATIVE-DEUX-SEVRES-Trouve-Ton-Match",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Oracle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.TrouveTonMatchApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.trouve_ton_match [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.trouve_ton_match [clean,test,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.trouve_ton_match [clean,test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.trouve_ton_match [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.trouve_ton_match [compile].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;5-12-initialisation-de-la-base-de-données&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Workspace MAIF/gestion-editions-automatiques-backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.TrouveTonMatchApplication">
     <configuration name="TrouveTonMatchApplication" type="Application" factoryName="Application">
       <envs>
@@ -84,6 +104,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="console_1.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/d9adea35-c0b5-401d-8b0b-f7c637c3bf0e/console_1.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
     <configuration name="TrouveTonMatchApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="trouve_ton_match" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="back.trouve_ton_match.TrouveTonMatchApplication" />
@@ -91,16 +116,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Database Script.console_1.sql" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Physical" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="" />
@@ -109,7 +142,17 @@
       <option name="presentableId" value="Default" />
       <updated>1736525486158</updated>
       <workItem from="1738833549032" duration="12121000" />
-      <workItem from="1738855500583" duration="1727000" />
+      <workItem from="1738855500583" duration="2147000" />
+      <workItem from="1738918705242" duration="13315000" />
+      <workItem from="1739178131485" duration="6170000" />
+      <workItem from="1739279802507" duration="1119000" />
+      <workItem from="1739541001704" duration="6660000" />
+      <workItem from="1739721106262" duration="820000" />
+      <workItem from="1739728144315" duration="3000" />
+      <workItem from="1741337312545" duration="1115000" />
+      <workItem from="1742563472366" duration="8959000" />
+      <workItem from="1743769432425" duration="2759000" />
+      <workItem from="1744010024869" duration="56000" />
     </task>
     <servers />
   </component>
