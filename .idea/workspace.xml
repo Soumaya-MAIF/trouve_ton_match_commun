@@ -6,24 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/SecteursController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/SecteurController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/repository/SecteursReseauxRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/repository/SecteursReseauxRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/service/SecteursReseauxService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/service/SecteursReseauxService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/TrouveTonMatchApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/TrouveTonMatchApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/config/JacksonConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/config/JacksonConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/controller/SecteursController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Type.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User$UserBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/SecteursReseauxRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/SecteursReseauxRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/SecteursReseauxService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/SecteursReseauxService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/UserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,37 +44,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.TrouveTonMatchApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [clean,test,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [clean,test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.trouve_ton_match [compile].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;5-12-initialisation-de-la-base-de-données&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Workspace MAIF/gestion-editions-automatiques-backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.TrouveTonMatchApplication.executor": "Run",
+    "Maven.trouve_ton_match [clean,install].executor": "Run",
+    "Maven.trouve_ton_match [clean,test,install].executor": "Run",
+    "Maven.trouve_ton_match [clean,test].executor": "Run",
+    "Maven.trouve_ton_match [clean].executor": "Run",
+    "Maven.trouve_ton_match [compile].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Workspace MAIF/gestion-editions-automatiques-backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.TrouveTonMatchApplication">
     <configuration name="TrouveTonMatchApplication" type="Application" factoryName="Application">
       <envs>
@@ -116,6 +98,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.TrouveTonMatchApplication" />
+      <item itemvalue="Database Script.console_1.sql" />
+      <item itemvalue="Spring Boot.TrouveTonMatchApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Database Script.console_1.sql" />
