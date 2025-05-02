@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @DiscriminatorValue("PORTEUR")
 @Table(name = "porteur")
 public class Porteur extends User{
