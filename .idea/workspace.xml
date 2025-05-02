@@ -6,6 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User$UserBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/UserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +63,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dev",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "git-widget-placeholder": "authentification",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Workspace MAIF/gestion-editions-automatiques-backend",
+    "last_opened_file_path": "C:/Workspaces/simplon-2024-ecoconception-main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",

@@ -16,44 +16,87 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class  User {
 
+    @Setter
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
+    @Setter
+    @Getter
     protected String nom;
 
+    @Setter
+    @Getter
     protected String prenom;
+
+    @Column(nullable = false)
+    private String password;
 
     protected String entreprise;
 
-    protected String plateforme;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCode_acces() {
+        return code_acces;
+    }
+
+    public void setCode_acces(String code_acces) {
+        this.code_acces = code_acces;
+    }
+
+    public String getEntreprise() {
+        return entreprise;
+    }
+
+    public void setEntreprise(String entreprise) {
+        this.entreprise = entreprise;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+//    protected String plateforme;
 
     protected String code_acces;
 
     protected Role role =  Role.UTILISATEUR;
 
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getNom() {
-//        return nom;
-//    }
-//
-//    public void setNom(String nom) {
-//        this.nom = nom;
-//    }
-//
-//    public String getPrenom() {
-//        return prenom;
-//    }
-//
-//    public void setPrenom(String prenom) {
-//        this.prenom = prenom;
-//    }
-
-//    public List<TypeAccompagnement> getType_accompagnement() {
+    //    public List<TypeAccompagnement> getType_accompagnement() {
 //        return typeAccompagnement;
 //    }
 //
