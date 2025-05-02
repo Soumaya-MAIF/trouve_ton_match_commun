@@ -3,16 +3,17 @@ spring:
     name: trouve_ton_match_commun
 
   datasource:
-    url: jdbc:postgresql://localhost:${POSTGRES_PORT}/ttm_commun
+    url: jdbc:postgresql://localhost:5432/ttm_commun
     username: postgres
     password: postgres
-    driver-class-name: org.postgresql.Driver
 
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
+    database: postgresql
 
+logging:
+  level:
+    org.springframework: DEBUG
+debug: true

@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @DiscriminatorValue("PARRAIN")
 @Table(name = "parrain")
 public class Parrain extends User{

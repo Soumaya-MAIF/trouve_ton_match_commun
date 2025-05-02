@@ -5,15 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98218a79-6304-45a9-b151-cb0b576f393a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/dto/FirstLoginDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/dto/RegisterDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Parrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Parrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Porteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/Porteur.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/back/trouve_ton_match/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Parrain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/Porteur.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User$UserBuilder.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/entity/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/repository/UserRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/back/trouve_ton_match/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/trouve_ton_match-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/trouve_ton_match-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,12 +69,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.TrouveTonMatchApplication.executor": "Run",
+    "Application.TrouveTonMatchApplication.executor": "Debug",
     "Maven.trouve_ton_match [clean,install].executor": "Run",
     "Maven.trouve_ton_match [clean,test,install].executor": "Run",
     "Maven.trouve_ton_match [clean,test].executor": "Run",
     "Maven.trouve_ton_match [clean].executor": "Run",
     "Maven.trouve_ton_match [compile].executor": "Run",
+    "Maven.trouve_ton_match [org.springframework.boot:spring-boot-maven-plugin:3.3.1:run].executor": "Run",
+    "Maven.trouve_ton_match [spring-boot:run].executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -84,20 +101,45 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Application.TrouveTonMatchApplication">
-    <configuration name="TrouveTonMatchApplication" type="Application" factoryName="Application">
-      <envs>
-        <env name="POSTGRES_PORT" value="5432" />
-      </envs>
-      <option name="MAIN_CLASS_NAME" value="back.trouve_ton_match.TrouveTonMatchApplication" />
-      <module name="trouve_ton_match" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="back.trouve_ton_match.entity.dto" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.trouve_ton_match [spring-boot:run]">
     <configuration name="console_1.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/d9adea35-c0b5-401d-8b0b-f7c637c3bf0e/console_1.sql" />
       <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
+    <configuration name="trouve_ton_match [spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="spring-boot:run" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
       <method v="2" />
     </configuration>
     <configuration name="TrouveTonMatchApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -108,12 +150,13 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.TrouveTonMatchApplication" />
       <item itemvalue="Database Script.console_1.sql" />
+      <item itemvalue="Maven.trouve_ton_match [spring-boot:run]" />
       <item itemvalue="Spring Boot.TrouveTonMatchApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Maven.trouve_ton_match [spring-boot:run]" />
         <item itemvalue="Database Script.console_1.sql" />
       </list>
     </recent_temporary>
@@ -165,6 +208,36 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/back/trouve_ton_match/repository/UserRepository.java</url>
+          <line>8</line>
+          <properties class="back.trouve_ton_match.repository.UserRepository" method="findByEmail">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/AuthController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/back/trouve_ton_match/service/UserService.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/back/trouve_ton_match/controller/AuthController.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
