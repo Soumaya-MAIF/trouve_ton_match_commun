@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: trouve_ton_match_commun
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ttm_commun
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database: postgresql
+
+logging:
+  level:
+    org.springframework: DEBUG
+debug: true
