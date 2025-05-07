@@ -18,7 +18,6 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-//@RequiredArgsConstructor
 @RequestMapping(consumes = "application/json", produces = "application/json")
 public class AuthController {
 
@@ -27,13 +26,15 @@ public class AuthController {
 
     @PostMapping("/register")
     public User register(@RequestBody RegisterDTO user) {
-        User newUser = user.getType() == Type.PARRAIN ? new Parrain() : new Porteur();
-        newUser.setNom(user.getNom());
-        newUser.setPrenom(user.getPrenom());
-        newUser.setEmail(user.getEmail());
-        newUser.setRole(Role.UTILISATEUR);
-        newUser.setEntreprise(user.getEntreprise());
-        newUser.setCode_acces(UUID.randomUUID().toString());
+        User newUser = User.builder()
+                .nom(user.getNom())
+                .prenom(user.getPrenom())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .entreprise(user.getEntreprise())
+                .code_acces(UUID.randomUUID().toString())
+                .type(user.getType())
+                .build();
         userService.createUser(newUser);
         return newUser;
     }
@@ -45,7 +46,7 @@ public class AuthController {
             if(userConnu.get().getCode_acces().equals(user.getCode_acces())) {
                 return "Vous êtes connecté";
             }
-            return "je connais le user mais c'estpas le bon mdp";
+            return "je connais le user mais c'est pas le bon mdp";
         }
         return "Vous n'êtes pas connecté";
     }
