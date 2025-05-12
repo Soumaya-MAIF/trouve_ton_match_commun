@@ -1,16 +1,16 @@
 import Wrapper from '../../wrapper/Index.jsx';
 import Message from './Message.jsx';
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 // import { useAuth } from '../../AuthContext';
 
 import './messages.css';
 import './../../components/global.css'
 import Contact from './Contact.jsx';
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
-const Messages = ({isMobile}) => {
+const Messages = ({ isMobile }) => {
 
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const Messages = ({isMobile}) => {
     return (
         <Wrapper>
             <section className='container-messages'>
-                { !isMobile ? (
+                {!isMobile ? (
                     <div className='contacts'>
                         <div className='titre-messages'>Contacts</div>
                         <Contact prenom='Laurent' nom='DUPONT' />
@@ -40,9 +40,9 @@ const Messages = ({isMobile}) => {
                         <Contact prenom='Paul' nom='LEROY' />
                         <Contact prenom='Paul' nom='LEROY' />
                     </div>
-                    ) : (
-                        null
-                    )}
+                ) : (
+                    null
+                )}
                 <div className='discussions'>
                     <Message
                         nom='Laurent'

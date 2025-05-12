@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Connexion from '../main/js/pages/connexion/Connexion';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router';
 
 describe('Connexion Component', () => {
     test('renders Connexion component and handles form submission', async () => {

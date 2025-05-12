@@ -1,7 +1,7 @@
 import Wrapper from '../../wrapper/Index';
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 // import { useAuth } from '../../AuthContext';
 
 import './../../components/global.css';
@@ -10,8 +10,8 @@ import './profils.css';
 import photoIdentite from '../../../medias/images/identite.png';
 import pouceBlanc from '../../../medias/images/pouce_blanc_rose2.png';
 import pouceRose from '../../../medias/images/pouce_rose.png';
-import {CarteParrain} from './CarteParrain';
-import {CartePorteur} from './CartePorteur';
+import { CarteParrain } from './CarteParrain';
+import { CartePorteur } from './CartePorteur';
 
 const Profils = () => {
     const parrainDispo = true
@@ -28,7 +28,7 @@ const Profils = () => {
                         branches="Métiers de l'automobile"
                         domaines="La comptabilté, le droit du travail, le marketing, la vente, les ressources humaines, la logistique, l'infrastructure informatique, ..."
                         zone="Niort, et 50km autour"
-                        match = {true}>
+                        match={true}>
                     </CarteParrain>
                     <CarteParrain
                         nom="LEGRAND Sophie"
@@ -86,7 +86,7 @@ const Profils = () => {
                         besoins="La comptabilté, le droit du travail, ..."
                         lieu="Parthenay"
                         match={false}
-                        >
+                    >
                     </CartePorteur>
                     <CartePorteur
                         nom="LEFEBVRE Marie"

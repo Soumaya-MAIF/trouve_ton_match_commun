@@ -1,7 +1,7 @@
 import Wrapper from '../../wrapper/Index';
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie';
 import './../../components/global.css';
 import './../mon-compte-porteur/mon-compte.css'
@@ -25,10 +25,10 @@ const MonCompteParrain = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const location = useLocation(); // Ce hook permet d’accéder à l’objet location qui représente l’URL actuelle de l’application 
     const navigate = useNavigate();
-    
+
     const idUtilisateur = localStorage.getItem('idUtilisateur');
     console.log('recupération de idUtilisateur:', idUtilisateur);
-    
+
     // Créer une référence pour le champ 'nomUtilisateur'
     const nomInputRef = useRef(null);
 
@@ -38,7 +38,7 @@ const MonCompteParrain = () => {
             console.log('Référence du champ Nom :', nomInputRef.current);
             nomInputRef.current.focus();
         }
-    }, []); 
+    }, []);
 
     // Réinitialisation des états des valeurs de parrainDto
     // lorsque le composant est monté (c’est-à-dire lorsque la page est chargée ou actualisée).
@@ -153,74 +153,74 @@ const MonCompteParrain = () => {
         <Wrapper>
             <div className='container-mon-compte'>
 
-            <div className='titre'>Mon compte</div>
-            <form onSubmit={handleSubmit} className='form-container'>
+                <div className='titre'>Mon compte</div>
+                <form onSubmit={handleSubmit} className='form-container'>
 
-                {errors.presentationParcours && <div className="message-erreur">{errors.presentationParcours}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('presentationParcours', value)}
-                    label="Rapide présentation du parcours :"
-                    name="presentationParcours"
-                    value={parrainDto.presentationParcours}
-                    regex={otherRegex}
-                    ref={nomInputRef}
-                    placeholder="A la retraite depuis 6 mois, j'ai occupé de nombreux postes ..."
-                />
+                    {errors.presentationParcours && <div className="message-erreur">{errors.presentationParcours}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('presentationParcours', value)}
+                        label="Rapide présentation du parcours :"
+                        name="presentationParcours"
+                        value={parrainDto.presentationParcours}
+                        regex={otherRegex}
+                        ref={nomInputRef}
+                        placeholder="A la retraite depuis 6 mois, j'ai occupé de nombreux postes ..."
+                    />
 
-                {errors.branchesReseau && <div className="message-erreur">{errors.branchesReseau}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('branchesReseau', value)}
-                    label="Branches sur lesquelles il a un bon réseau :"
-                    name="branchesReseau"
-                    value={parrainDto.branchesReseau}
-                    regex={otherRegex}
-                    placeholder="Métiers de l'automobile..."
-                />
+                    {errors.branchesReseau && <div className="message-erreur">{errors.branchesReseau}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('branchesReseau', value)}
+                        label="Branches sur lesquelles il a un bon réseau :"
+                        name="branchesReseau"
+                        value={parrainDto.branchesReseau}
+                        regex={otherRegex}
+                        placeholder="Métiers de l'automobile..."
+                    />
 
-                {errors.domainesExpertise && <div className="message-erreur">{errors.domainesExpertise}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('domainesExpertise', value)}
-                    label="Domaine d’expertise particulier :"
-                    name="domainesExpertise"
-                    value={parrainDto.domainesExpertise}
-                    regex={otherRegex}
-                    placeholder="La comptabilté, le droit du travail, le marketing, la vente, les ressources humaines, la logistique, l'infrastructure informatique, ... "
-                />
+                    {errors.domainesExpertise && <div className="message-erreur">{errors.domainesExpertise}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('domainesExpertise', value)}
+                        label="Domaine d’expertise particulier :"
+                        name="domainesExpertise"
+                        value={parrainDto.domainesExpertise}
+                        regex={otherRegex}
+                        placeholder="La comptabilté, le droit du travail, le marketing, la vente, les ressources humaines, la logistique, l'infrastructure informatique, ... "
+                    />
 
-                {errors.secteurGeographique && <div className="message-erreur">{errors.secteurGeographique}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('secteurGeographique', value)}
-                    label="Lieux sur lesquels il souhaite se déplacer :"
-                    name="secteurGeographique"
-                    value={parrainDto.secteurGeographique}
-                    regex={otherRegex}
-                    placeholder="Niort, et ses environs (50km)"
-                />
+                    {errors.secteurGeographique && <div className="message-erreur">{errors.secteurGeographique}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('secteurGeographique', value)}
+                        label="Lieux sur lesquels il souhaite se déplacer :"
+                        name="secteurGeographique"
+                        value={parrainDto.secteurGeographique}
+                        regex={otherRegex}
+                        placeholder="Niort, et ses environs (50km)"
+                    />
 
-                {errors.disponibilites && <div className="message-erreur">{errors.disponibilites}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('disponibilites', value)}
-                    label="Disponibilités :"
-                    name="disponibilites"
-                    value={parrainDto.disponibilites}
-                    regex={otherRegex}
-                    placeholder="Du lundi au jeudi : 9h-12h / 13h-17h"
-                />
+                    {errors.disponibilites && <div className="message-erreur">{errors.disponibilites}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('disponibilites', value)}
+                        label="Disponibilités :"
+                        name="disponibilites"
+                        value={parrainDto.disponibilites}
+                        regex={otherRegex}
+                        placeholder="Du lundi au jeudi : 9h-12h / 13h-17h"
+                    />
 
-                <div className='btn-row'>
-                    <div className="btn">
-                        <button type="submit" className='btn-enregistrer'>
-                            Enregistrer
-                        </button>
+                    <div className='btn-row'>
+                        <div className="btn">
+                            <button type="submit" className='btn-enregistrer'>
+                                Enregistrer
+                            </button>
+                        </div>
+                        <div className="btn">
+                            <button type="submit" className='btn-suivant'>
+                                Suivant
+                            </button>
+                        </div>
                     </div>
-                    <div className="btn">
-                        <button type="submit" className='btn-suivant'>
-                            Suivant
-                        </button>
-                    </div>
-                </div>
 
-            </form>
+                </form>
             </div>
         </Wrapper>
     )

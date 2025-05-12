@@ -1,9 +1,22 @@
+.form-radio-role {
+    background-color: #e7ffcc;
+    padding: 0.3rem 3.1rem 0.3rem 0.6rem;
+    margin-bottom: 1.25rem;
+    border-radius: 0.3rem;
+    width: 18rem;
+
+}
+
 .form-radio-type {
     background-color: #e7ffcc;
     padding: 0.3rem 3.1rem 0.3rem 0.6rem;
-    margin-bottom: 0;
+    margin-bottom: 1.25rem;
     border-radius: 0.3rem;
     width: 12.5rem;
+    display: flex;
+    /* flex-direction: column;  */
+    /* padding: 0; */
+    display: inline-block; /* Assure que le label est un bloc en ligne pour s'adapter au contenu */
 }
 
 .radio-label {
@@ -78,14 +91,24 @@
 
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */
 @media (max-width: 1200px) {
-    .form-radio-type {
+    .form-radio-type, .form-radio-role {
         font-size: 0.9rem; 
     }
 }
 
 @media (max-width: 900px) {
-    .form-radio-type {
+    .form-radio-type, .form-radio-role {
         font-size: 0.8rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    .form-radio-type, .form-radio-role {
+        font-size: 0.8rem; 
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0.3rem 0.6rem 0.3rem 0.6rem;
     }
 }
 

@@ -12,8 +12,15 @@ spring:
       ddl-auto: create
     show-sql: true
     database: postgresql
+    
+  output:
+    ansi:
+      enabled: ALWAYS
+
 
 logging:
   level:
     org.springframework: DEBUG
+
+
 debug: true

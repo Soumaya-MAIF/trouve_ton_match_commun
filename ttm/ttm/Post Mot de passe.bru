@@ -1,0 +1,18 @@
+meta {
+  name: Post Mot de passe
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/mot-de-passe
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "titi@test.fr",
+    "password": "mdp"
+  }
+}

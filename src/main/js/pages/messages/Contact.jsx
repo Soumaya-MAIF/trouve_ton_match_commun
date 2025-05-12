@@ -1,11 +1,11 @@
 import './messages.css';
 import './../../components/global.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 let mobile = true;
 
 
-const Contact = ( {prenom, nom}) => {
+const Contact = ({ prenom, nom }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {

@@ -37,5 +37,9 @@ public abstract class User {
 
     protected String code_acces;
 
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING) // pour stocker le nom de l'enum dans la BDD (et non pas l'index)
     protected Role role =  Role.UTILISATEUR;
+    
 }

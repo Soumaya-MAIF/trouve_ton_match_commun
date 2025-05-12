@@ -1,17 +1,18 @@
 import './header.css';
 import './../../../index.css'
-import { Link } from "react-router-dom";
-// import { useAuth } from '../AuthContext'; // ================= A mettre en place
+import { Link } from "react-router";
+import { useAuth } from '../AuthContext';
 
 // let connecter = true;
-let connecter = false;
+// let connecter = false;
 
 // let admin = true;
-let admin = false;
+// let admin = false;
 
 
 const Header = () => {
-    // const { isAuthenticated, logout } = useAuth();  // ================= A mettre en place
+    const { isAuthenticated, isAdmin, logout } = useAuth();  // Récupérer les états et fonctions du contexte
+    console.log('Header rendu avec isAuthenticated:', isAuthenticated, 'isAdmin:', isAdmin); // Log pour vérifier les états
 
     return (
         <>
@@ -22,43 +23,42 @@ const Header = () => {
                             <div className="favicon" alt="favicon_TTM"></div>
                         </div>
                     </Link>
-                    { (!connecter && !admin) ? (
+                    {(isAuthenticated && !isAdmin) ? (
                         <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
-                    ) : null }
-                    { (!connecter && !admin) ? (
+                    ) : null}
+                    {(isAuthenticated && !isAdmin) ? (
                         <Link className="menu" to="/profils">Profils disponibles</Link>
-                    ) : null }
-                    { (!connecter && !admin) ? (
-                    <Link className="menu" to="/messages">Messages</Link>
-                    ) : null }
-                    { (!connecter && !admin) ? (
-                    <Link className="menu" to="/matchs">Mes Matchs</Link>
-                    ) : null }
-                    { !connecter ? (
-                    <Link className="menu" to="/ressources">Ressources</Link>
-                    ) : null }
-                    { (!connecter && admin)? (
-                    <Link className="menu" to="/indicateurs">Indicateurs</Link>
-                    ) : null }
-                    { connecter ? (
+                    ) : null}
+                    {(isAuthenticated && !isAdmin) ? (
+                        <Link className="menu" to="/messages">Messages</Link>
+                    ) : null}
+                    {(isAuthenticated && !isAdmin) ? (
+                        <Link className="menu" to="/matchs">Mes Matchs</Link>
+                    ) : null}
+                    {isAuthenticated ? (
+                        <Link className="menu" to="/ressources">Ressources</Link>
+                    ) : null}
+                    {(isAuthenticated && isAdmin) ? (
+                        <Link className="menu" to="/indicateurs">Indicateurs</Link>
+                    ) : null}
+                    {!isAuthenticated ? (
                         <>
                             <div className="bouton">
-                                {/* <button type="button" className="btn" onClick={logout}>Se déconnecter</button> */}
                                 <Link to="/connexion">
                                     <button type="button" className="btn-connexion">Se connecter</button>
                                 </Link>
-                                    {/* {isAuthenticated ? (
-                                        <button type="button" className="btn" onClick={logout}>Se déconnecter</button>
-                                        ) : (
-                                            <Link to="/connexion">
-                                            <button type="button" className="btn">Se connecter</button>
-                                            </Link>
-                                            )} */}
                             </div>
                         </>
-                    ) : null }
-
-                    { (!connecter && admin) ? (
+                    ) : (
+                        <>
+                            <div className="bouton">
+                                <Link to="/">
+                                    <button type="button" className="btn" onClick={logout}>Se déconnecter</button>
+                                </Link>
+                            </div>
+                        </>
+                    )}
+                    {(isAuthenticated && isAdmin) ? (
                         <>
                             <div className="bouton">
                                 <Link to="/creation-compte">
@@ -66,19 +66,19 @@ const Header = () => {
                                 </Link>
                             </div>
                         </>
-                    ) : null }
+                    ) : null}
                 </div>
                 <div className="header-container">
                     <div className="logo-ttm" alt="logo_TTM" />
                     <div className="logo-reseau" alt="logo_reseau" />
                 </div>
-                <div class="line" />
+                <div className="line" />
             </header>
             <header className='header-mobile'>
                 <div className="header-container-mobile">
                     <div className='colonne col-1'>
                         <Link to="/menu-burger">
-                                <div className="menu-burger" alt="menu-burger"></div>
+                            <div className="menu-burger" alt="menu-burger"></div>
                         </Link>
                     </div>
                     <div className='colonne col-2'>
@@ -86,15 +86,12 @@ const Header = () => {
                         <div className="logo-ttm" alt="logo_TTM" />
                     </div>
                     <div className='colonne col-3'>
-                            {/* {isAuthenticated ? (
-                                <div className='utlisateur' alt='logo_utlisateur'/>
-                            )} */}
-                            {connecter ? (
-                                <div className='utlisateur' alt='logo_utlisateur'/>
-                            ) : null }
+                        {isAuthenticated  ? (
+                            <div className='utilisateur' alt='logo_utlisateur' />
+                        ) : null}
                     </div>
                 </div>
-                <div class="line" />
+                <div className="line" />
 
             </header>
         </>

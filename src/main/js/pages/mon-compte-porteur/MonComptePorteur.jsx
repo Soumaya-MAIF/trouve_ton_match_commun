@@ -1,7 +1,7 @@
 import Wrapper from '../../wrapper/Index';
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie';
 import './../../components/global.css';
 import './mon-compte.css'
@@ -26,10 +26,10 @@ const MonCompteParrain = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const location = useLocation(); // Ce hook permet d’accéder à l’objet location qui représente l’URL actuelle de l’application 
     const navigate = useNavigate();
-    
+
     const idUtilisateur = localStorage.getItem('idUtilisateur');
     console.log('recupération de idUtilisateur:', idUtilisateur);
-    
+
     // Créer une référence pour le champ 'nomUtilisateur'
     const nomInputRef = useRef(null);
 
@@ -39,7 +39,7 @@ const MonCompteParrain = () => {
             console.log('Référence du champ Nom :', nomInputRef.current);
             nomInputRef.current.focus();
         }
-    }, []); 
+    }, []);
 
     // Réinitialisation des états des valeurs de parrainDto
     // lorsque le composant est monté (c’est-à-dire lorsque la page est chargée ou actualisée).
@@ -154,86 +154,86 @@ const MonCompteParrain = () => {
     }
 
     return (
-        <Wrapper> 
+        <Wrapper>
             <div className='container-mon-compte'>
 
-            <div className='titre'>Mon compte</div>
-            <form onSubmit={handleSubmit} className='form-container'>
+                <div className='titre'>Mon compte</div>
+                <form onSubmit={handleSubmit} className='form-container'>
 
-                {errors.dateLancement && <div className="message-erreur">{errors.dateLancement}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('dateLancement', value)}
-                    label="Date de lancement (reprise de l'activité) :"
-                    name="dateLancement"
-                    value={parrainDto.dateLancement}
-                    regex={otherRegex}
-                    ref={nomInputRef}
-                    placeholder="Deuxième semestre 2025"
-                />
+                    {errors.dateLancement && <div className="message-erreur">{errors.dateLancement}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('dateLancement', value)}
+                        label="Date de lancement (reprise de l'activité) :"
+                        name="dateLancement"
+                        value={parrainDto.dateLancement}
+                        regex={otherRegex}
+                        ref={nomInputRef}
+                        placeholder="Deuxième semestre 2025"
+                    />
 
-                {errors.domaineActivite && <div className="message-erreur">{errors.domaineActivite}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('domaineActivite', value)}
-                    label="Domaine d'activité :"
-                    name="domaineActivite"
-                    value={parrainDto.domaineActivite}
-                    regex={otherRegex}
-                    placeholder="Métiers de l'automobile"
-                />
+                    {errors.domaineActivite && <div className="message-erreur">{errors.domaineActivite}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('domaineActivite', value)}
+                        label="Domaine d'activité :"
+                        name="domaineActivite"
+                        value={parrainDto.domaineActivite}
+                        regex={otherRegex}
+                        placeholder="Métiers de l'automobile"
+                    />
 
-                {errors.descriptifActivite && <div className="message-erreur">{errors.descriptifActivite}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('descriptifActivite', value)}
-                    label="Descriptif de l'activité :"
-                    name="descriptifActivite"
-                    value={parrainDto.descriptifActivite}
-                    regex={otherRegex}
-                    placeholder="Garage automobile : vente, mécanique, carrosserie "
-                />
+                    {errors.descriptifActivite && <div className="message-erreur">{errors.descriptifActivite}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('descriptifActivite', value)}
+                        label="Descriptif de l'activité :"
+                        name="descriptifActivite"
+                        value={parrainDto.descriptifActivite}
+                        regex={otherRegex}
+                        placeholder="Garage automobile : vente, mécanique, carrosserie "
+                    />
 
-                {errors.besoinsPotentiels && <div className="message-erreur">{errors.besoinsPotentiels}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('besoinsPotentiels', value)}
-                    label="Besoins potentiels :"
-                    name="besoinsPotentiels"
-                    value={parrainDto.besoinsPotentiels}
-                    regex={otherRegex}
-                    placeholder="La comptabilté, le droit du travail, le marketing, les ressources humaines, la logistique, l'infrastructure informatique, ..."
-                />
+                    {errors.besoinsPotentiels && <div className="message-erreur">{errors.besoinsPotentiels}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('besoinsPotentiels', value)}
+                        label="Besoins potentiels :"
+                        name="besoinsPotentiels"
+                        value={parrainDto.besoinsPotentiels}
+                        regex={otherRegex}
+                        placeholder="La comptabilté, le droit du travail, le marketing, les ressources humaines, la logistique, l'infrastructure informatique, ..."
+                    />
 
-                {errors.lieuActivite && <div className="message-erreur">{errors.lieuActivite}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('lieuActivite', value)}
-                    label="Lieu de l'activité:"
-                    name="lieuActivite"
-                    value={parrainDto.lieuActivite}
-                    regex={otherRegex}
-                    placeholder="Melle"
-                />
+                    {errors.lieuActivite && <div className="message-erreur">{errors.lieuActivite}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('lieuActivite', value)}
+                        label="Lieu de l'activité:"
+                        name="lieuActivite"
+                        value={parrainDto.lieuActivite}
+                        regex={otherRegex}
+                        placeholder="Melle"
+                    />
 
-                {errors.disponibilites && <div className="message-erreur">{errors.disponibilites}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('disponibilites', value)}
-                    label="Disponibilités :"
-                    name="disponibilites"
-                    value={parrainDto.disponibilites}
-                    regex={otherRegex}
-                    placeholder="Du lundi au jeudi : 9h-12h / 13h-17h"
-                />
+                    {errors.disponibilites && <div className="message-erreur">{errors.disponibilites}</div>}
+                    <ChampSaisie
+                        setValue={(value) => handleChange('disponibilites', value)}
+                        label="Disponibilités :"
+                        name="disponibilites"
+                        value={parrainDto.disponibilites}
+                        regex={otherRegex}
+                        placeholder="Du lundi au jeudi : 9h-12h / 13h-17h"
+                    />
 
-                <div className='btn-row'>
-                    <div className="btn">
-                        <button type="submit" className='btn-enregistrer'>
-                            Enregistrer
-                        </button>
+                    <div className='btn-row'>
+                        <div className="btn">
+                            <button type="submit" className='btn-enregistrer'>
+                                Enregistrer
+                            </button>
+                        </div>
+                        <div className="btn">
+                            <button type="submit" className='btn-suivant'>
+                                Suivant
+                            </button>
+                        </div>
                     </div>
-                    <div className="btn">
-                        <button type="submit" className='btn-suivant'>
-                            Suivant
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
             </div>
         </Wrapper>
     )

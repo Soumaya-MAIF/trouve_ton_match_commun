@@ -1,22 +1,20 @@
-import Wrapper from '../../wrapper/Index';
+import Wrapper from '../../wrapper/Index.jsx';
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../../AuthContext.jsx';
+import { useAuth } from '../../AuthContext';
 
 
-import { ChampSaisie } from './../../components/champ-saisie/ChampSaisie.jsx';
-import './connexion.css';
+import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie.jsx';
+import './../connexion/connexion.css';
 import './../../components/global.css'
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
 const nomRegex = /^[A-ZÀ-ÿ\- ]{2,}$/; // NOM en MAJUSCULES
 const codeRegex = /^[a-zA-ZÀ-ÿ\- ]{1}\d{3}$/; // code admis :  1 lettre suivie de 3 chiffres
+const codeAccesRegex = /^[a-z0-9-]+$/; // code admis :  1 lettre suivie de 3 chiffres  
 
-const Connexion = () => {
-    console.log('Composant Connexion rendu');
-
-    const { login } = useAuth(); // Récupérer la fonction login du contexte
+const MotDePasse = () => {
 
     const [utilisateurDto, setUtilisateurDto] = useState({
         email: '',
@@ -31,7 +29,7 @@ const Connexion = () => {
     // Utiliser useEffect pour appliquer le focus au champ 'Email' lors du montage du composant
     useEffect(() => {
         if (emailInputRef.current) {
-            console.log('Référence du champ Nom :', emailInputRef.current);
+            console.log('Référence du champ Email :', emailInputRef.current);
             emailInputRef.current.focus();
         }
     }, []);
@@ -39,12 +37,18 @@ const Connexion = () => {
     const [errors, setErrors] = useState({});
     const [userNotFound, setUserNotFound] = useState(false);
     const navigate = useNavigate();
+    // const { login } = useAuth(); ==================== A gérer
 
     const validate = () => {
         const newErrors = {};
 
         if (!utilisateurDto.email) newErrors.email = 'L\'email est requis';
         if (!utilisateurDto.password) newErrors.password = 'Le mot de passe est requis';
+        if (!utilisateurDto.confirmationPassword) { 
+            newErrors.confirmationPasswordmot_de_passe = 'La confirmation du mot de passe est requis';
+        } else if (utilisateurDto.password !== utilisateurDto.confirmationPassword) {
+            newErrors.confirmationPassword = 'Les mots de passe ne correspondent pas';
+        }
 
         return newErrors;
     };
@@ -69,7 +73,6 @@ const Connexion = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('handleSubmit appelé');
 
         // Validation des champs
         const validationErrors = validate();
@@ -78,45 +81,27 @@ const Connexion = () => {
             return;
         }
 
+        // Extraire les valeurs de utilisateurDto
+        const { email, password } = utilisateurDto;
+
         // Requête pour vérifier l'existence de l'utilisateur
-        fetch('http://localhost:8080/user/checkutilisateur', {
+        fetch('http://localhost:8080/mot-de-passe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(utilisateurDto)
+            // body: JSON.stringify(utilisateurDto)
+            body: JSON.stringify({email, password})
         })
-        .then(response => {
-            if (!response.ok) {
-                if (response.status === 404) {  
-                    setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
-                }
-                throw new Error('Utilisateur inconnu');
-            }
-            navigate('/'); // Rediriger vers la page "Accueil"
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if (data.id) {
-                console.log('Utilisateur trouvé, id:', data.id);
-                console.log('Utilisateur trouvé, data:', data);
-
-                const isAdmin = data.isAdmin || false; // Récupérer la valeur de isAdmin
-                console.log('isAdmin reçu du backend:', isAdmin); // Log pour vérifier la valeur de isAdmin
-
-                localStorage.setItem('id', data.id); // Stocker l'id utilisateur dans le localStorage (permet de conserver l'id après le rechargement de la page ou une redirection)
-
-                // Mettez à jour l'état ici après avoir reçu la réponse
-                // setUtilisateurDto(prev =>{
-                //     ...prev,
-                //     id: data.id,
-                // }));
-
-                login(isAdmin); // Mettre à jour l'état de connexion (Si l'utilisateur est admin, passez true et isAuthenticated = true)
-                console.log('Login appelé avec isAdmin:', isAdmin); // Log pour vérifier l'appel
-
-                navigate('/'); // Rediriger vers la page d'accueil
+            console.log('Réponse du backend :', data);
+            if (data.success) {
+                console.log(data.message); // Afficher le message de succès
+                //login(); // Mettre à jour l'état de connexion ================= A Gérer
+                navigate('/connexion'); // Rediriger vers la page "Connexion"
             } else {
+                console.error(data.message); // Afficher le message d'erreur
                 setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
             }
         })
@@ -128,7 +113,7 @@ const Connexion = () => {
     
     return (
         <Wrapper>
-            <div className='titre'>Connexion</div>
+            <div className='titre'>Mot de passe</div>
             <div className="espace"></div>
             <form onSubmit={handleSubmit} className='form-container'>
 
@@ -155,6 +140,17 @@ const Connexion = () => {
                 />
                 <div className="espace"></div>
 
+                {errors.confirmationPassword && <div className="message-erreur">{errors.confirmationPassword}</div>}
+                <ChampSaisie
+                    setValue={(value) => handleChange('confirmationPassword', value)}
+                    label="Confirmation du mot de passe :"
+                    name="confirmationPassword"
+                    value={utilisateurDto.confirmationPassword}
+                    regex={otherRegex}
+                    placeholder="password"
+                />
+                <div className="espace"></div>
+
                 <div className="position-bouton">
                     {userNotFound && (
                         <div>
@@ -176,4 +172,4 @@ const Connexion = () => {
     )
 }
 
-export default Connexion;
+export default MotDePasse;

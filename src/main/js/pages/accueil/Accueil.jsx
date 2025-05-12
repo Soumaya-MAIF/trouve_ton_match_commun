@@ -1,5 +1,6 @@
 import "./accueil.css";
 import Wrapper from '../../wrapper/Index.jsx'
+import { useAuth } from '../../AuthContext.jsx';
 
 
 const Accueil = () => {

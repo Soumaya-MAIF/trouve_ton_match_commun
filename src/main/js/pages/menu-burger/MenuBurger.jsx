@@ -1,30 +1,35 @@
 import Wrapper from '../../wrapper/Index';
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import './../../components/global.css';
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
-let connecter = true;
+import { useAuth } from '../../AuthContext';
+
+// let connecter = true;
 // let connecter = false;
 
 // let admin = true;
-let admin = false;
+// let admin = false;
 
 const MenuBurger = () => {
+    const { isAuthenticated, isAdmin, logout } = useAuth();  // Récupérer les états et fonctions du contexte
+
     return (
         <Wrapper>
-            { !connecter ? (
+            {!isAuthenticated ? (
                 <>
-                    <Link className="menu-mobile" to="/connexion">Se connecter</Link>   
+                    <Link className="menu-mobile" to="/connexion">Se connecter</Link>
                 </>
-             ) : (
-                 admin ? (
-                     <>
+            ) : (
+                isAdmin ? (
+                    <>
                         <Link className="menu-mobile" to="/creation-compte">Créer un compte</Link>
                         <Link className="menu-mobile" to="/ressources">Ressources</Link>
                         <Link className="menu-mobile" to="/indicateurs">Indicateurs</Link>
+                        <Link className="menu-mobile" to="/" onClick={logout}>Se déconnecter</Link>
                     </>
 
                 ) : (
@@ -34,6 +39,7 @@ const MenuBurger = () => {
                         <Link className="menu-mobile" to="/messages-contact">Messages</Link>
                         <Link className="menu-mobile" to="/matchs">Mes Matchs</Link>
                         <Link className="menu-mobile" to="/ressources">Ressources</Link>
+                        <Link className="menu-mobile" to="/" onClick={logout}>Se déconnecter</Link>
                     </>
                 )
             )}

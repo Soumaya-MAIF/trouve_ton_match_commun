@@ -1,7 +1,7 @@
 import Wrapper from '../../wrapper/Index';
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 // import { useAuth } from '../../AuthContext';
 
 
@@ -21,17 +21,17 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur1"
-                            // checked={secteurReseau.secteur1}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur1}
+                        // onChange={handleChange}
                         />
-                    </label> 
+                    </label>
                     <label className="checkbox-label">
                         Activités spécialisées, scientifiques et techniques
                         <input
                             type="checkbox"
                             name="secteur2"
-                            // checked={secteurReseau.secteur2}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur2}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -39,8 +39,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur3"
-                            // checked={secteurReseau.secteur3}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur3}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -48,8 +48,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur4"
-                            // checked={secteurReseau.secteur4}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur4}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -57,8 +57,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur5"
-                            // checked={secteurReseau.secteur5}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur5}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -66,8 +66,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur6"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -75,8 +75,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur7"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -84,8 +84,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur8"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -93,8 +93,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur9"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -102,8 +102,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur10"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -111,8 +111,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur11"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -120,8 +120,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur12"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -129,8 +129,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur13"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -138,8 +138,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur14"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -147,8 +147,8 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur15"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
                     <label className="checkbox-label">
@@ -156,11 +156,11 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="secteur16"
-                            // checked={secteurReseau.secteur6}
-                            // onChange={handleChange}
+                        // checked={secteurReseau.secteur6}
+                        // onChange={handleChange}
                         />
                     </label>
-                    <br />   
+                    <br />
 
                 </div>
                 <div className='type-accompagnements'>
@@ -171,44 +171,44 @@ const Filtres = () => {
                         <input
                             type="checkbox"
                             name="typeAccompagnement1"
-                            // checked={accompagnements.typeAccompagnement1}
-                            // onChange={handleChange}
+                        // checked={accompagnements.typeAccompagnement1}
+                        // onChange={handleChange}
                         />
-                        </label><br/>
-                        <label className="checkbox-label">
-                            Finance / Comptabilité
-                            <input
-                                type="checkbox"
-                                name="typeAccompagnement2"
-                                // checked={accompagnements.typeAccompagnement2}
-                                // onChange={handleChange}
-                            />
-                        </label><br />
-                        <label className="checkbox-label">
+                    </label><br />
+                    <label className="checkbox-label">
+                        Finance / Comptabilité
+                        <input
+                            type="checkbox"
+                            name="typeAccompagnement2"
+                        // checked={accompagnements.typeAccompagnement2}
+                        // onChange={handleChange}
+                        />
+                    </label><br />
+                    <label className="checkbox-label">
                         Juridique
                         <input
                             type="checkbox"
                             name="typeAccompagnement3"
-                            // checked={accompagnements.typeAccompagnement3}
-                            // onChange={handleChange}
+                        // checked={accompagnements.typeAccompagnement3}
+                        // onChange={handleChange}
                         />
-                        </label><br />
-                        <label className="checkbox-label">
+                    </label><br />
+                    <label className="checkbox-label">
                         Informatique
                         <input
                             type="checkbox"
                             name="typeAccompagnement4"
-                            // checked={accompagnements.typeAccompagnement4}
-                            // onChange={handleChange}
+                        // checked={accompagnements.typeAccompagnement4}
+                        // onChange={handleChange}
                         />
-                        </label><br />
-                        <label className="checkbox-label">
+                    </label><br />
+                    <label className="checkbox-label">
                         Commercial / Communication
                         <input
                             type="checkbox"
                             name="typeAccompagnement5"
-                            // checked={accompagnements.typeAccompagnement5}
-                            // onChange={handleChange}
+                        // checked={accompagnements.typeAccompagnement5}
+                        // onChange={handleChange}
                         />
                     </label><br />
                 </div>
