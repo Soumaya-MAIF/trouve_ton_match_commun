@@ -8,24 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    @Autowired
-    private UserRepository repository;
+    public Optional<User> getUserById(@PathVariable Long id);
 
+    public User createUser(User user);
 
-
-    public Optional<User> getUserById(@PathVariable Long id) {
-        return repository.findById(id);
-    }
-
-    public User createUser(User user) {
-        return repository.save(user);
-    }
-
-    public Optional<User> getUserByEmail(String email) {
-        return repository.findByEmail(email);
-    }
+    public Optional<User> getUserByEmail(String email);
 }
 
