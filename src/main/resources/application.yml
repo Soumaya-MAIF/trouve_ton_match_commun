@@ -13,13 +13,14 @@ spring:
     show-sql: true
     database: postgresql
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: your_issuer_uri
+
+
 
 logging:
   level:
     org.springframework: DEBUG
 debug: true
+
+jwt:
+  secret: "secret"
+  expiration: 3000000
