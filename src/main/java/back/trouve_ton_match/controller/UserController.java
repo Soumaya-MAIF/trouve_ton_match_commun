@@ -4,6 +4,7 @@ package back.trouve_ton_match.controller;
 import back.trouve_ton_match.entity.Role;
 import back.trouve_ton_match.entity.User;
 import back.trouve_ton_match.entity.dto.PasswordDTO;
+import back.trouve_ton_match.entity.dto.MonCompteDTO;
 import back.trouve_ton_match.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,6 +70,30 @@ public class UserController {
         // return user
         //         .map(ResponseEntity::ok)
         //         .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    // La méthode répond aux requêtes HTTP POST envoyées à l’URL /checkutilisateur.
+    // La réponse sera au format JSON
+    @PutMapping(value = "/monCompte/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<?> saveMonCompte(@RequestBody MonCompteDTO userDto) {
+    public ResponseEntity<?> saveMonCompte(
+            @PathVariable(value = "id", required = true) String id,
+            @RequestBody MonCompteDTO userDto) {
+        Optional<User> userExist = userService.getUserByEmail(
+                userDto.getEmail()
+        );
+
+        if (userExist.isPresent()) {
+            User user = userExist.get();
+            user.setNom(userDto.getNom());
+            user.setPrenom(userDto.getPrenom());
+            // user.setEmail(userDto.getEmail());
+            user.setPresentation(userDto.getPresentation()); // Assurez-vous que ce champ est bien mis à jour
+            userService.saveUser(user);
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
+        }
     }
 
 }

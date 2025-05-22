@@ -24,7 +24,7 @@ const Header = () => {
                         </div>
                     </Link>
                     {(isAuthenticated && !isAdmin) ? (
-                        <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
+                        <Link className="menu" to="/mon-compte">Mon compte</Link>
                     ) : null}
                     {(isAuthenticated && !isAdmin) ? (
                         <Link className="menu" to="/profils">Profils disponibles</Link>

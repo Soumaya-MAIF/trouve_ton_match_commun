@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie';
 import './../../components/global.css';
-import './../mon-compte-porteur/mon-compte.css'
+import '../mon-compte/mon-compte.css'
 // import { useAuth } from '../../AuthContext';
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs

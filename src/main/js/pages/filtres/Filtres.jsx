@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 
 import { ChampSaisie } from './../../components/champ-saisie/ChampSaisie.jsx';
 import './filtres.css';
-import './../mon-compte-porteur/mon-compte.css'
+import '../mon-compte/mon-compte.css'
 import './../../components/global.css'
 
 const Filtres = () => {

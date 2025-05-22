@@ -65,7 +65,13 @@ const CreationCompte = () => {
         if (!utilisateurDto.entreprise) newErrors.entreprise = 'L\'entreprise est requise';
         // if (!utilisateurDto.plateforme) newErrors.plateforme = 'La plateforme est requise';
         if (!utilisateurDto.role) newErrors.role = 'Le role de l\'utlisateur est requis';
-        if (!utilisateurDto.type) newErrors.type = 'Le type de profil est requis';
+        // if (!utilisateurDto.type) newErrors.type = 'Le type de profil est requis';
+
+        // Vérifiez si le champ "type" est requis en fonction du rôle
+        if (utilisateurDto.role === 'UTILISATEUR' && !utilisateurDto.type) {
+            newErrors.type = 'Le type est requis pour les utilisateurs';
+        }
+        
 
         return newErrors;
     };
@@ -95,19 +101,25 @@ const CreationCompte = () => {
 
         const validationErrors = validate();
 
+        const utilisateurDtoCopy = { ...utilisateurDto }; // Crée une copie de utilisateurDto
+
+        if (utilisateurDtoCopy.role === 'ADMINISTRATEUR' || !utilisateurDtoCopy.role) {
+            delete utilisateurDtoCopy.type; // Supprime la propriété "type" si le rôle est "ADMINISTRATEUR"
+        }
+        
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
 
-        console.log("JSON.stringify(utilisateurDto):" + JSON.stringify(utilisateurDto))
+        console.log("JSON.stringify(utilisateurDto):" + JSON.stringify(utilisateurDtoCopy))
 
         fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(utilisateurDto)
+            body: JSON.stringify(utilisateurDtoCopy)
         })
             .then(response => {
                 console.log("Réponse du serveur:", response);  // reponse du serveur après la requête
