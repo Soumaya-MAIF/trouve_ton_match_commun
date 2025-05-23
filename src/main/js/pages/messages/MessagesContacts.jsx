@@ -1,8 +1,8 @@
 import Wrapper from '../../wrapper/Index.jsx';
 import Message from './Message.jsx';
 import { useEffect, useState, useRef } from "react";
-import { Link, useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 // import { useAuth } from '../../AuthContext';
 
 import './messages.css';

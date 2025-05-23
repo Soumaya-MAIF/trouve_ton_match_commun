@@ -27,5 +27,13 @@ public class UserService {
     public Optional<User> getUserByEmail(String email) {
         return repository.findByEmail(email);
     }
+
+    public Optional<User> getByEmailPassword(String email, String password) {
+        return repository.findByEmailAndPassword(email, password);
+    }
+
+    public User saveUser(User user) {
+        return repository.save(user);
+    }
 }
 

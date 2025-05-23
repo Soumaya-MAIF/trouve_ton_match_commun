@@ -49,6 +49,14 @@
 }
 
 
+.btn-enregistrer:disabled:hover {
+    background-color: #FF165D; /* même couleur que l'état normal */
+    color: white;
+    border: none;
+    cursor: not-allowed;
+}
+
+
 .btn button:active {
     transform: scale(0.8);
 }

@@ -1,0 +1,20 @@
+meta {
+  name: Put Mon compte
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:8080/user/monCompte/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "a",
+    "nom": "a",
+    "prenom": "a",
+    "presentation": "sdsdsd"
+  }
+}

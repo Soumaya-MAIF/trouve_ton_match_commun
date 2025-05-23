@@ -1,6 +1,6 @@
 import Wrapper from '../../wrapper/Index';
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie.jsx';
 import './creation-compte.css';
 import './../../components/global.css';
@@ -14,18 +14,19 @@ const CreationCompte = () => {
     // Initialisation des états des valeurs de utilisateurDto
     const [utilisateurDto, setUtilisateurDto] = useState({
         idUtilisateur: '',
-        nomUtilisateur: '',
-        prenomUtilisateur: '',
-        entrepriseUtilisateur: '',
-        plateformeUtilisateur: '',
-        codeUtilisateur: '',
-        typeUtilisateur: ''
+        nom: '',
+        prenom: '',
+        email: '',
+        entreprise: '',
+        // plateformeUtilisateur: '',
+        role: '',
+        type: ''
     });
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const location = useLocation(); // Ce hook permet d’accéder à l’objet location qui représente l’URL actuelle de l’application 
 
-    // Créer une référence pour le champ 'nomUtilisateur'
+    // Créer une référence pour le champ 'nom'
     const nomInputRef = useRef(null);
 
     // Utiliser useEffect pour appliquer le focus au champ 'Nom' lors du montage du composant
@@ -34,19 +35,20 @@ const CreationCompte = () => {
             console.log('Référence du champ Nom :', nomInputRef.current);
             nomInputRef.current.focus();
         }
-    }, []); 
+    }, []);
 
     // Réinitialisation des états des valeurs de utilisateurDto
     // lorsque le composant est monté (c’est-à-dire lorsque la page est chargée ou actualisée).
     useEffect(() => {
         setUtilisateurDto({
-            idUtilisateur: '',
-            nomUtilisateur: '',
-            prenomUtilisateur: '',
-            entrepriseUtilisateur: '',
-            plateformeUtilisateur: '',
-            codeUtilisateur: '',
-            typeUtilisateur: ''
+            id: '',
+            nom: '',
+            prenom: '',
+            email: '',
+            entreprise: '',
+            // plateformeUtilisateur: '',
+            role: '',
+            type: ''
         });
 
         setIsSubmitted(false);
@@ -57,12 +59,19 @@ const CreationCompte = () => {
     const validate = () => {
         const newErrors = {};
 
-        if (!utilisateurDto.nomUtilisateur) newErrors.nomUtilisateur = 'Le nom est requis';
-        if (!utilisateurDto.prenomUtilisateur) newErrors.prenomUtilisateur = 'Le prénom est requis';
-        if (!utilisateurDto.entrepriseUtilisateur) newErrors.entrepriseUtilisateur = 'L\'entreprise est requise';
-        if (!utilisateurDto.plateformeUtilisateur) newErrors.plateformeUtilisateur = 'La plateforme est requise';
-        if (!utilisateurDto.codeUtilisateur) newErrors.codeUtilisateur = 'Le code d\'accès est requis';
-        if (!utilisateurDto.typeUtilisateur) newErrors.typeUtilisateur = 'Le type de profil est requis';
+        if (!utilisateurDto.nom) newErrors.nom = 'Le nom est requis';
+        if (!utilisateurDto.prenom) newErrors.prenom = 'Le prénom est requis';
+        if (!utilisateurDto.email) newErrors.email = 'L\'email est requise';
+        if (!utilisateurDto.entreprise) newErrors.entreprise = 'L\'entreprise est requise';
+        // if (!utilisateurDto.plateforme) newErrors.plateforme = 'La plateforme est requise';
+        if (!utilisateurDto.role) newErrors.role = 'Le role de l\'utlisateur est requis';
+        // if (!utilisateurDto.type) newErrors.type = 'Le type de profil est requis';
+
+        // Vérifiez si le champ "type" est requis en fonction du rôle
+        if (utilisateurDto.role === 'UTILISATEUR' && !utilisateurDto.type) {
+            newErrors.type = 'Le type est requis pour les utilisateurs';
+        }
+        
 
         return newErrors;
     };
@@ -92,19 +101,25 @@ const CreationCompte = () => {
 
         const validationErrors = validate();
 
+        const utilisateurDtoCopy = { ...utilisateurDto }; // Crée une copie de utilisateurDto
+
+        if (utilisateurDtoCopy.role === 'ADMINISTRATEUR' || !utilisateurDtoCopy.role) {
+            delete utilisateurDtoCopy.type; // Supprime la propriété "type" si le rôle est "ADMINISTRATEUR"
+        }
+        
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
 
-        console.log("JSON.stringify(utilisateurDto):" + JSON.stringify(utilisateurDto))
+        console.log("JSON.stringify(utilisateurDto):" + JSON.stringify(utilisateurDtoCopy))
 
-        fetch('http://localhost:8080/creationCompte/createutilisateur', {
+        fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(utilisateurDto)
+            body: JSON.stringify(utilisateurDtoCopy)
         })
             .then(response => {
                 console.log("Réponse du serveur:", response);  // reponse du serveur après la requête
@@ -118,16 +133,16 @@ const CreationCompte = () => {
 
                 setUtilisateurDto(prevState => ({
                     ...prevState,
-                    idUtilisateur: data.idUtilisateur // Met à jour idUtilisateur tout en conservant les autres propriétés
+                    id: data.id // Met à jour id tout en conservant les autres propriétés
                 }));
 
                 console.log('id:', utilisateurDto);
-                console.log('Type de idUtilisateur:', typeof data.idUtilisateur);
-                console.log('id:', data.idUtilisateur); // Ok
-                localStorage.setItem('idUtilisateur', data.idUtilisateur); // Stockage de l'id
-                console.log('id:', utilisateurDto.idUtilisateur);
-                console.log('nom:', utilisateurDto.nomUtilisateur);
-                console.log('type:', utilisateurDto.typeUtilisateur);
+                console.log('Type de id:', typeof data.id);
+                console.log('id:', data.id); // Ok
+                localStorage.setItem('id', data.id); // Stockage de l'id
+                console.log('id:', utilisateurDto.id);
+                console.log('nom:', utilisateurDto.nom);
+                console.log('type:', utilisateurDto.type);
 
                 setIsSubmitted(true); // Masquer le bouton après l'envoi
             })
@@ -142,81 +157,121 @@ const CreationCompte = () => {
             <div className='titre'>Creation compte</div>
             <form onSubmit={handleSubmit} className='form-container'>
 
-                {errors.nomUtilisateur && <div className="message-erreur">{errors.nomUtilisateur}</div>}
+                {errors.nom && <div className="message-erreur">{errors.nom}</div>}
                 <ChampSaisie
-                    setValue={(value) => handleChange('nomUtilisateur', value)}
+                    setValue={(value) => handleChange('nom', value)}
                     label="Nom :"
-                    name="nomUtilisateur"
-                    value={utilisateurDto.nomUtilisateur}
+                    name="nom"
+                    value={utilisateurDto.nom}
                     regex={otherRegex}
                     ref={nomInputRef}
                     placeholder="DUPONT"
                 />
 
-                {errors.prenomUtilisateur && <div className="message-erreur">{errors.prenomUtilisateur}</div>}
-                <ChampSaisie 
-                    setValue={(value) => handleChange('prenomUtilisateur', value)} 
-                    label="Prenom :" name="prenomUtilisateur" 
-                    value={utilisateurDto.prenomUtilisateur} 
+                {errors.prenom && <div className="message-erreur">{errors.prenom}</div>}
+                <ChampSaisie
+                    setValue={(value) => handleChange('prenom', value)}
+                    label="Prenom :" name="prenom"
+                    value={utilisateurDto.prenom}
                     regex={otherRegex}
                     placeholder="Laurent"
                 />
 
-                {errors.entrepriseUtilisateur && <div className="message-erreur">{errors.entrepriseUtilisateur}</div>}
-                <ChampSaisie 
-                    setValue={(value) => handleChange('entrepriseUtilisateur', value)} 
-                    value={utilisateurDto.entrepriseUtilisateur} 
-                    label="Entreprise (entreprise représentée en tant que membre d’Initiative Deux-Sèvres) :" 
-                    name="entrepriseUtilisateur" 
-                    regex={otherRegex}  
+                {errors.email && <div className="message-erreur">{errors.email}</div>}
+                <ChampSaisie
+                    setValue={(value) => handleChange('email', value)}
+                    value={utilisateurDto.email}
+                    label="Email :"
+                    name="email"
+                    regex={otherRegex}
+                    placeholder="laurent.dupont@test.fr"
+                />
+
+                {errors.entreprise && <div className="message-erreur">{errors.entreprise}</div>}
+                <ChampSaisie
+                    setValue={(value) => handleChange('entreprise', value)}
+                    value={utilisateurDto.entreprise}
+                    label="Entreprise (entreprise représentée en tant que membre d’Initiative Deux-Sèvres) :"
+                    name="entreprise"
+                    regex={otherRegex}
                     placeholder="Tartempion"
                 />
 
-                {errors.plateformeUtilisateur && <div className="message-erreur">{errors.plateformeUtilisateur}</div>}
-                <ChampSaisie 
-                    setValue={(value) => handleChange('plateformeUtilisateur', value)} 
-                    value={utilisateurDto.plateformeUtilisateur} 
-                    label="Plateforme Initiative :" 
-                    name="plateformeUtilisateur" 
-                    regex={otherRegex} 
-                    placeholder="Initiative Deux-Sèvres" 
-                />
+                {/* {errors.plateforme && <div className="message-erreur">{errors.plateforme}</div>}
+                <ChampSaisie
+                    setValue={(value) => handleChange('plateforme', value)}
+                    value={utilisateurDto.plateforme}
+                    label="Plateforme Initiative :"
+                    name="plateforme"
+                    regex={otherRegex}
+                    placeholder="Initiative Deux-Sèvres"
+                /> */}
 
-                {errors.codeUtilisateur && <div className="message-erreur">{errors.codeUtilisateur}</div>}
-                <ChampSaisie 
-                    setValue={(value) => handleChange('codeUtilisateur', value)} 
-                    value={utilisateurDto.codeUtilisateur} 
-                    label="Code d'accès :" 
-                    name="codeUtilisateur" 
-                    regex={otherRegex}  
+                {/* {errors.code && <div className="message-erreur">{errors.code}</div>}
+                <ChampSaisie
+                    setValue={(value) => handleChange('code', value)}
+                    value={utilisateurDto.code}
+                    label="Code d'accès :"
+                    name="code"
+                    regex={otherRegex}
                     placeholder="A123"
-                />
+                /> */}
 
-                {errors.typeUtilisateur && <div className="message-erreur">{errors.typeUtilisateur}</div>}
-                <div className="form-radio-type">
+                {errors.role && <div className="message-erreur">{errors.role}</div>}
+                <div className="form-radio-role">
                     <label className="radio-label">
                         <input
                             type="radio"
-                            name="type"
-                            value="parrain"
-                            checked={utilisateurDto.typeUtilisateur === 'parrain'}
-                            onChange={(e) => handleChange('typeUtilisateur', e.target.value)}
+                            name="role"
+                            value="UTILISATEUR"
+                            checked={utilisateurDto.role === 'UTILISATEUR'}
+                            onChange={(e) => handleChange('role', e.target.value)}
                             className="radio-input"
                         />
-                        Parrain
+                        Utilisateur
                     </label>
                     <label className="radio-label">
                         <input
                             type="radio"
-                            name="type"
-                            value="porteur"
-                            checked={utilisateurDto.typeUtilisateur === 'porteur'}
-                            onChange={(e) => handleChange('typeUtilisateur', e.target.value)}
+                            name="role"
+                            value="ADMINISTRATEUR"
+                            checked={utilisateurDto.role === 'ADMINISTRATEUR'}
+                            onChange={(e) => handleChange('role', e.target.value)}
                             className="radio-input"
                         />
-                        Porteur
+                        Administrateur
                     </label>
                 </div>
+
+                {(utilisateurDto.role === "UTILISATEUR") ? (
+                    <>
+                        {errors.type && <div className="message-erreur">{errors.type}</div>}
+                        <div className="form-radio-type">
+                            <label className="radio-label">
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    value="PARRAIN"
+                                    checked={utilisateurDto.type === 'PARRAIN'}
+                                    onChange={(e) => handleChange('type', e.target.value)}
+                                    className="radio-input"
+                                />
+                                Parrain
+                            </label>
+                            <label className="radio-label">
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    value="PORTEUR"
+                                    checked={utilisateurDto.type === 'PORTEUR'}
+                                    onChange={(e) => handleChange('type', e.target.value)}
+                                    className="radio-input"
+                                />
+                                Porteur
+                            </label>
+                        </div>
+                    </>
+                ) : null }
 
                 <div className="position-bouton">
                     {!isSubmitted ? (
@@ -230,14 +285,14 @@ const CreationCompte = () => {
                         // Affichage de l'id de l'utilisateur crée
                         <div className='row-creation'>
                             <div className="col-id">
-                                <label htmlFor="idUtilisateur" className="form-label custom-label">Identifiant : </label>
+                                <label htmlFor="id" className="form-label custom-label">Identifiant : </label>
                                 <div className="custom-id">
                                     <input
                                         className="custom-id"
                                         disabled
-                                        name="idUtilisateur"
-                                        id="idUtilisateur"
-                                        value={utilisateurDto.idUtilisateur}
+                                        name="id"
+                                        id="id"
+                                        value={utilisateurDto.id}
                                     />
                                 </div>
                             </div>
