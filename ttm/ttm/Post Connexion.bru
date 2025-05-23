@@ -5,7 +5,14 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/user/checkUtilisateur
-  body: none
+  url: http://localhost:8080/user/checkutilisateur
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "email": "admin@test.fr",
+    "password": "mdp"
+  }
 }

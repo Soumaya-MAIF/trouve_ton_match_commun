@@ -4,8 +4,8 @@ meta {
   seq: 7
 }
 
-post {
-  url: http://localhost:8080/user/checkutilisateur
+put {
+  url: http://localhost:8080/user/monCompte/1
   body: json
   auth: none
 }
@@ -13,6 +13,8 @@ post {
 body:json {
   {
     "email": "a",
-    "password": "mdp"
+    "nom": "a",
+    "prenom": "a",
+    "presentation": "sdsdsd"
   }
 }

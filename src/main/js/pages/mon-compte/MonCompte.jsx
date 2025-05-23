@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie';
+import { ChampInfo } from '../../components/champ-info/ChampInfo';
+import { ZoneSaisie } from '../../components/zone-saisie/ZoneSaisie';
 import './../../components/global.css';
 import './mon-compte.css'
 import { useAuth } from '../../AuthContext';
@@ -198,39 +200,20 @@ const MonCompte = () => {
                 <div className='titre'>Mon compte</div>
                 <form onSubmit={handleSubmit} className='form-container'>
 
-                    {errors.nom && <div className="message-erreur">{errors.nom}</div>}
-                    <ChampSaisie
-                        setValue={(value) => handleChange('nom', value)}
+                    <ChampInfo
                         label="Nom :"
                         name="nom"
                         value={monCompteDto.nom}
-                        regex={otherRegex}
-                        // placeholder="Deuxième semestre 2025"
-                        />
+                    />
 
-                    {errors.prenom && <div className="message-erreur">{errors.prenom}</div>}
-                    <ChampSaisie
-                        setValue={(value) => handleChange('prenom', value)}
+                    <ChampInfo
                         label="Prénom :"
                         name="prenom"
                         value={monCompteDto.prenom}
-                        regex={otherRegex}
-                        // placeholder="Métiers de l'automobile"
-                        />
-
-                    {/* {errors.email && <div className="message-erreur">{errors.email}</div>}
-                    <ChampSaisie
-                        setValue={(value) => handleChange('email', value)}
-                        label="Email :"
-                        name="email"
-                        value={monCompteDto.email}
-                        regex={otherRegex}
-                        readOnly={true} // Empêche la modification
-                        // placeholder="Garage automobile : vente, mécanique, carrosserie "
-                        /> */}
+                    />
 
                     {errors.presentation && <div className="message-erreur">{errors.presentation}</div>}
-                    <ChampSaisie
+                    <ZoneSaisie
                         setValue={(value) => handleChange('presentation', value)}
                         label="Présentation :"
                         name="presentation"
@@ -238,22 +221,20 @@ const MonCompte = () => {
                         regex={otherRegex}
                         ref={presInputRef}
                         placeholder="Je vais me présenter, et présenter mon projet ou bien en quoi je peux apporter mon expertise ..."
-                        />
+                    />
 
                     {errors.server && <div className="message-erreur">{errors.server}</div>}
                     {isSubmitted && <div className="message-confirmation">Vos informations ont été mises à jour avec succès.</div>}
 
                     <div className='btn-row'>
                         <div className="btn">
-                            <button type="submit" className='btn-enregistrer'>
+                            <button 
+                                type="submit" 
+                                className='btn-enregistrer'
+                                disabled={!monCompteDto.presentation || monCompteDto.presentation.length < 5}>
                                 Enregistrer
                             </button>
                         </div>
-                        {/* <div className="btn">
-                            <button type="submit" className='btn-suivant'>
-                                Suivant
-                            </button>
-                        </div> */}
                     </div>
                 </form>
             </div>
