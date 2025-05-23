@@ -1,18 +1,20 @@
 package back.trouve_ton_match.controller;
 
-import back.trouve_ton_match.config.JwtTokenUtil;
+import back.trouve_ton_match.config.JwtAuthResponse;
+import back.trouve_ton_match.config.JwtTokenProvider;
 import back.trouve_ton_match.entity.*;
 import back.trouve_ton_match.entity.dto.FirstLoginDTO;
 import back.trouve_ton_match.entity.dto.RegisterDTO;
+import back.trouve_ton_match.service.AuthService;
 import back.trouve_ton_match.service.UserService;
+import back.trouve_ton_match.service.UserServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,34 +23,37 @@ import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 import java.util.UUID;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
 @RestController
-@RequestMapping(consumes = "application/json", produces = "application/json")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    private final UserService userService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenUtil jwtTokenUtil;
+    private final UserServiceImpl userServiceImpl;
 
-    @Autowired
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserService userService) {
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenUtil = jwtTokenUtil;
-        this.userService = userService;
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        try {
-            var authenticationToken = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
-            var authentication = authenticationManager.authenticate(authenticationToken);
-            var jwt = jwtTokenUtil.generateToken(authentication.getName());
-            return jwt;
-        } catch (AuthenticationException e) {
-            return "Invalid credentials";
-        }
-    }
-
+    //    private final UserService userService;
+//    private final AuthenticationManager authenticationManager;
+//    private final JwtTokenProvider jwtTokenProvider;
+//
+//    @Autowired
+//    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, JwtTokenProvider jwtTokenProvider1) {
+//        this.authenticationManager = authenticationManager;
+//        this.jwtTokenProvider = jwtTokenProvider;
+//        this.userService = userService;
+//    }
+//
+//    @PostMapping("/login")
+//    public String login(@RequestBody User user) {
+//        try {
+//            var authenticationToken = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+//            var authentication = authenticationManager.authenticate(authenticationToken);
+//            var jwt = jwtTokenProvider.generateToken(authentication);
+//            return jwt;
+//        } catch (AuthenticationException e) {
+//            return "Invalid credentials";
+//        }
+//    }
+//
     @PostMapping("/register")
     public User register(@RequestBody RegisterDTO user) {
         User newUser = User.builder()
@@ -60,19 +65,32 @@ public class AuthController {
                 .code_acces(UUID.randomUUID().toString())
                 .type(user.getType())
                 .build();
-        userService.createUser(newUser);
+        userServiceImpl.createUser(newUser);
         return newUser;
     }
+//
+//    @PostMapping("/firstLogin")
+//    public String firstLogin(@RequestBody FirstLoginDTO user) {
+//        Optional<User> userConnu = userService.getUserByEmail(user.getEmail());
+//        if (userConnu.isPresent()) {
+//            if(userConnu.get().getCode_acces().equals(user.getCode_acces())) {
+//                return "Vous êtes connecté";
+//            }
+//            return "je connais le user mais c'est pas le bon mdp";
+//        }
+//        return "Vous n'êtes pas connecté";
+//    }
 
-    @PostMapping("/firstLogin")
-    public String firstLogin(@RequestBody FirstLoginDTO user) {
-        Optional<User> userConnu = userService.getUserByEmail(user.getEmail());
-        if (userConnu.isPresent()) {
-            if(userConnu.get().getCode_acces().equals(user.getCode_acces())) {
-                return "Vous êtes connecté";
-            }
-            return "je connais le user mais c'est pas le bon mdp";
-        }
-        return "Vous n'êtes pas connecté";
+    private AuthService authService;
+
+    // Build Login REST API
+    @PostMapping("/login")
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody FirstLoginDTO firstLoginDto){
+        String token = authService.login(firstLoginDto);
+
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+
+        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
     }
 }

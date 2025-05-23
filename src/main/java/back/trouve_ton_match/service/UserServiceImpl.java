@@ -11,22 +11,21 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     @Override
     public Optional<User> getUserById(Long id) {
-        return repository.findById(id);
+        return userRepository.findById(id);
     }
 
     @Override
     public User createUser(User user) {
-        return repository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return repository.findByEmail(email);
+        return userRepository.findByNomOrEmail(email, email);
     }
-
-
 }
+
