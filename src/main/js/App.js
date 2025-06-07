@@ -13,6 +13,8 @@ import CreationCompte from './pages/creation-compte/CreationCompte';
 import Filtres from './pages/filtres/Filtres';
 import MenuBurger from './pages/menu-burger/MenuBurger';
 import { useEffect, useState } from 'react';
+import PremiereConnexion from './pages/connexion/PremiereConnexion';
+import MotDePasseChangement from './pages/connexion/MotDePasseChangement';
 // import { AuthProvider } from './AuthContext';  // ================= A mettre en place
 
 function App() {
@@ -54,6 +56,8 @@ function App() {
       <Route path='/connexion' element={<Connexion />}></Route>
       <Route path='/creation-compte' element={<CreationCompte />}></Route>
       <Route path='/filtres' element={<Filtres />}></Route>
+      <Route path="/premiere-connexion" element={<PremiereConnexion />}></Route>
+      <Route path="/mot-de-passe" element={<MotDePasseChangement />}></Route>
     </Routes>
     // </AuthProvider>
   );

@@ -31,7 +31,7 @@ public class AuthController {
 
     private final UserServiceImpl userServiceImpl;
 
-    //    private final UserService userService;
+        private final UserService userService;
 //    private final AuthenticationManager authenticationManager;
 //    private final JwtTokenProvider jwtTokenProvider;
 //
@@ -68,19 +68,20 @@ public class AuthController {
         userServiceImpl.createUser(newUser);
         return newUser;
     }
-//
-//    @PostMapping("/firstLogin")
-//    public String firstLogin(@RequestBody FirstLoginDTO user) {
-//        Optional<User> userConnu = userService.getUserByEmail(user.getEmail());
-//        if (userConnu.isPresent()) {
-//            if(userConnu.get().getCode_acces().equals(user.getCode_acces())) {
-//                return "Vous êtes connecté";
-//            }
-//            return "je connais le user mais c'est pas le bon mdp";
-//        }
-//        return "Vous n'êtes pas connecté";
-//    }
 
+    @PostMapping("/firstLogin")
+    public ResponseEntity<String> firstLogin(@RequestBody FirstLoginDTO user) {
+        Optional<User> userConnu = userService.getUserByEmail(user.getEmail());
+        if (userConnu.isPresent()) {
+            if(userConnu.get().getCode_acces().equals(user.getCode_acces())) {
+                return new ResponseEntity<>("Nous vous avons trouvé", HttpStatus.OK);
+            }
+            return new ResponseEntity<>( "je connais le user mais c'est pas le bon code d'acces", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>( "Vous n'êtes pas connecté", HttpStatus.I_AM_A_TEAPOT);
+    }
+
+    @Autowired
     private AuthService authService;
 
     // Build Login REST API
@@ -91,6 +92,7 @@ public class AuthController {
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
         jwtAuthResponse.setAccessToken(token);
 
-        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
+        System.out.println("vous êtes bien connecté");
+        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.I_AM_A_TEAPOT);
     }
 }
