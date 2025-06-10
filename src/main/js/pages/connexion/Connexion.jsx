@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChampSaisie } from './../../components/champ-saisie/ChampSaisie.jsx';
 import './connexion.css';
 import './../../components/global.css'
+import { useAuth } from '../../components/context/AuthContext.jsx';
 
 const Connexion = () => {
 
@@ -34,6 +35,8 @@ const Connexion = () => {
     const [errors, setErrors] = useState({});
     const [userNotFound, setUserNotFound] = useState(false);
     const navigate = useNavigate();
+
+    const { setAuth } = useAuth();
 
     const validate = () => {
         const newErrors = {};
@@ -85,23 +88,22 @@ const Connexion = () => {
                 mot_de_passe : utilisateurDto.mot_de_passe
             })
         })
-        .then(response => {
-            if(response.status === 200) {
-                navigate('/');
-            } else {
-                setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
-            }
-        })
+        
+.then(response => {
+         if (!response.ok) {
+         setUserNotFound(true);
+         throw new Error('Utilisateur inconnu');
+         }
+         return response.json(); // ✅ Parse la réponse JSON ici
+     })
+    
         .then(data => {
-            if (data.idUtilisateur) {
-                localStorage.setItem('idUtilisateur', data.idUtilisateur);
+            console.log("data: " + JSON.stringify(data))
+            if (data.userId && data.accessToken) {
+                document.cookie = `token=${data.accessToken}; path=/; secure; samesite=strict`;
+                setAuth(data.accessToken);
 
-                // Mettez à jour l'état ici après avoir reçu la réponse
-                setUtilisateurDto({
-                    idUtilisateur: data.idUtilisateur, // Assurez-vous que l'ID est récupéré correctement
-                });
-
-                navigate('/mot-de-passe');
+                navigate('/');
             } else {
                 setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
             }

@@ -1,7 +1,8 @@
 import './header.css';
 import './../../../index.css'
 import { Link } from "react-router-dom";
-// import { useAuth } from '../AuthContext'; // ================= A mettre en place
+import { useAuth } from '../components/context/AuthContext';
+
 
 // let connecter = true;
 let connecter = false;
@@ -11,7 +12,7 @@ let admin = false;
 
 
 const Header = () => {
-    // const { isAuthenticated, logout } = useAuth();  // ================= A mettre en place
+    const { auth, logout } = useAuth();
 
     return (
         <>
@@ -40,23 +41,17 @@ const Header = () => {
                     { (!connecter && admin)? (
                     <Link className="menu" to="/indicateurs">Indicateurs</Link>
                     ) : null }
-                    { connecter ? (
                         <>
                             <div className="bouton">
-                                {/* <button type="button" className="btn" onClick={logout}>Se déconnecter</button> */}
-                                <Link to="/connexion">
-                                    <button type="button" className="btn-connexion">Se connecter</button>
-                                </Link>
-                                    {/* {isAuthenticated ? (
-                                        <button type="button" className="btn" onClick={logout}>Se déconnecter</button>
+                                    {auth != null ? (
+                                        <button type="button" className="btn-connexion" onClick={logout}>Se déconnecter</button>
                                         ) : (
                                             <Link to="/connexion">
-                                            <button type="button" className="btn">Se connecter</button>
+                                            <button type="button" className="btn-connexion">Se connecter</button>
                                             </Link>
-                                            )} */}
+                                            )}
                             </div>
                         </>
-                    ) : null }
 
                     { (!connecter && admin) ? (
                         <>
@@ -86,9 +81,6 @@ const Header = () => {
                         <div className="logo-ttm" alt="logo_TTM" />
                     </div>
                     <div className='colonne col-3'>
-                            {/* {isAuthenticated ? (
-                                <div className='utlisateur' alt='logo_utlisateur'/>
-                            )} */}
                             {connecter ? (
                                 <div className='utlisateur' alt='logo_utlisateur'/>
                             ) : null }

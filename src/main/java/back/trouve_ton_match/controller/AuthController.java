@@ -89,28 +89,32 @@ public class AuthController {
 
     // Build Login REST API
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginDto){
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDTO loginDto){
+
         try {
-        String token = authService.login(loginDto);
+ String token = authService.login(loginDto);
+ Optional<User> user = userService.getUserByEmail(loginDto.getEmail());
 
-        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
-        jwtAuthResponse.setAccessToken(token);
+            JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+            jwtAuthResponse.setAccessToken(token);
+            jwtAuthResponse.setUserId(user.get().getId());
 
-        System.out.println("vous êtes bien connecté");
-        return ResponseEntity.ok(jwtAuthResponse);
+            System.out.println("vous êtes bien connecté");
+            return ResponseEntity.ok(jwtAuthResponse);
         } catch (BadCredentialsException e) {
-            return ResponseEntity
-                        .status(HttpStatus.UNAUTHORIZED)
-                        .body("Identifiants incorrects. Veuillez réessayer.");
+            JwtAuthResponse errorResponse = new JwtAuthResponse();
+            errorResponse.setErrorCode("Identifiants incorrects");
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         } catch (UsernameNotFoundException e) {
-            return ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
-                        .body("Utilisateur non trouvé.");
+            JwtAuthResponse errorResponse = new JwtAuthResponse();
+            errorResponse.setErrorCode("Utilisateur non trouvé");
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Une erreur est survenue lors de la connexion.");
+            JwtAuthResponse errorResponse = new JwtAuthResponse();
+            errorResponse.setErrorCode("Impossible de se connecter");
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         }
+
     }}
 
 

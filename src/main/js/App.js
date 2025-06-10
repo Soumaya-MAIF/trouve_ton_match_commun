@@ -15,7 +15,8 @@ import MenuBurger from './pages/menu-burger/MenuBurger';
 import { useEffect, useState } from 'react';
 import PremiereConnexion from './pages/connexion/PremiereConnexion';
 import MotDePasseChangement from './pages/connexion/MotDePasseChangement';
-// import { AuthProvider } from './AuthContext';  // ================= A mettre en place
+import { AuthProvider } from './components/context/AuthContext';
+
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
   }, []);
 
   return (
-    // <AuthProvider> // ================= A mettre en place
+    <AuthProvider> 
     <Routes>
       <Route path='/' element={<Accueil />}></Route>
       <Route path='/menu-burger' element={<MenuBurger />}></Route>
@@ -59,7 +60,7 @@ function App() {
       <Route path="/premiere-connexion" element={<PremiereConnexion />}></Route>
       <Route path="/mot-de-passe" element={<MotDePasseChangement />}></Route>
     </Routes>
-    // </AuthProvider>
+   </AuthProvider>
   );
 }
 
