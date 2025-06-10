@@ -15,5 +15,7 @@ public interface UserService {
     public User createUser(User user);
 
     public Optional<User> getUserByEmail(String email);
+
+    void save(User user);
 }
 

@@ -22,5 +22,5 @@ logging:
 debug: true
 
 jwt:
-  secret: "secret"
+  secret: "kV73kRw7TaXECmsQ9854FuWsk3r655HMDFGkV73kRw7TaXECmsQ9854FuWsk3r655HMDFG"
   expiration: 3000000

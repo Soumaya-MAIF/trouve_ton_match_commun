@@ -4,6 +4,7 @@ import back.trouve_ton_match.config.JwtAuthResponse;
 import back.trouve_ton_match.config.JwtTokenProvider;
 import back.trouve_ton_match.entity.*;
 import back.trouve_ton_match.entity.dto.FirstLoginDTO;
+import back.trouve_ton_match.entity.dto.LoginDTO;
 import back.trouve_ton_match.entity.dto.RegisterDTO;
 import back.trouve_ton_match.service.AuthService;
 import back.trouve_ton_match.service.UserService;
@@ -13,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -86,13 +89,31 @@ public class AuthController {
 
     // Build Login REST API
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> login(@RequestBody FirstLoginDTO firstLoginDto){
-        String token = authService.login(firstLoginDto);
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDto){
+        try {
+        String token = authService.login(loginDto);
 
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
         jwtAuthResponse.setAccessToken(token);
 
         System.out.println("vous êtes bien connecté");
-        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.I_AM_A_TEAPOT);
-    }
-}
+        return ResponseEntity.ok(jwtAuthResponse);
+        } catch (BadCredentialsException e) {
+            return ResponseEntity
+                        .status(HttpStatus.UNAUTHORIZED)
+                        .body("Identifiants incorrects. Veuillez réessayer.");
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body("Utilisateur non trouvé.");
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Une erreur est survenue lors de la connexion.");
+        }
+    }}
+
+
+
+
+
