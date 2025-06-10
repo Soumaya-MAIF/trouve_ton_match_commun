@@ -98,6 +98,8 @@ public class AuthController {
             JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
             jwtAuthResponse.setAccessToken(token);
             jwtAuthResponse.setUserId(user.get().getId());
+            jwtAuthResponse.setUserRole(user.get().getRole());
+            jwtAuthResponse.setUserType(user.get().getType());
 
             System.out.println("vous êtes bien connecté");
             return ResponseEntity.ok(jwtAuthResponse);

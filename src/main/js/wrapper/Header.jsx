@@ -12,7 +12,9 @@ let admin = false;
 
 
 const Header = () => {
-    const { auth, logout } = useAuth();
+    const { auth, logout, isAdmin } = useAuth();
+
+    console.log(isAdmin);
 
     return (
         <>
@@ -23,43 +25,32 @@ const Header = () => {
                             <div className="favicon" alt="favicon_TTM"></div>
                         </div>
                     </Link>
-                    { (!connecter && !admin) ? (
-                        <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
-                    ) : null }
-                    { (!connecter && !admin) ? (
-                        <Link className="menu" to="/profils">Profils disponibles</Link>
-                    ) : null }
-                    { (!connecter && !admin) ? (
-                    <Link className="menu" to="/messages">Messages</Link>
-                    ) : null }
-                    { (!connecter && !admin) ? (
-                    <Link className="menu" to="/matchs">Mes Matchs</Link>
-                    ) : null }
-                    { !connecter ? (
-                    <Link className="menu" to="/ressources">Ressources</Link>
-                    ) : null }
-                    { (!connecter && admin)? (
-                    <Link className="menu" to="/indicateurs">Indicateurs</Link>
-                    ) : null }
+                    {auth != null ? 
+                    (
                         <>
-                            <div className="bouton">
-                                    {auth != null ? (
-                                        <button type="button" className="btn-connexion" onClick={logout}>Se déconnecter</button>
-                                        ) : (
-                                            <Link to="/connexion">
-                                            <button type="button" className="btn-connexion">Se connecter</button>
-                                            </Link>
-                                            )}
-                            </div>
+                        <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
+                        <Link className="menu" to="/profils">Profils disponibles</Link>
+                        <Link className="menu" to="/messages">Messages</Link>
+                        <Link className="menu" to="/matchs">Mes Matchs</Link>
+                        <Link className="menu" to="/ressources">Ressources</Link>
+                        <button type="button" className="btn-connexion" onClick={logout}>Se déconnecter</button>
                         </>
+                    ) : 
+                    (
+                        <Link to="/connexion">
+                            <button type="button" className="btn-connexion">Se connecter</button>
+                        </Link>
+                                            
+                    )}                  
 
-                    { (!connecter && admin) ? (
+                    { (auth != null && isAdmin === "ADMINISTRATEUR") ? (
                         <>
                             <div className="bouton">
                                 <Link to="/creation-compte">
                                     <button type="button" className="btn-creer">Créer un compte</button>
                                 </Link>
                             </div>
+                            <Link className="menu" to="/indicateurs">Indicateurs</Link>
                         </>
                     ) : null }
                 </div>

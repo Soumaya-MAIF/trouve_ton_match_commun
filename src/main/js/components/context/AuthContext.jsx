@@ -9,40 +9,16 @@ export const AuthContext = createContext();
  
 // Fournisseur du contexte
 export const AuthProvider = ({ children }) => {
-    const [isAdmin, setIsAdmin] = useState(false); // État admin ou non
+    const [isAdmin, setIsAdmin] = useState(null); // État admin ou non
     const [auth, setAuth] = useState(null);
     const navigate = useNavigate();
  
-    // Charge l'utilisateur authentifié au démarrage
-    // useEffect(() => {
-    //     const fetchAuthenticatedUser = async () => {
-    //         try {
-    //             const authenticatedUser = await userService.getAuthenticateUser();
-    //             setAuth(authenticatedUser); // Met l'utilisateur dans le state
-    //             console.log("Utilisateur authentifié :", authenticatedUser);
-    //         } catch (error) {
-    //             console.error("Échec de récupération de l'utilisateur :", error);
-    //             setAuth(null); // Aucun utilisateur authentifié
-    //         }
-    //     };
- 
-    //     fetchAuthenticatedUser();
-    // }, []);
- 
-    // Fonction pour gérer la déconnexion
-    // const logout = async () => {
-    //     try {
-    //         await fetch("/logout", { method: "POST", credentials: "include" }); // Déconnexion serveur
-    //         setAuth(null); // Réinitialise le state local
-    //     } catch (error) {
-    //         console.error("Erreur lors de la déconnexion :", error);
-    //     }
-    // };
- 
     // fonction de connexion
-    const login = (isAdminUser = false) => {
+    const login = (isAdminUser, token) => {
         setIsAdmin(isAdminUser);
+        setAuth(token);
     };
+    
  
     // fonction de déconnexion
     const logout = () => {
@@ -60,9 +36,9 @@ export const AuthProvider = ({ children }) => {
     };
  
     return (
-<AuthContext.Provider value={{ isAdmin, auth, setAuth, login, logout }}>
+        <AuthContext.Provider value={{ isAdmin, auth, setAuth, login, logout }}>
             {children}
-</AuthContext.Provider>
+        </AuthContext.Provider>
     );
 };
  

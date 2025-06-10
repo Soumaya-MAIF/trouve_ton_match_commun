@@ -36,7 +36,7 @@ const Connexion = () => {
     const [userNotFound, setUserNotFound] = useState(false);
     const navigate = useNavigate();
 
-    const { setAuth } = useAuth();
+    const { login } = useAuth();
 
     const validate = () => {
         const newErrors = {};
@@ -101,7 +101,8 @@ const Connexion = () => {
             console.log("data: " + JSON.stringify(data))
             if (data.userId && data.accessToken) {
                 document.cookie = `token=${data.accessToken}; path=/; secure; samesite=strict`;
-                setAuth(data.accessToken);
+
+                login(data.userRole, data.accessToken);
 
                 navigate('/');
             } else {
