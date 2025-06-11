@@ -14,10 +14,10 @@ import {CarteParrain} from './CarteParrain';
 import {CartePorteur} from './CartePorteur';
 
 const Profils = () => {
-    const parrainDispo = true
-    const match = ''
+    // const parrainDispo = true
+    // const match = ''
 
-    if (parrainDispo) {
+    // if (parrainDispo) {
         return (
             <Wrapper>
                 <div className='titre'>Profils disponibles</div>
@@ -74,64 +74,64 @@ const Profils = () => {
                 </div>
             </Wrapper>
         )
-    } else {
-        return (
-            <Wrapper>
-                <div className='titre'>Profils disponibles</div>
-                <div className='profil-row'>
-                    <CartePorteur
-                        nom="DURAND Alain"
-                        entreprise="Trucmuche"
-                        description="Maçonnerie"
-                        besoins="La comptabilté, le droit du travail, ..."
-                        lieu="Parthenay"
-                        match={false}
-                        >
-                    </CartePorteur>
-                    <CartePorteur
-                        nom="LEFEBVRE Marie"
-                        entreprise="Bricolo"
-                        description="Électricité"
-                        besoins="Marketing, vente, ressources humaines"
-                        lieu="Melle"
-                        match={true}
-                    />
-                    <CartePorteur
-                        nom="MARTIN Pierre"
-                        entreprise="Jardinier Pro"
-                        description="Paysagisme"
-                        besoins="Logistique, infrastructure informatique"
-                        lieu="Echiré"
-                        match={false}
-                    />
-                    <CartePorteur
-                        nom="BERNARD Sophie"
-                        entreprise="Cuisine Délice"
-                        description="Restauration"
-                        besoins="Comptabilité, droit du travail, marketing"
-                        lieu="Coulon"
-                        match={false}
-                    />
-                    <CartePorteur
-                        nom="ROUSSEAU Jean"
-                        entreprise="Tech Innov"
-                        description="Développement logiciel"
-                        besoins="Vente, ressources humaines, logistique"
-                        lieu="Aiffres"
-                        match={false}
-                    />
-                    <CartePorteur
-                        nom="DUPUIS Claire"
-                        entreprise="Nettoyage Plus"
-                        description="Services de nettoyage"
-                        besoins="Marketing, comptabilité, ressources humaines"
-                        lieu="Niort"
-                        match={false}
-                    />
-                </div>
-            </Wrapper>
-        )
-    }
+    // } else {
+    //     return (
+    //         <Wrapper>
+    //             <div className='titre'>Profils disponibles</div>
+    //             <div className='profil-row'>
+    //                 <CartePorteur
+    //                     nom="DURAND Alain"
+    //                     entreprise="Trucmuche"
+    //                     description="Maçonnerie"
+    //                     besoins="La comptabilté, le droit du travail, ..."
+    //                     lieu="Parthenay"
+    //                     match={false}
+    //                     >
+    //                 </CartePorteur>
+    //                 <CartePorteur
+    //                     nom="LEFEBVRE Marie"
+    //                     entreprise="Bricolo"
+    //                     description="Électricité"
+    //                     besoins="Marketing, vente, ressources humaines"
+    //                     lieu="Melle"
+    //                     match={true}
+    //                 />
+    //                 <CartePorteur
+    //                     nom="MARTIN Pierre"
+    //                     entreprise="Jardinier Pro"
+    //                     description="Paysagisme"
+    //                     besoins="Logistique, infrastructure informatique"
+    //                     lieu="Echiré"
+    //                     match={false}
+    //                 />
+    //                 <CartePorteur
+    //                     nom="BERNARD Sophie"
+    //                     entreprise="Cuisine Délice"
+    //                     description="Restauration"
+    //                     besoins="Comptabilité, droit du travail, marketing"
+    //                     lieu="Coulon"
+    //                     match={false}
+    //                 />
+    //                 <CartePorteur
+    //                     nom="ROUSSEAU Jean"
+    //                     entreprise="Tech Innov"
+    //                     description="Développement logiciel"
+    //                     besoins="Vente, ressources humaines, logistique"
+    //                     lieu="Aiffres"
+    //                     match={false}
+    //                 />
+    //                 <CartePorteur
+    //                     nom="DUPUIS Claire"
+    //                     entreprise="Nettoyage Plus"
+    //                     description="Services de nettoyage"
+    //                     besoins="Marketing, comptabilité, ressources humaines"
+    //                     lieu="Niort"
+    //                     match={false}
+    //                 />
+    //             </div>
+    //         </Wrapper>
+    //     )
+    // }
 }
 
 export default Profils;

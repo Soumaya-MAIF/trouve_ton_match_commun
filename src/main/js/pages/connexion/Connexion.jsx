@@ -100,9 +100,11 @@ const Connexion = () => {
         .then(data => {
             console.log("data: " + JSON.stringify(data))
             if (data.userId && data.accessToken) {
-                document.cookie = `token=${data.accessToken}; path=/; secure; samesite=strict`;
+                // document.cookie = `token=${data.accessToken}; path=/; secure; samesite=strict`;
 
-                login(data.userRole, data.accessToken);
+                localStorage.setItem("token", data.accessToken);
+
+                login(data.userRole, data.userType, data.accessToken);
 
                 navigate('/');
             } else {

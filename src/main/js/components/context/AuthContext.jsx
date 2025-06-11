@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from '../../service/jwtDecode';
  
 // Créer le contexte
 export const AuthContext = createContext();
@@ -9,13 +10,30 @@ export const AuthContext = createContext();
  
 // Fournisseur du contexte
 export const AuthProvider = ({ children }) => {
-    const [isAdmin, setIsAdmin] = useState(null); // État admin ou non
+    const [role, setRole] = useState(null); // État admin ou non
+    const [typeUtilisateur, setTypeUtilisateur] = useState(null); 
+
     const [auth, setAuth] = useState(null);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if(token != null) {
+                    setAuth(token);
+
+        const user = jwtDecode(token).payload["user"];
+        setRole(user.role);
+        setTypeUtilisateur(user.type);
+        }
+
+
+}, [setAuth])
  
     // fonction de connexion
-    const login = (isAdminUser, token) => {
-        setIsAdmin(isAdminUser);
+    const login = (role, typeUtilisateur, token) => {
+        setRole(role);
+        setTypeUtilisateur(typeUtilisateur)
         setAuth(token);
     };
     
@@ -23,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     // fonction de déconnexion
     const logout = () => {
     
-    setIsAdmin(false);
+    setRole(null);
 
     // Supprimer le cookie "token"
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -36,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     };
  
     return (
-        <AuthContext.Provider value={{ isAdmin, auth, setAuth, login, logout }}>
+        <AuthContext.Provider value={{ role, auth, setAuth, login, logout, typeUtilisateur }}>
             {children}
         </AuthContext.Provider>
     );

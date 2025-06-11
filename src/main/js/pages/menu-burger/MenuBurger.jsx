@@ -23,17 +23,17 @@ const MenuBurger = () => {
                  admin ? (
                      <>
                         <Link className="menu-mobile" to="/creation-compte">Créer un compte</Link>
-                        <Link className="menu-mobile" to="/ressources">Ressources</Link>
-                        <Link className="menu-mobile" to="/indicateurs">Indicateurs</Link>
+                        {/* <Link className="menu-mobile" to="/ressources">Ressources</Link>
+                        <Link className="menu-mobile" to="/indicateurs">Indicateurs</Link> */}
                     </>
 
                 ) : (
                     <>
                         <Link className="menu-mobile" to="/mon-compte-parrain">Mon compte</Link>
-                        <Link className="menu-mobile" to="/profils">Profils disponibles</Link>
+                        {/* <Link className="menu-mobile" to="/profils">Profils disponibles</Link> */}
                         <Link className="menu-mobile" to="/messages-contact">Messages</Link>
                         <Link className="menu-mobile" to="/matchs">Mes Matchs</Link>
-                        <Link className="menu-mobile" to="/ressources">Ressources</Link>
+                        {/* <Link className="menu-mobile" to="/ressources">Ressources</Link> */}
                     </>
                 )
             )}

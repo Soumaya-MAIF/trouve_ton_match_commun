@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie.jsx';
 import './creation-compte.css';
 import './../../components/global.css';
+import { ChampInfo } from '../../components/champ-info/ChampInfo.jsx';
+import { useAuth } from '../../components/context/AuthContext.jsx';
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
 const nomRegex = /^[A-ZÀ-ÿ\- ]{2,}$/; // NOM en MAJUSCULES
@@ -23,6 +25,7 @@ const CreationCompte = () => {
     });
 
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [codeAcces, setCodeAcces] = useState(null);
     const location = useLocation(); // Ce hook permet d’accéder à l’objet location qui représente l’URL actuelle de l’application 
 
     // Créer une référence pour le champ 'nomUtilisateur'
@@ -65,6 +68,8 @@ const CreationCompte = () => {
         return newErrors;
     };
 
+    const {auth} = useAuth();
+
 
     // Met à jour dynamiquement les propriétés de utilisateurDto à chaque changer de valeur
     const handleChange = (name, value) => {
@@ -95,12 +100,11 @@ const CreationCompte = () => {
             return;
         }
 
-        console.log("JSON.stringify(utilisateurDto):" + JSON.stringify(utilisateurDto))
-
         fetch('http://localhost:8080/api/auth/register', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authentication' : `Bearer ${auth}` 
             },
             body: JSON.stringify(utilisateurDto)
         })
@@ -112,6 +116,10 @@ const CreationCompte = () => {
                 }
                 return response.json();
             })
+            .then(data => {
+                console.log(data);
+                setCodeAcces(data.code_acces);
+            })
             .catch(error => {
                 console.error('Erreur lors de la soumission du formulaire!', error);
             });
@@ -119,7 +127,7 @@ const CreationCompte = () => {
 
     return (
         <Wrapper>
-            <div className='titre'>Creation compte</div>
+            <div className='titre'>Création d'un compte</div>
             <form onSubmit={handleSubmit} className='form-container'>
 
                 {errors.nom && <div className="message-erreur">{errors.nom}</div>}
@@ -142,6 +150,16 @@ const CreationCompte = () => {
                     placeholder="Laurent"
                 />
 
+                {errors.email && <div className="message-erreur">{errors.email}</div>}
+                <ChampSaisie 
+                    setValue={(value) => handleChange('email', value)} 
+                    value={utilisateurDto.email} 
+                    label="Email :" 
+                    name="email" 
+                    regex={emailRegex} 
+                    placeholder="email@email.fr" 
+                />
+
                 {errors.entreprise && <div className="message-erreur">{errors.entreprise}</div>}
                 <ChampSaisie 
                     setValue={(value) => handleChange('entreprise', value)} 
@@ -152,15 +170,31 @@ const CreationCompte = () => {
                     placeholder="Tartempion"
                 />
 
-                {errors.email && <div className="message-erreur">{errors.email}</div>}
-                <ChampSaisie 
-                    setValue={(value) => handleChange('email', value)} 
-                    value={utilisateurDto.email} 
-                    label="email :" 
-                    name="email" 
-                    regex={emailRegex} 
-                    placeholder="mail@email.fr" 
-                />
+                {errors.role && <div className="message-erreur">{errors.role}</div>}
+                <div className="form-radio-type">
+                    <label className="radio-label">
+                        <input
+                            type="radio"
+                            name="role"
+                            value="UTILISATEUR"
+                            checked={utilisateurDto.role === 'UTILISATEUR'}
+                            onChange={(e) => handleChange('role', e.target.value)}
+                            className="radio-input"
+                        />
+                        Utilisateur
+                    </label>
+                    <label className="radio-label">
+                        <input
+                            type="radio"
+                            name="role"
+                            value="ADMINISTRATEUR"
+                            checked={utilisateurDto.role === 'ADMINISTRATEUR'}
+                            onChange={(e) => handleChange('role', e.target.value)}
+                            className="radio-input"
+                        />
+                        Administrateur
+                    </label>                       
+                </div>
 
                 {errors.type && <div className="message-erreur">{errors.type}</div>}
                 <div className="form-radio-type">
@@ -189,38 +223,23 @@ const CreationCompte = () => {
                      
                 </div>
 
-                {errors.role && <div className="message-erreur">{errors.role}</div>}
-                <div className="form-radio-type">
-                    <label className="radio-label">
-                        <input
-                            type="radio"
-                            name="role"
-                            value="UTILISATEUR"
-                            checked={utilisateurDto.role === 'UTILISATEUR'}
-                            onChange={(e) => handleChange('role', e.target.value)}
-                            className="radio-input"
-                        />
-                        Utilisateur
-                    </label>
-                    <label className="radio-label">
-                        <input
-                            type="radio"
-                            name="role"
-                            value="ADMINISTRATEUR"
-                            checked={utilisateurDto.role === 'ADMINISTRATEUR'}
-                            onChange={(e) => handleChange('role', e.target.value)}
-                            className="radio-input"
-                        />
-                        Admin
-                    </label>                       
-                     
+                <div className="position-bouton">
+                    <button
+                        type="submit"
+                        className="bouton-bas-page btn-compte">
+                        Envoyer
+                    </button>
                 </div>
-                <button
-                    type="submit"
-                    className="bouton-bas-page">
-                    Envoyer
-                </button>
+                
+            {codeAcces != null && (
+                  <ChampInfo
+                  label="Code d'accès :"
+                  name="code_acces"
+                  value={codeAcces}
+              />
+            )}
             </form>
+
         </Wrapper>
     )
 };

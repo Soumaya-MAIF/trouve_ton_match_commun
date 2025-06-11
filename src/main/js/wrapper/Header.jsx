@@ -12,9 +12,9 @@ let admin = false;
 
 
 const Header = () => {
-    const { auth, logout, isAdmin } = useAuth();
+    const { auth, logout, role, typeUtilisateur } = useAuth();
 
-    console.log(isAdmin);
+    console.log("auth = " + auth);
 
     return (
         <>
@@ -29,11 +29,10 @@ const Header = () => {
                     (
                         <>
                         <Link className="menu" to="/mon-compte-parrain">Mon compte</Link>
-                        <Link className="menu" to="/profils">Profils disponibles</Link>
+                        {/* <Link className="menu" to="/profils">Profils disponibles</Link> */}
                         <Link className="menu" to="/messages">Messages</Link>
-                        <Link className="menu" to="/matchs">Mes Matchs</Link>
-                        <Link className="menu" to="/ressources">Ressources</Link>
-                        <button type="button" className="btn-connexion" onClick={logout}>Se déconnecter</button>
+                        {typeUtilisateur === 'PARRAIN' && <Link className="menu" to="/matchs">Mes porteurs</Link>}
+                        {/* <Link className="menu" to="/ressources">Ressources</Link> */}
                         </>
                     ) : 
                     (
@@ -43,16 +42,19 @@ const Header = () => {
                                             
                     )}                  
 
-                    { (auth != null && isAdmin === "ADMINISTRATEUR") ? (
+                    { (auth != null && role === "ADMINISTRATEUR") ? (
                         <>
                             <div className="bouton">
                                 <Link to="/creation-compte">
                                     <button type="button" className="btn-creer">Créer un compte</button>
                                 </Link>
                             </div>
-                            <Link className="menu" to="/indicateurs">Indicateurs</Link>
+                            {/* <Link className="menu" to="/indicateurs">Indicateurs</Link> */}
                         </>
                     ) : null }
+                    <div className="bouton">
+                    <button type="button" className="btn-connexion" onClick={logout}>Se déconnecter</button>
+                    </div>
                 </div>
                 <div className="header-container">
                     <div className="logo-ttm" alt="logo_TTM" />

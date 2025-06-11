@@ -3,7 +3,7 @@ import Wrapper from '../../wrapper/Index';
 const Matchs =() => {
     return (
         <Wrapper>
-            <div className='titre'>Mes Matchs</div>
+            <div className='titre'>Mes porteurs</div>
 
         </Wrapper>
     )

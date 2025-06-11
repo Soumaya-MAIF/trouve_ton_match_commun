@@ -106,14 +106,17 @@ public class AuthController {
         } catch (BadCredentialsException e) {
             JwtAuthResponse errorResponse = new JwtAuthResponse();
             errorResponse.setErrorCode("Identifiants incorrects");
+            System.out.println(errorResponse.getErrorCode());
             return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         } catch (UsernameNotFoundException e) {
             JwtAuthResponse errorResponse = new JwtAuthResponse();
             errorResponse.setErrorCode("Utilisateur non trouvé");
+            System.out.println(errorResponse.getErrorCode());
             return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
             JwtAuthResponse errorResponse = new JwtAuthResponse();
             errorResponse.setErrorCode("Impossible de se connecter");
+            System.out.println(errorResponse.getErrorCode());
             return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         }
 
