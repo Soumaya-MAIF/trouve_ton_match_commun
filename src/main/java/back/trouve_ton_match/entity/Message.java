@@ -7,18 +7,23 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Document(collection = "messages")
 public class Message {
 
+    // private String id;
+    // private User user1;
+    // private User user2;
+    // private String content;
+
     @Id
     String id;
-    String sender;
-    String dest;
+    Long senderId; // id de l'expéditeur
+    Long destId; // id du destinataire
     String content;
 }
 

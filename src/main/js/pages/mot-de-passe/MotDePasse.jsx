@@ -2,7 +2,7 @@ import Wrapper from '../../wrapper/Index.jsx';
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../../AuthContext';
+import { useAuth } from '../../components/context/AuthContext.jsx';
 
 
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie.jsx';
@@ -44,7 +44,7 @@ const MotDePasse = () => {
 
         if (!utilisateurDto.email) newErrors.email = 'L\'email est requis';
         if (!utilisateurDto.password) newErrors.password = 'Le mot de passe est requis';
-        if (!utilisateurDto.confirmationPassword) { 
+        if (!utilisateurDto.confirmationPassword) {
             newErrors.confirmationPasswordmot_de_passe = 'La confirmation du mot de passe est requis';
         } else if (utilisateurDto.password !== utilisateurDto.confirmationPassword) {
             newErrors.confirmationPassword = 'Les mots de passe ne correspondent pas';
@@ -91,26 +91,26 @@ const MotDePasse = () => {
                 'Content-Type': 'application/json'
             },
             // body: JSON.stringify(utilisateurDto)
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({ email, password })
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Réponse du backend :', data);
-            if (data.success) {
-                console.log(data.message); // Afficher le message de succès
-                //login(); // Mettre à jour l'état de connexion ================= A Gérer
-                navigate('/connexion'); // Rediriger vers la page "Connexion"
-            } else {
-                console.error(data.message); // Afficher le message d'erreur
-                setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
-            }
-        })
-        .catch(error => {
-            console.error('Erreur lors de la soumission du formulaire!', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Réponse du backend :', data);
+                if (data.success) {
+                    console.log(data.message); // Afficher le message de succès
+                    //login(); // Mettre à jour l'état de connexion ================= A Gérer
+                    navigate('/connexion'); // Rediriger vers la page "Connexion"
+                } else {
+                    console.error(data.message); // Afficher le message d'erreur
+                    setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la soumission du formulaire!', error);
+            });
 
     };
-    
+
     return (
         <Wrapper>
             <div className='titre'>Mot de passe</div>
@@ -124,7 +124,7 @@ const MotDePasse = () => {
                     name="email"
                     value={utilisateurDto.email}
                     regex={otherRegex}
-                    ref={emailInputRef}  
+                    ref={emailInputRef}
                     placeholder="laurent.dupont@test.fr"
                 />
                 <div className="espace"></div>
@@ -161,8 +161,8 @@ const MotDePasse = () => {
                             />
                         </div>
                     )}
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         className="bouton-bas-page">
                         Suivant
                     </button>

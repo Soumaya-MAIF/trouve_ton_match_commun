@@ -4,11 +4,13 @@ package back.trouve_ton_match.controller;
 import back.trouve_ton_match.entity.Role;
 import back.trouve_ton_match.entity.User;
 import back.trouve_ton_match.entity.dto.PasswordDTO;
+import back.trouve_ton_match.entity.dto.ContactsDTO;
 import back.trouve_ton_match.entity.dto.MonCompteDTO;
 import back.trouve_ton_match.entity.dto.PresentationDTO;
 import back.trouve_ton_match.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,8 +20,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -32,27 +32,46 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-
     @Autowired
-    private UserService service;
+    private UserService userService;
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         return service.getUserById(id).orElse(null);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody PresentationDTO presentationDto) {
-        Optional<User> userOptional = service.getUserById(id);
-        if (userOptional.isPresent()) {
-            User userConnu = userOptional.get();
-            userConnu.setPresentation(presentationDto.getPresentation());
-            service.save(userConnu);
-            return new ResponseEntity<>(userConnu, HttpStatus.OK);
+    @GetMapping("/")
+    public ResponseEntity<List<ContactsDTO>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    // La méthode répond aux requêtes HTTP POST envoyées à l’URL /checkutilisateur.
+    // La réponse sera au format JSON
+    @PostMapping(value = "/checkutilisateur", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> checkUtilisateur(@RequestBody PasswordDTO userDto) {
+        Optional<User> user = userService.getByEmailPassword(
+                userDto.getEmail(),
+                userDto.getPassword()
+        );
+
+        if (user.isPresent()) {
+            log.info("Role de l'utilisateur : {}" + user.get().getRole());
+            System.out.println("Role de l'utilisateur : " + user.get().getRole());
+            boolean isAdmin = Role.ADMINISTRATEUR.equals(user.get().getRole()); // Vérifie si le rôle est ADMIN
+            return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "id", user.get().getId(),
+                    "email", user.get().getEmail(),
+                    "isAdmin", isAdmin
+            ));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                    "success", false,
+                    "message", "Utilisateur non trouvé ou mot de passe incorrect"
+            ));
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

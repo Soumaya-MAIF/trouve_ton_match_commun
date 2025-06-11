@@ -15,7 +15,9 @@ import MenuBurger from "./pages/menu-burger/MenuBurger";
 import { useEffect, useState } from "react";
 import PremiereConnexion from "./pages/connexion/PremiereConnexion";
 import MotDePasseChangement from "./pages/connexion/MotDePasseChangement";
-import { AuthProvider } from "./components/context/AuthContext";
+import { AuthProvider } from "./components/context/components/context/AuthContext";
+import { UserProvider } from "./components/context/UserContext";
+import { ContactProvider } from "./components/context/ContactContext";
 
 function App() {
   let [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -34,31 +36,35 @@ function App() {
 
   return (
     <AuthProvider>
-      <Routes>
-        <Route path="/" element={<Accueil />}></Route>
-        <Route path="/menu-burger" element={<MenuBurger />}></Route>
-        {/* <Route path="/mon-compte-parrain" element={<MonCompteParrain />}></Route>
-        <Route path="/mon-compte-porteur" element={<MonComptePorteur />}></Route> */}
-        <Route path="/profils" element={<Profils />}></Route>
-        <Route path="/matchs" element={<Matchs />}></Route>
-        <Route path="/messages-contact" element={<MessagesContacts />}></Route>
-        <Route path="/messages" element={<Messages />}></Route>
-        <Route path="/mon-compte" element={<MonCompte />}></Route>
-        {/* <Route path='/messages' element={<Messages isMobile={isMobile} />}></Route>  */}
-        {/* { isMobile ? (
-        <Route path='/messages' element={<MessagesContacts />}></Route> 
-      ) : (
-        <Route path='/messages' element={<Messages isMobile={isMobile} />}></Route> 
-      ) } */}
-        <Route path="/messages-contacts" element={<MessagesContacts />}></Route>
-        <Route path="/ressources" element={<Ressources />}></Route>
-        <Route path="/indicateurs" element={<Indicateurs />}></Route>
-        <Route path="/connexion" element={<Connexion />}></Route>
-        <Route path="/creation-compte" element={<CreationCompte />}></Route>
-        <Route path="/filtres" element={<Filtres />}></Route>
-        <Route path="/premiere-connexion" element={<PremiereConnexion />}></Route>
-        <Route path="/mot-de-passe" element={<MotDePasseChangement />}></Route>
-      </Routes>
+      <UserProvider>
+        <ContactProvider>
+          <Routes>
+            <Route path="/" element={<Accueil />}></Route>
+            <Route path="/menu-burger" element={<MenuBurger />}></Route>
+            {/* <Route path="/mon-compte-parrain" element={<MonCompteParrain />}></Route>
+            <Route path="/mon-compte-porteur" element={<MonComptePorteur />}></Route> */}
+            <Route path="/profils" element={<Profils />}></Route>
+            <Route path="/matchs" element={<Matchs />}></Route>
+            <Route path="/messages-contact" element={<MessagesContacts />}></Route>
+            <Route path="/messages" element={<Messages />}></Route>
+            <Route path="/mon-compte" element={<MonCompte />}></Route>
+            {/* <Route path='/messages' element={<Messages isMobile={isMobile} />}></Route>  */}
+            {/* { isMobile ? (
+            <Route path='/messages' element={<MessagesContacts />}></Route> 
+          ) : (
+            <Route path='/messages' element={<Messages isMobile={isMobile} />}></Route> 
+          ) } */}
+            <Route path="/messages-contacts" element={<MessagesContacts />}></Route>
+            <Route path="/ressources" element={<Ressources />}></Route>
+            <Route path="/indicateurs" element={<Indicateurs />}></Route>
+            <Route path="/connexion" element={<Connexion />}></Route>
+            <Route path="/creation-compte" element={<CreationCompte />}></Route>
+            <Route path="/filtres" element={<Filtres />}></Route>
+            <Route path="/premiere-connexion" element={<PremiereConnexion />}></Route>
+            <Route path="/mot-de-passe" element={<MotDePasseChangement />}></Route>
+          </Routes>
+        </ContactProvider>
+      </UserProvider>
     </AuthProvider>
   );
 }

@@ -80,6 +80,8 @@
     padding-top: 0.5rem;
     flex: 3;
     overflow-y: auto; 
+    position: relative;
+    height: calc(100vh - 50vh);
 }
 
 /* Styles généraux pour chaque message */
@@ -98,6 +100,12 @@
     border-radius: 0.3rem;
     max-width: 60%;
     min-width: 40%;
+    
+
+    word-wrap: break-word; /* coupe les mots trop longs */
+    overflow-wrap: break-word; /* pour compatibilité */
+    white-space: pre-wrap; /* garde les sauts de ligne */
+
 }
 
 /* Messages du contact (alignés à gauche) */
@@ -137,6 +145,14 @@
 .discussions .bouton {
     height: 2rem;
     width: 10rem;
+}
+
+.nouveau-message {
+    position: fixed;
+    width: 70%;
+    bottom: 13vh;
+    z-index: 10; 
+    padding: 1rem;
 }
 
 /* Media queries pour ajuster le style en fonction de la taille de l'écran */

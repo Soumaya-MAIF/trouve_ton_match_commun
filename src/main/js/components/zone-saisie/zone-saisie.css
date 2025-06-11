@@ -27,19 +27,28 @@
 } */
 
 .custom-input-zone {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 1);
     color: rgb(0, 0, 0);
     border: 0.06rem solid transparent; /* Ajoute une bordure par défaut */
     border-radius: 0.3rem; 
     padding: 0.2rem 1rem; 
-    margin: 0 0 1.25rem;
+    margin: 0 0 0.5rem;
     width: 100%; /* Pour qu'il prenne toute la largeur */
     box-sizing: border-box; /* Assure que le padding n'affecte pas la taille */
     outline: none; /* Supprime la bordure par défaut du focus */
     font-family: 'Fira Sans', sans-serif;
-    font-size: 1rem; /* Taille spécifique pour les champs */
+    font-size: 0.9rem; /* Taille spécifique pour les champs */
     transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Ajoute une transition pour un effet fluide */
 }
+
+
+.custom-input-zone {
+    resize: none; 
+    overflow: hidden;
+    min-height: 1rem; 
+    /* line-height: 1.5rem; */
+}
+
 
 .custom-container .custom-input-zone.is-valid {
     border-color: rgb(6, 233, 6, 0.5); /* Bordure verte pour un état valide */

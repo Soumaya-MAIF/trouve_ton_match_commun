@@ -11,14 +11,16 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
-        config.setApplicationDestinationPrefixes("/app");
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("/topic"); // définit le préfixe d’accès au flux émis par le broker pour les clients souhaitant s’y inscrire.
+        registry.setApplicationDestinationPrefixes("/app"); // définit le préfixe d’accès aux éventuels contrôleurs que les clients pourront consommer dans votre API.
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*");
+        registry.addEndpoint("/ws")
+            .setAllowedOriginPatterns("*") // définit le point d’entrée pour le handshake entre le client et le serveur. Cela permet d’établir la connexion ouverte entre les deux services. Remarquez le présence de setAllowedOrigins("*") permettant de gérer les CORS lors de l’appel.
+            .withSockJS();
     }
 
     // @Override

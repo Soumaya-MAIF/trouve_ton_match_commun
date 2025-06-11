@@ -1,7 +1,9 @@
 import Wrapper from "../../wrapper/Index";
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
+import { useNavigate } from "react-router";
+import { useAuth } from "../../AuthContext.jsx";
+import { useUser } from "../../components/context/UserContext.jsx";
 
 import { ChampSaisie } from "./../../components/champ-saisie/ChampSaisie.jsx";
 import "./connexion.css";
@@ -11,6 +13,9 @@ import { useAuth } from "../../components/context/AuthContext.jsx";
 const Connexion = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
+  const { login } = useAuth(); // Récupérer la fonction login du contexte
+  const { setUser } = useUser(); // Récupérer la fonction setUser du contexte
 
   const [utilisateurDto, setUtilisateurDto] = useState({
     email: "",
@@ -120,7 +125,6 @@ const Connexion = () => {
       <div className="espace"></div>
       <form onSubmit={handleSubmit} className="form-container">
         {errors.email && <div className="message-erreur">{errors.email}</div>}
-        {errors.email && <div className="message-erreur">{errors.email}</div>}
         <ChampSaisie
           setValue={(value) => handleChange("email", value)}
           label="Email :"
@@ -128,7 +132,7 @@ const Connexion = () => {
           value={utilisateurDto.email}
           regex={emailRegex}
           ref={emailInputRef}
-          placeholder="DUPONT"
+          placeholder="laurent.dupont@test.fr"
         />
         <div className="espace"></div>
 

@@ -1,11 +1,11 @@
 import './messages.css';
 import './../../components/global.css'
 
-const Message = ( {nom, contenuMessage}) => {
+const Message = ( {nom, contenuMessage, estMoi}) => {
 
     return (
         <div className='message'>
-            {nom === "Moi" ? (
+            {estMoi ? (
                 <>
                     <div className='message-nom message-nom-moi'>{nom}</div>
                     <div className='message-contenu message-moi'>{contenuMessage}</div>

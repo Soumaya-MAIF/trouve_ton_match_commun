@@ -228,6 +228,16 @@ const CreationCompte = () => {
           </label>
         </div>
 
+        {errors.match && <div className="message-erreur">{errors.match}</div>}
+        <ChampSaisie
+          setValue={(value) => handleChange("plateforme", value)}
+          value={utilisateurDto.match}
+          label="Match :"
+          name="match"
+          regex={otherRegex}
+          placeholder="Nom du match"
+        />
+
         <div className="position-bouton">
           <button type="submit" className="bouton-bas-page btn-compte">
             Envoyer

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../components/context/AuthContext.jsx";
 import { ChampSaisie } from "../../components/champ-saisie/ChampSaisie";
 import Wrapper from "../../wrapper/Index";
 
