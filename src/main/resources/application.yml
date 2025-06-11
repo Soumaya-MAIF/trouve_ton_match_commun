@@ -26,14 +26,12 @@ logging:
   level:
     org.springframework: DEBUG
 
-debug: true
+debug: false
 
 jwt:
   secret: "kV73kRw7TaXECmsQ9854FuWsk3r655HMDFGkV73kRw7TaXECmsQ9854FuWsk3r655HMDFG"
   expiration: 3000000
 
-
 server:
   servlet:
     context-path: /api
-

@@ -202,41 +202,49 @@ const CreationCompte = () => {
           </label>
         </div>
 
-        {errors.type && <div className="message-erreur">{errors.type}</div>}
-        <div className="form-radio-type">
-          <label className="radio-label">
-            <input
-              type="radio"
-              name="type"
-              value="PARRAIN"
-              checked={utilisateurDto.type === "PARRAIN"}
-              onChange={(e) => handleChange("type", e.target.value)}
-              className="radio-input"
-            />
-            Parrain
-          </label>
-          <label className="radio-label">
-            <input
-              type="radio"
-              name="type"
-              value="PORTEUR"
-              checked={utilisateurDto.type === "PORTEUR"}
-              onChange={(e) => handleChange("type", e.target.value)}
-              className="radio-input"
-            />
-            Porteur
-          </label>
-        </div>
+        {utilisateurDto.role === "UTILISATEUR" && (
+          <>
+            {errors.type && <div className="message-erreur">{errors.type}</div>}
+            <div className="form-radio-type">
+              <label className="radio-label">
+                <input
+                  type="radio"
+                  name="type"
+                  value="PARRAIN"
+                  checked={utilisateurDto.type === "PARRAIN"}
+                  onChange={(e) => handleChange("type", e.target.value)}
+                  className="radio-input"
+                />
+                Parrain
+              </label>
+              <label className="radio-label">
+                <input
+                  type="radio"
+                  name="type"
+                  value="PORTEUR"
+                  checked={utilisateurDto.type === "PORTEUR"}
+                  onChange={(e) => handleChange("type", e.target.value)}
+                  className="radio-input"
+                />
+                Porteur
+              </label>
+            </div>
 
-        {errors.match && <div className="message-erreur">{errors.match}</div>}
-        <ChampSaisie
-          setValue={(value) => handleChange("plateforme", value)}
-          value={utilisateurDto.match}
-          label="Match :"
-          name="match"
-          regex={otherRegex}
-          placeholder="Nom du match"
-        />
+            {utilisateurDto.type === "PORTEUR" && (
+              <>
+                {errors.match && <div className="message-erreur">{errors.match}</div>}
+                <ChampSaisie
+                  setValue={(value) => handleChange("plateforme", value)}
+                  value={utilisateurDto.parrain}
+                  label="Parrain :"
+                  name="match"
+                  regex={otherRegex}
+                  placeholder="Nom du parrain"
+                />
+              </>
+            )}
+          </>
+        )}
 
         <div className="position-bouton">
           <button type="submit" className="bouton-bas-page btn-compte">
