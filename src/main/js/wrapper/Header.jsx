@@ -33,16 +33,7 @@ const Header = () => {
                         <Link className="menu" to="/messages">Messages</Link>
                         {typeUtilisateur === 'PARRAIN' && <Link className="menu" to="/matchs">Mes porteurs</Link>}
                         {/* <Link className="menu" to="/ressources">Ressources</Link> */}
-                        </>
-                    ) : 
-                    (
-                        <Link to="/connexion">
-                            <button type="button" className="btn-connexion">Se connecter</button>
-                        </Link>
-                                            
-                    )}                  
-
-                    { (auth != null && role === "ADMINISTRATEUR") ? (
+                        { (auth != null && role === "ADMINISTRATEUR") && (
                         <>
                             <div className="bouton">
                                 <Link to="/creation-compte">
@@ -51,10 +42,24 @@ const Header = () => {
                             </div>
                             {/* <Link className="menu" to="/indicateurs">Indicateurs</Link> */}
                         </>
-                    ) : null }
-                    <div className="bouton">
+                    )}
+                    <Link to="/">
+                        <div className="bouton">
                     <button type="button" className="btn-connexion" onClick={logout}>Se déconnecter</button>
                     </div>
+                    </Link>
+                        </>
+                    ) : 
+                    (
+                        <Link to="/connexion">
+                            <div className="bouton">
+                                <button type="button" className="btn-connexion">Se connecter</button>
+                            </div>
+                        </Link>
+                                            
+                    )}                  
+
+                    
                 </div>
                 <div className="header-container">
                     <div className="logo-ttm" alt="logo_TTM" />

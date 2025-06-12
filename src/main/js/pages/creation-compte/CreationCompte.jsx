@@ -104,7 +104,7 @@ const CreationCompte = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authentication' : `Bearer ${auth}` 
+                'Authorization' : `Bearer ${auth}` 
             },
             body: JSON.stringify(utilisateurDto)
         })

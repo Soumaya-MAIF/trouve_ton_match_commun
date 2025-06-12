@@ -32,7 +32,7 @@ const MenuBurger = () => {
                         <Link className="menu-mobile" to="/mon-compte-parrain">Mon compte</Link>
                         {/* <Link className="menu-mobile" to="/profils">Profils disponibles</Link> */}
                         <Link className="menu-mobile" to="/messages-contact">Messages</Link>
-                        <Link className="menu-mobile" to="/matchs">Mes Matchs</Link>
+                        <Link className="menu-mobile" to="/matchs">Mes porteurs</Link>
                         {/* <Link className="menu-mobile" to="/ressources">Ressources</Link> */}
                     </>
                 )
