@@ -2,6 +2,7 @@
 package back.trouve_ton_match.controller;
 
 import back.trouve_ton_match.entity.Role;
+import back.trouve_ton_match.entity.Type;
 import back.trouve_ton_match.entity.User;
 import back.trouve_ton_match.entity.dto.PasswordDTO;
 import back.trouve_ton_match.entity.dto.ContactsDTO;
@@ -46,6 +47,11 @@ public class UserController {
     @GetMapping("/")
     public ResponseEntity<List<ContactsDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/parrains")
+    public ResponseEntity<List<ParrainsDTO>> findParrains() {
+        return ResponseEntity.ok(userService.findParrains());
     }
 
     // La méthode répond aux requêtes HTTP POST envoyées à l’URL /checkutilisateur.

@@ -20,7 +20,7 @@ import { Link } from "react-router";
 import { ChampSaisie } from '../../components/champ-saisie/ChampSaisie.jsx';
 import { ZoneSaisie } from '../../components/zone-saisie/ZoneSaisie.jsx';
 
-const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
+const otherRegex = /^[a-zA-ZÀ-ÿ\s\-\.,;:!?()'"]{1,}$/; // minimum 2 caractères pour les autres champs
 
 const Messages = ({ isMobile }) => {
     
@@ -250,6 +250,7 @@ const Messages = ({ isMobile }) => {
                         {contacts
                             .filter(contact => contact.id !== user.id) // Exclure l'utilisateur actuel
                             .map((contact) => (
+                                console.log('Contact:', contact),
                             <Contact
                                 key={contact.id}
                                 prenom={contact.prenom}
@@ -261,17 +262,19 @@ const Messages = ({ isMobile }) => {
                                 }}
                             />
                         ))}
-                        <Contact prenom='Laurent' nom='DUPONT' />
 
                     </div>
                 )}
                 <div className='discussions'>
                     {selectedContact ? (
                         <>
+                            <p className="titre-conversation">
+                                Conversation avec {selectedContact.prenom} {selectedContact.nom}
+                            </p>
                             {messages.map((message) => {
                                 const senderId = message.senderId ?? message.sender;
                                 const estMoi = senderId === user.id;
-                                const nomAffiche = estMoi ? "Moi" : selectedContact.nom;
+                                const nomAffiche = estMoi ? "Moi" : `${selectedContact.prenom} ${selectedContact.nom}`;
                                 console.log('estMoi:', estMoi);
                                 console.log('user:', user);
                                 console.log('user.nom:', user.nom);
@@ -290,18 +293,10 @@ const Messages = ({ isMobile }) => {
 
                         </>
                     ) : (
-                        <p>Sélectionnez un contact pour commencer une conversation</p>
+                        null
+                        // <p className='titre-conversation'>Sélectionnez un contact pour commencer une conversation</p>
                     )}
                     <div className='nouveau-message'>
-                        {/* <ChampSaisie
-                            setValue={(value) => handleChange('content', value)}
-                            label="Message :"
-                            name="message"
-                            value={sendMessageDto.content}
-                            regex={otherRegex}
-                            ref={messageInputRef}
-                            placeholder="Message"
-                        /> */}
                         <ZoneSaisie
                             setValue={(value) => handleChange('content', value)}
                             label="Message :"
@@ -321,13 +316,6 @@ const Messages = ({ isMobile }) => {
                             </button>
                         </div>
                     </div>
-
-
-                    {/* <Message
-                        nom='Laurent'
-                        contenuMessage='Bonjour Pierre, merci de me consacrer du temps. J’ai bien avancé sur mon projet de plateforme de gestion des stocks pour les petits commerces, mais j’ai encore des doutes sur certains aspects.'
-                    />*/}
-
                 </div>
             </section>
         </Wrapper>

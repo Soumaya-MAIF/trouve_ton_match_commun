@@ -1,0 +1,169 @@
+.profil-row {
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: start;
+    overflow-x: auto; /* Ajoute une barre de défilement horizontale si nécessaire */
+    gap: 1rem; /* Ajoute un espace constant entre les cartes */
+}
+
+.carte {
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+    padding: 1rem;
+    background-color: white;
+    opacity: 0.9;
+    width: 20rem;
+    height: 26rem;
+    border: 0.2rem;
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    text-align:start;
+    flex-shrink: 0; /* L'élément ne rétrécit pas même si l'espace est limité. */
+}
+
+.images {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.photo-identite {
+    background-image: "../../../medias/images/pouce_blanc_rose2.png" alt="Pouce blanc rose" class="pouce-image";
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 7rem;
+    height: 8rem;
+}
+
+.pouce-image {
+    background-image: "../../../medias/images/pouce_blanc_rose2.png" alt="Pouce blanc rose" class="pouce-image";
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+}
+
+.nom {
+    display: flex;
+    align-items: end;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.infos-profil {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.95rem;
+    margin: 0.5rem 0;
+}
+
+.label {
+    font-weight: bold;
+    white-space: nowrap; /* Empêche le retour à la ligne pour le titre */
+    margin-right: 0.5rem; /* Ajoute un petit espace entre le label et le texte */
+}
+
+.texte {
+    flex-grow: 1; /* Permet au texte de prendre l'espace restant */
+    font-size: 0.95rem;
+    font-weight: 100;
+    color: rgb(82, 82, 82);
+    margin-left: 0.5rem;
+}
+
+/* Media queries pour ajuster le style en fonction de la taille de l'écran */
+@media (max-width: 1600px) {
+    .carte {
+        height: 24rem;
+        flex-shrink: 1; /* L'élément peut rétrécir si nécessaire. */
+    }
+    .infos-profil, .label, .texte {
+        font-size: 0.9rem;
+    }
+    .nom {
+        font-size: 1rem;
+    }
+    .photo-identite {
+        width: 6rem;
+        height: 7rem;
+    }
+    .pouce-image {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media (max-width: 1400px) {
+    .carte {
+        height: 23rem;
+    }
+    .infos-profil, .label, .texte {
+        font-size: 0.85rem;
+    }
+    .nom {
+        font-size: 0.95rem;
+    }
+    .photo-identite {
+        width: 5rem;
+        height: 6rem;
+    }
+    .pouce-image {
+        width: 2.35rem;
+        height: 2.35rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .carte {
+        height: 22rem;
+    }
+    .infos-profil, .label, .texte {
+        font-size: 0.8rem;
+    }
+    .nom {
+        font-size: 0.9rem;
+    }
+    .photo-identite {
+        width: 4.5rem;
+        height: 5.5rem;
+    }
+    .pouce-image {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .carte {
+        height: 20rem;
+    }
+    .infos-profil, .label, .texte {
+        font-size: 0.75rem;
+    }
+    .nom {
+        font-size: 0.85rem;
+    }
+    .photo-identite {
+        width: 4rem;
+        height: 5rem;
+    }
+    .pouce-image {
+        width: 2.1rem;
+        height: 2.1rem;
+    }
+}
+
+@media (max-width: 768px) { /* Version mobile */
+    .profil-row {
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto; /* Barre de défilement si nécessaire */
+    }
+}

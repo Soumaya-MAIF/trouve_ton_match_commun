@@ -68,31 +68,14 @@ public class MongoService {
     private MongoClient client;
     private MongoDatabase db;
     private MongoCollection<Document> messageCollection;
-    // private CodecRegistry codec;
 
    // Préparation de la connexion à MongoDB
     @PostConstruct
     void init() throws IOException {
-        // codec = CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build());
-        // client = MongoClients.create("mongodb://localhost:27017");
-        // client = MongoClients.create("mongodb://localhost:27017/?replicaSet=rs0");
         client = MongoClients.create("mongodb://localhost:27017");
         db = client.getDatabase("ttm");
-
-        // si infos dans application.yml
-        // client = MongoClients.create(mongoUrl);
-        // db = client.getDatabase(mongoDb);
-
-        // messageCollection = db.getCollection("messages", Message.class);
         messageCollection = db.getCollection("messages");
     }
-
-    // private Document fromMessage(Message message) {
-    //     return new Document
-    //     ("sender", message.getSender())
-    //     .append("dest", message.getDest())
-    //     .append("content", message.getContent());
-    // }
 
     public SendMessageDTO insert(User sender, User dest, String content) {
         // var newMessage = new Message({})
@@ -104,17 +87,6 @@ public class MongoService {
 
         return new SendMessageDTO(dest.getId(), content, sender.getId());
     }
-
-    // public List<Message> getMessagesForConversation(Long user1, Long user2) {
-    //     List<Message> list = new ArrayList<>();
-    //     messageCollection.aggregate(Arrays.asList(
-    //             Aggregates.match(
-    //                     Filters.and(
-    //                             Filters.in("sender", user1, user2),
-    //                             Filters.in("dest", user1, user2)))))
-    //             .forEach(list::add);
-    //     return list;
-    // }
 
     public MongoIterable<Document> getMessagesForConversation(Long user1, Long user2) {
         return messageCollection.aggregate(Arrays.asList(

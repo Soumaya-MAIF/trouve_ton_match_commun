@@ -1,6 +1,6 @@
 # Application Trouve Ton Match
 
-L'application Trouve Ton Match a pour bur de favoriser les mises en relation et les échanges entre un porteur de projet (création d'entreprise) et un parrain (qui peut lui apporter son expertise, l'aider) dans ses démarches.
+L'application Trouve Ton Match a pour but de favoriser les mises en relation et les échanges entre un porteur de projet (création d'entreprise par exemple) et un parrain (qui peut lui apporter son expertise, l'aider) dans ses démarches.
 
 # Configuration minimale
 - Java: 21.0.2
@@ -9,8 +9,8 @@ L'application Trouve Ton Match a pour bur de favoriser les mises en relation et 
 
 # Frontend
 
-## Installer les dépendances
-### `npm install`
+### Installer les dépendances
+#### `npm install`
 
 ## Démarrer
 ### `npm start`
@@ -20,13 +20,13 @@ Ouvrez [http://localhost:3000](http://localhost:3000) pour l'afficher dans votre
 
 La page se rechargera lorsque vous apporterez des modifications.
 
-## Tester
-### `npm test`
+### Tester
+#### `npm test`
 
 Lance le lanceur de tests en mode interactif.\
 Voir la section sur [l'exécution des tests](https://facebook.github.io/create-react-app/docs/running-tests) pour plus d'informations.
 
-### `npm run build`
+#### `npm run build`
 
 Génère l'application pour la production dans le dossier `build`.\
 Il intègre correctement React en mode production et optimise le build pour des performances optimales.
@@ -38,12 +38,25 @@ Consultez la section [déploiement](https://facebook.github.io/create-react-app/
 
 # Backend (Java + Maven)
 
-## Installation
-### `mvn clean install`
+### Installation
+#### `mvn clean install`
 ````
 Pour nettoyer et compiler le backend
 ````
 
-## Démarrer
-### `mvn spring-boot:run`
+### Démarrer
+#### `mvn spring-boot:run`
+
+# Base de données (postgreSQL)
+
+### Installation
+
+
+
+
+# Base de données MongDB pour la messagerie (postgreSQL)
+
+### Installation
+dans un terminal lancer la commande : 
+#### `mongosh`
 

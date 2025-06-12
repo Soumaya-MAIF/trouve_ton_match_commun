@@ -9,6 +9,8 @@ import { useAuth } from "../../components/context/AuthContext.jsx";
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
 const nomRegex = /^[A-ZÀ-ÿ\- ]{2,}$/; // NOM en MAJUSCULES
+const prenomRegex = /^[A-ZÀ-Ÿ][a-zà-ÿ'-]{1,49}$/; // PRENOM en MAJUSCULES et minuscules, avec un tiret ou apostrophe autorisés
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex pour valider les emails
 const codeRegex = /^[a-zA-ZÀ-ÿ\- ]{1}\d{3}$/; // code admis :  1 lettre suivie de 3 chiffres
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -163,7 +165,7 @@ const CreationCompte = () => {
           label="Email :"
           name="email"
           regex={emailRegex}
-          placeholder="email@email.fr"
+          placeholder="laurent.dupont@test.fr"
         />
 
         {errors.entreprise && <div className="message-erreur">{errors.entreprise}</div>}

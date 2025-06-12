@@ -13,6 +13,8 @@ const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les a
 const nomRegex = /^[A-ZÀ-ÿ\- ]{2,}$/; // NOM en MAJUSCULES
 const codeRegex = /^[a-zA-ZÀ-ÿ\- ]{1}\d{3}$/; // code admis :  1 lettre suivie de 3 chiffres
 const codeAccesRegex = /^[a-z0-9-]+$/; // code admis :  1 lettre suivie de 3 chiffres  
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex pour valider les emails
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{4,}$/; // Regex pour valider les mots de passe (au moins 4 caractères, une majuscule, une minuscule et un chiffre) 
 
 const MotDePasse = () => {
 
@@ -123,7 +125,7 @@ const MotDePasse = () => {
                     label="Email :"
                     name="email"
                     value={utilisateurDto.email}
-                    regex={otherRegex}
+                    regex={emailRegex}
                     ref={emailInputRef}
                     placeholder="laurent.dupont@test.fr"
                 />
@@ -135,7 +137,7 @@ const MotDePasse = () => {
                     label="Mot de passe :"
                     name="password"
                     value={utilisateurDto.password}
-                    regex={otherRegex}
+                    regex={passwordRegex}
                     placeholder="password"
                 />
                 <div className="espace"></div>
@@ -146,7 +148,7 @@ const MotDePasse = () => {
                     label="Confirmation du mot de passe :"
                     name="confirmationPassword"
                     value={utilisateurDto.confirmationPassword}
-                    regex={otherRegex}
+                    regex={passwordRegex}
                     placeholder="password"
                 />
                 <div className="espace"></div>

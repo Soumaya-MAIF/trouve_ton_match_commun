@@ -14,7 +14,6 @@ export const ZoneSaisie = forwardRef(({ setValue, label, name, value, regex, pla
     }, [value, regex]);
 
     const handleChange = (e) => {
-        // setValue(e.target.value)
         const textarea = e.target;
         textarea.style.height = "auto"; // réinitialise la hauteur
         textarea.style.height = `${textarea.scrollHeight}px`; // ajuste à la hauteur du contenu
@@ -48,23 +47,7 @@ export const ZoneSaisie = forwardRef(({ setValue, label, name, value, regex, pla
                     className={`custom-input-zone ${!value ? "" : validInput ? "is-valid" : "is-invalid"}`}
                     disabled={false}
                     placeholder={placeholder}
-                    // cols="33"
                 />
-                {/* <div className="custom-container">
-                    <input 
-                        ref={ref}
-                        onChange={handleChange}
-                        value={value}
-                        name={name}
-                        onBlur={() => addMsgError('Format de saisie non respecté !', setFocusInput, validInput)}
-                        onFocus={() => { setFocusInput(true) }}
-                        type="text-champ"
-                        className={`custom-input ${!value ? "" : validInput ? "is-valid" : "is-invalid"}`}
-                        disabled={false}
-                        id={name}
-                        placeholder={placeholder}
-                    />
-                </div> */}
             </div>
         </div>
     );

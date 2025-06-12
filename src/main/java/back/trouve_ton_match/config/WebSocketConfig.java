@@ -22,10 +22,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             .setAllowedOriginPatterns("*") // définit le point d’entrée pour le handshake entre le client et le serveur. Cela permet d’établir la connexion ouverte entre les deux services. Remarquez le présence de setAllowedOrigins("*") permettant de gérer les CORS lors de l’appel.
             .withSockJS();
     }
-
-    // @Override
-    // public void registerStompEndpoints(StompEndpointRegistry registry) {
-    //     registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS();
-    //     // registry.addEndpoint("/ws").withSockJS();
-    // }
 }

@@ -1,7 +1,10 @@
 package back.trouve_ton_match.service;
 
+import back.trouve_ton_match.entity.Role;
+import back.trouve_ton_match.entity.Type;
 import back.trouve_ton_match.entity.User;
 import back.trouve_ton_match.entity.dto.ContactsDTO;
+import back.trouve_ton_match.entity.dto.ParrainsDTO;
 import back.trouve_ton_match.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public interface UserService {
 
     public Optional<User> getUserById(@PathVariable Long id);
