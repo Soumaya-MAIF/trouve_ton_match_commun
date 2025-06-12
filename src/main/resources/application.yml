@@ -3,7 +3,7 @@ spring:
     name: trouve_ton_match_commun
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/ttm_commun
+    url: jdbc:postgresql://db:5432/ttm_commun
     username: postgres
     password: postgres
 
@@ -17,3 +17,7 @@ logging:
   level:
     org.springframework: DEBUG
 debug: true
+
+server:
+  tomcat:
+    basedir: /api
