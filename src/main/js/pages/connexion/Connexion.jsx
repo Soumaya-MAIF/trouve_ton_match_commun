@@ -1,179 +1,161 @@
-import Wrapper from '../../wrapper/Index';
+import Wrapper from "../../wrapper/Index";
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router';
-import { useNavigate } from 'react-router';
-import { useAuth } from '../../AuthContext.jsx';
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-
-import { ChampSaisie } from './../../components/champ-saisie/ChampSaisie.jsx';
-import './connexion.css';
-import './../../components/global.css'
-
-const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
-const nomRegex = /^[A-ZÀ-ÿ\- ]{2,}$/; // NOM en MAJUSCULES
-const codeRegex = /^[a-zA-ZÀ-ÿ\- ]{1}\d{3}$/; // code admis :  1 lettre suivie de 3 chiffres
+import { ChampSaisie } from "./../../components/champ-saisie/ChampSaisie.jsx";
+import "./connexion.css";
+import "./../../components/global.css";
+import { useAuth } from "../../components/context/AuthContext.jsx";
 
 const Connexion = () => {
-    console.log('Composant Connexion rendu');
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
-    const { login } = useAuth(); // Récupérer la fonction login du contexte
+  const [utilisateurDto, setUtilisateurDto] = useState({
+    email: "",
+    mot_de_passe: "",
+  });
 
-    const [utilisateurDto, setUtilisateurDto] = useState({
-        email: '',
-        password: '',
+  const location = useLocation(); // Pour suivre le changement de route
+
+  // Créer une référence pour le champ 'email'
+  const emailInputRef = useRef(null);
+
+  // Utiliser useEffect pour appliquer le focus au champ 'Email' lors du montage du composant
+  useEffect(() => {
+    if (emailInputRef.current) {
+      console.log("Référence du champ Email :", emailInputRef.current);
+      emailInputRef.current.focus();
+    }
+  }, []);
+
+  const [errors, setErrors] = useState({});
+  const [userNotFound, setUserNotFound] = useState(false);
+  const navigate = useNavigate();
+
+  const { login } = useAuth();
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!utilisateurDto.email) newErrors.email = "L'email est requis";
+    if (!utilisateurDto.mot_de_passe) newErrors.mot_de_passe = "Le mot de passe est requis";
+
+    return newErrors;
+  };
+
+  const handleChange = (name, value) => {
+    setUtilisateurDto({
+      ...utilisateurDto,
+      [name]: value,
     });
 
-    const location = useLocation(); // Pour suivre le changement de route
+    const newErrors = { ...errors };
+    if (value.trim() === "") {
+      newErrors[name] = "Ce champ est requis";
+    } else {
+      delete newErrors[name];
+    }
+    setErrors(newErrors);
 
-    // Créer une référence pour le champ 'email'
-    const emailInputRef = useRef(null);
+    // Réinitialiser userNotFound à false lorsque l'utilisateur modifie un champ
+    setUserNotFound(false);
+  };
 
-    // Utiliser useEffect pour appliquer le focus au champ 'Email' lors du montage du composant
-    useEffect(() => {
-        if (emailInputRef.current) {
-            console.log('Référence du champ Nom :', emailInputRef.current);
-            emailInputRef.current.focus();
+  const API_BASE_URL = "http://localhost:8080/api";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("handleSubmit appelé");
+
+    // Validation des champs
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    // Requête pour vérifier l'existence de l'utilisateur
+    fetch(`${API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: utilisateurDto.email,
+        mot_de_passe: utilisateurDto.mot_de_passe,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          setUserNotFound(true);
+          throw new Error("Utilisateur inconnu");
         }
-    }, []);
+        return response.json(); // ✅ Parse la réponse JSON ici
+      })
 
-    const [errors, setErrors] = useState({});
-    const [userNotFound, setUserNotFound] = useState(false);
-    const navigate = useNavigate();
+      .then((data) => {
+        console.log("data: " + JSON.stringify(data));
+        if (data.userId && data.accessToken) {
+          // document.cookie = `token=${data.accessToken}; path=/; secure; samesite=strict`;
 
-    const validate = () => {
-        const newErrors = {};
+          localStorage.setItem("token", data.accessToken);
 
-        if (!utilisateurDto.email) newErrors.email = 'L\'email est requis';
-        if (!utilisateurDto.password) newErrors.password = 'Le mot de passe est requis';
+          login(data.userRole, data.userType, data.accessToken);
 
-        return newErrors;
-    };
-
-    const handleChange = (name, value) => {
-        setUtilisateurDto({
-            ...utilisateurDto,
-            [name]: value
-        });
-
-        const newErrors = { ...errors };
-        if (value.trim() === '') {
-            newErrors[name] = 'Ce champ est requis';
+          navigate("/");
         } else {
-            delete newErrors[name];
+          setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
         }
-        setErrors(newErrors);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la soumission du formulaire!", error);
+      });
+  };
 
-        // Réinitialiser userNotFound à false lorsque l'utilisateur modifie un champ
-        setUserNotFound(false);
-    };
+  return (
+    <Wrapper>
+      <div className="titre">Connexion</div>
+      <div className="espace"></div>
+      <form onSubmit={handleSubmit} className="form-container">
+        {errors.email && <div className="message-erreur">{errors.email}</div>}
+        {errors.email && <div className="message-erreur">{errors.email}</div>}
+        <ChampSaisie
+          setValue={(value) => handleChange("email", value)}
+          label="Email :"
+          name="email"
+          value={utilisateurDto.email}
+          regex={emailRegex}
+          ref={emailInputRef}
+          placeholder="DUPONT"
+        />
+        <div className="espace"></div>
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('handleSubmit appelé');
+        {errors.mot_de_passe && <div className="message-erreur">{errors.mot_de_passe}</div>}
+        <ChampSaisie
+          setValue={(value) => handleChange("mot_de_passe", value)}
+          label="Mot de passe :"
+          name="mot_de_passe"
+          value={utilisateurDto.mot_de_passe}
+          regex={passwordRegex}
+          placeholder="A123"
+        />
+        <div className="espace"></div>
 
-        // Validation des champs
-        const validationErrors = validate();
-        if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
-            return;
-        }
-
-        // Requête pour vérifier l'existence de l'utilisateur
-        fetch('http://localhost:8080/user/checkutilisateur', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(utilisateurDto)
-        })
-        .then(response => {
-            if (!response.ok) {
-                if (response.status === 404) {  
-                    setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
-                }
-                throw new Error('Utilisateur inconnu');
-            }
-            navigate('/'); // Rediriger vers la page "Accueil"
-            return response.json();
-        })
-        .then(data => {
-            if (data.id) {
-                console.log('Utilisateur trouvé, id:', data.id);
-                console.log('Utilisateur trouvé, data:', data);
-
-                const isAdmin = data.isAdmin || false; // Récupérer la valeur de isAdmin
-                console.log('isAdmin reçu du backend:', isAdmin); // Log pour vérifier la valeur de isAdmin
-
-                localStorage.setItem('id', data.id); // Stocker l'id utilisateur dans le localStorage (permet de conserver l'id après le rechargement de la page ou une redirection)
-
-                // Mettez à jour l'état ici après avoir reçu la réponse
-                // setUtilisateurDto(prev =>{
-                //     ...prev,
-                //     id: data.id,
-                // }));
-
-                login(isAdmin); // Mettre à jour l'état de connexion (Si l'utilisateur est admin, passez true et isAuthenticated = true)
-                console.log('Login appelé avec isAdmin:', isAdmin); // Log pour vérifier l'appel
-
-                navigate('/'); // Rediriger vers la page d'accueil
-            } else {
-                setUserNotFound(true); // Afficher le message "Utilisateur inconnu"
-            }
-        })
-        .catch(error => {
-            console.error('Erreur lors de la soumission du formulaire!', error);
-        });
-
-    };
-    
-    return (
-        <Wrapper>
-            <div className='titre'>Connexion</div>
-            <div className="espace"></div>
-            <form onSubmit={handleSubmit} className='form-container'>
-
-                {errors.email && <div className="message-erreur">{errors.email}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('email', value)}
-                    label="Email :"
-                    name="email"
-                    value={utilisateurDto.email}
-                    regex={otherRegex}
-                    ref={emailInputRef}  
-                    placeholder="laurent.dupont@test.fr"
-                />
-                <div className="espace"></div>
-
-                {errors.password && <div className="message-erreur">{errors.password}</div>}
-                <ChampSaisie
-                    setValue={(value) => handleChange('password', value)}
-                    label="Mot de passe :"
-                    name="password"
-                    value={utilisateurDto.password}
-                    regex={otherRegex}
-                    placeholder="password"
-                />
-                <div className="espace"></div>
-
-                <div className="position-bouton">
-                    {userNotFound && (
-                        <div>
-                            <input
-                                className="error-input"
-                                value="Utilisateur inconnu"
-                                disabled
-                            />
-                        </div>
-                    )}
-                    <button 
-                        type="submit" 
-                        className="bouton-bas-page">
-                        Suivant
-                    </button>
-                </div>
-            </form>
-        </Wrapper>
-    )
-}
+        <div className="position-bouton">
+          {userNotFound && (
+            <div>
+              <input className="error-input" value="Utilisateur inconnu" disabled />
+            </div>
+          )}
+          <button type="submit" className="bouton-bas-page">
+            Suivant
+          </button>
+        </div>
+      </form>
+    </Wrapper>
+  );
+};
 
 export default Connexion;

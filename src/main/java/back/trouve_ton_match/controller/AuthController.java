@@ -1,17 +1,24 @@
 package back.trouve_ton_match.controller;
 
+import back.trouve_ton_match.config.JwtAuthResponse;
+import back.trouve_ton_match.config.JwtTokenProvider;
 import back.trouve_ton_match.entity.*;
 import back.trouve_ton_match.entity.dto.FirstLoginDTO;
 import back.trouve_ton_match.entity.dto.PasswordDTO;
+import back.trouve_ton_match.entity.dto.LoginDTO;
 import back.trouve_ton_match.entity.dto.RegisterDTO;
+import back.trouve_ton_match.service.AuthService;
 import back.trouve_ton_match.service.UserService;
-
+import back.trouve_ton_match.service.UserServiceImpl;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,70 +28,103 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-@RequiredArgsConstructor
-@RestController
 //@RequiredArgsConstructor
-@RequestMapping(consumes = "application/json", produces = "application/json")
+@AllArgsConstructor
+@RestController
+@RequestMapping("/auth")
 public class AuthController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
+        private final UserService userService;
+//    private final AuthenticationManager authenticationManager;
+//    private final JwtTokenProvider jwtTokenProvider;
+//
+//    @Autowired
+//    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, JwtTokenProvider jwtTokenProvider1) {
+//        this.authenticationManager = authenticationManager;
+//        this.jwtTokenProvider = jwtTokenProvider;
+//        this.userService = userService;
+//    }
+//
+//    @PostMapping("/login")
+//    public String login(@RequestBody User user) {
+//        try {
+//            var authenticationToken = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+//            var authentication = authenticationManager.authenticate(authenticationToken);
+//            var jwt = jwtTokenProvider.generateToken(authentication);
+//            return jwt;
+//        } catch (AuthenticationException e) {
+//            return "Invalid credentials";
+//        }
+//    }
+//
     @PostMapping("/register")
     public User register(@RequestBody RegisterDTO user) {
-        User newUser = user.getType() == Type.PARRAIN ? new Parrain() : new Porteur();
-        newUser.setNom(user.getNom());
-        newUser.setPrenom(user.getPrenom());
-        newUser.setEmail(user.getEmail());
-        newUser.setRole(user.getRole());
-        // newUser.setRole(Role.UTILISATEUR);
-        newUser.setEntreprise(user.getEntreprise());
-        newUser.setCode_acces("code");
-        // newUser.setCode_acces(UUID.randomUUID().toString());
-        userService.createUser(newUser);
+        User newUser = User.builder()
+                .nom(user.getNom())
+                .prenom(user.getPrenom())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .entreprise(user.getEntreprise())
+                .code_acces(UUID.randomUUID().toString())
+                .type(user.getType())
+                .build();
+        userServiceImpl.createUser(newUser);
         return newUser;
     }
 
     @PostMapping("/firstLogin")
-    public ResponseEntity<?> firstLogin(@RequestBody FirstLoginDTO user) {
+    public ResponseEntity<String> firstLogin(@RequestBody FirstLoginDTO user) {
         Optional<User> userConnu = userService.getUserByEmail(user.getEmail());
         if (userConnu.isPresent()) {
             if(userConnu.get().getCode_acces().equals(user.getCode_acces())) {
-                // return "Vous êtes connecté";
-                return ResponseEntity.ok(Map.of(
-                "success", true,
-                "id", userConnu.get().getId(),
-                "email", userConnu.get().getEmail(),
-                "code_acces", userConnu.get().getCode_acces()
-                ));
+                return new ResponseEntity<>("Nous vous avons trouvé", HttpStatus.OK);
             }
-            return ResponseEntity.ok(Map.of("success", false, "message", "Code d'accès incorrect"));
-            // return "je connais le user mais c'estpas le bon mdp";
+            return new ResponseEntity<>( "je connais le user mais c'est pas le bon code d'acces", HttpStatus.UNAUTHORIZED);
         }
-        return ResponseEntity.ok(Map.of("success", false, "message", "Utilisateur inconnu"));
-        // return "Vous n'êtes pas connecté";
+        return new ResponseEntity<>( "Vous n'êtes pas connecté", HttpStatus.I_AM_A_TEAPOT);
     }
 
-    @PostMapping("/mot-de-passe")
-    public ResponseEntity<?> password(@RequestBody PasswordDTO user) {
+    @Autowired
+    private AuthService authService;
 
-        Optional<User> userConnu = userService.getUserByEmail(user.getEmail());
+    // Build Login REST API
+    @PostMapping("/login")
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDTO loginDto){
 
-        if (userConnu.isPresent()) {
+        try {
+ String token = authService.login(loginDto);
+ Optional<User> user = userService.getUserByEmail(loginDto.getEmail());
 
-            User userExiste = userConnu.get();
-            
-            userExiste.setPassword(user.getPassword());
+            JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+            jwtAuthResponse.setAccessToken(token);
+            jwtAuthResponse.setUserId(user.get().getId());
+            jwtAuthResponse.setUserRole(user.get().getRole());
+            jwtAuthResponse.setUserType(user.get().getType());
 
-            userService.saveUser(userExiste);
-            return ResponseEntity.ok(Map.of(
-            "success", true,
-            "message", "Mot de passe sauvegardé avec succès"
-            ));
+            System.out.println("vous êtes bien connecté");
+            return ResponseEntity.ok(jwtAuthResponse);
+        } catch (BadCredentialsException e) {
+            JwtAuthResponse errorResponse = new JwtAuthResponse();
+            errorResponse.setErrorCode("Identifiants incorrects");
+            System.out.println(errorResponse.getErrorCode());
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+        } catch (UsernameNotFoundException e) {
+            JwtAuthResponse errorResponse = new JwtAuthResponse();
+            errorResponse.setErrorCode("Utilisateur non trouvé");
+            System.out.println(errorResponse.getErrorCode());
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            JwtAuthResponse errorResponse = new JwtAuthResponse();
+            errorResponse.setErrorCode("Impossible de se connecter");
+            System.out.println(errorResponse.getErrorCode());
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-            "success", false,
-            "message", "Utilisateur non trouvé"
-        ));
-    }
-  
-}
+
+    }}
+
+
+
+
+

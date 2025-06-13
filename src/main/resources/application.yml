@@ -9,22 +9,26 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     database: postgresql
-    
+
   output:
     ansi:
       enabled: ALWAYS
-
 
 logging:
   level:
     org.springframework: DEBUG
 
-
 debug: true
 
+jwt:
+  secret: "kV73kRw7TaXECmsQ9854FuWsk3r655HMDFGkV73kRw7TaXECmsQ9854FuWsk3r655HMDFG"
+  expiration: 3000000
+
+
 server:
-  tomcat:
-    basedir: /api
+  servlet:
+    context-path: /api
+

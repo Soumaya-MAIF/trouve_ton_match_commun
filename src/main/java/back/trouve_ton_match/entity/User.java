@@ -3,17 +3,14 @@ package back.trouve_ton_match.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Table(name = "users")
-@DiscriminatorColumn(name = "type")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+@Builder
+public class User {
 
     @Setter
     @Getter
@@ -39,9 +36,8 @@ public abstract class User {
 
     protected String presentation;
 
-    @Getter
-    @Setter
-    @Enumerated(EnumType.STRING) // pour stocker le nom de l'enum dans la BDD (et non pas l'index)
     protected Role role =  Role.UTILISATEUR;
-    
+
+    protected Type type;
+
 }

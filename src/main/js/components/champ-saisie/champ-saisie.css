@@ -27,7 +27,7 @@
 }
 
 .custom-input {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 1);
     color: black;
     border: 0.06rem solid transparent; /* Ajoute une bordure par défaut */
     border-radius: 0.3rem; 
