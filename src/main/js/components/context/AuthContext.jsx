@@ -1,46 +1,44 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from '../../service/jwtDecode';
- 
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "../../service/jwtDecode";
+
 // Créer le contexte
 export const AuthContext = createContext();
- 
+
 // et l'état admin (isAdmin) pour les utilisateurs ayant des privilèges d'administration
 // Gère les fonctions de connexion et de déconnexion
- 
+
 // Fournisseur du contexte
 export const AuthProvider = ({ children }) => {
-    const [role, setRole] = useState(null); // État admin ou non
-    const [typeUtilisateur, setTypeUtilisateur] = useState(null); 
+  const [role, setRole] = useState(null); // État admin ou non
+  const [typeUtilisateur, setTypeUtilisateur] = useState(null);
+  const [idUtilisateur, setIdUtilisateur] = useState();
 
-    const [auth, setAuth] = useState(null);
-    const navigate = useNavigate();
+  const [auth, setAuth] = useState(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-        if(token != null) {
-                    setAuth(token);
+    if (token != null) {
+      setAuth(token);
 
-        const user = jwtDecode(token).payload["user"];
-        setRole(user.role);
-        setTypeUtilisateur(user.type);
-        }
+      const user = jwtDecode(token).payload["user"];
+      setRole(user.role);
+      setTypeUtilisateur(user.type);
+      setIdUtilisateur(user.id);
+    }
+  }, [setAuth]);
 
+  // fonction de connexion
+  const login = (role, typeUtilisateur, token) => {
+    setRole(role);
+    setTypeUtilisateur(typeUtilisateur);
+    setAuth(token);
+  };
 
-}, [setAuth])
- 
-    // fonction de connexion
-    const login = (role, typeUtilisateur, token) => {
-        setRole(role);
-        setTypeUtilisateur(typeUtilisateur)
-        setAuth(token);
-    };
-    
- 
-    // fonction de déconnexion
-    const logout = () => {
-    
+  // fonction de déconnexion
+  const logout = () => {
     setRole(null);
 
     // Supprimer le cookie "token"
@@ -49,16 +47,13 @@ export const AuthProvider = ({ children }) => {
     setAuth(null);
 
     // Rediriger vers la page de connexion
-     navigate('/connexion'); 
+    navigate("/connexion");
+  };
 
-    };
- 
-    return (
-        <AuthContext.Provider value={{ role, auth, setAuth, login, logout, typeUtilisateur }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ role, auth, setAuth, login, logout, typeUtilisateur, idUtilisateur }}>{children}</AuthContext.Provider>
+  );
 };
- 
+
 // Hook personnalisé pour utiliser le contexte
 export const useAuth = () => useContext(AuthContext);

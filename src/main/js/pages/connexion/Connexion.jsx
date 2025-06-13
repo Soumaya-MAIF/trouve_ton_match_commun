@@ -21,8 +21,6 @@ const Connexion = () => {
 
   // Créer une référence pour le champ 'email'
   const emailInputRef = useRef(null);
-  // Créer une référence pour le champ 'email'
-  const emailInputRef = useRef(null);
 
   // Utiliser useEffect pour appliquer le focus au champ 'Email' lors du montage du composant
   useEffect(() => {

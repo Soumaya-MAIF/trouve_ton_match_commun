@@ -31,7 +31,7 @@ import java.util.UUID;
 //@RequiredArgsConstructor
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final UserServiceImpl userServiceImpl;

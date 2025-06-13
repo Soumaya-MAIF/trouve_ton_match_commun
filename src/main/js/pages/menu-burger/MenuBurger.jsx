@@ -1,21 +1,11 @@
 import Wrapper from "../../wrapper/Index";
-import { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router";
-import { useNavigate } from "react-router";
 
 import "./../../components/global.css";
 import { Link } from "react-router";
-
-import { useAuth } from "../../AuthContext";
-
-// let connecter = true;
-// let connecter = false;
-
-// let admin = true;
-// let admin = false;
+import { useAuth } from "../../components/context/AuthContext";
 
 const MenuBurger = () => {
-  const { isAuthenticated, isAdmin, logout } = useAuth(); // Récupérer les états et fonctions du contexte
+  const { isAuthenticated, isAdmin } = useAuth(); // Récupérer les états et fonctions du contexte
 
   return (
     <Wrapper>

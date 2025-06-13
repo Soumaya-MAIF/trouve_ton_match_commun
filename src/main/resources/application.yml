@@ -27,6 +27,8 @@ jwt:
   secret: "kV73kRw7TaXECmsQ9854FuWsk3r655HMDFGkV73kRw7TaXECmsQ9854FuWsk3r655HMDFG"
   expiration: 3000000
 
+
 server:
-  tomcat:
-    basedir: /api
+  servlet:
+    context-path: /api
+

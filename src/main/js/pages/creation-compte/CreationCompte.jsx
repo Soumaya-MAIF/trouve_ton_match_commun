@@ -136,13 +136,9 @@ const CreationCompte = () => {
       <div className="titre">Création d'un compte</div>
       <form onSubmit={handleSubmit} className="form-container">
         {errors.nom && <div className="message-erreur">{errors.nom}</div>}
-        {errors.nom && <div className="message-erreur">{errors.nom}</div>}
         <ChampSaisie
           setValue={(value) => handleChange("nom", value)}
-          setValue={(value) => handleChange("nom", value)}
           label="Nom :"
-          name="nom"
-          value={utilisateurDto.nom}
           name="nom"
           value={utilisateurDto.nom}
           regex={otherRegex}
@@ -217,7 +213,7 @@ const CreationCompte = () => {
               onChange={(e) => handleChange("type", e.target.value)}
               className="radio-input"
             />
-            Utilisateur
+            Parrain
           </label>
           <label className="radio-label">
             <input
@@ -231,36 +227,6 @@ const CreationCompte = () => {
             Porteur
           </label>
         </div>
-
-        {utilisateurDto.role === "UTILISATEUR" ? (
-          <>
-            {errors.type && <div className="message-erreur">{errors.type}</div>}
-            <div className="form-radio-type">
-              <label className="radio-label">
-                <input
-                  type="radio"
-                  name="type"
-                  value="PARRAIN"
-                  checked={utilisateurDto.type === "PARRAIN"}
-                  onChange={(e) => handleChange("type", e.target.value)}
-                  className="radio-input"
-                />
-                Parrain
-              </label>
-              <label className="radio-label">
-                <input
-                  type="radio"
-                  name="type"
-                  value="PORTEUR"
-                  checked={utilisateurDto.type === "PORTEUR"}
-                  onChange={(e) => handleChange("type", e.target.value)}
-                  className="radio-input"
-                />
-                Porteur
-              </label>
-            </div>
-          </>
-        ) : null}
 
         <div className="position-bouton">
           <button type="submit" className="bouton-bas-page btn-compte">

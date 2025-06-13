@@ -18,12 +18,8 @@ public interface UserService {
 
     void save(User user);
 
-    public Optional<User> getByEmailPassword(String email, String password) {
-        return repository.findByEmailAndPassword(email, password);
-    }
+    public Optional<User> getByEmailPassword(String email, String password);
 
-    public User saveUser(User user) {
-        return repository.save(user);
-    }
+    public User saveUser(User user);
 }
 

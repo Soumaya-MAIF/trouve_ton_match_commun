@@ -3,12 +3,6 @@ import "./../../../index.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../components/context/AuthContext";
 
-// let connecter = true;
-// let connecter = false;
-
-// let admin = true;
-// let admin = false;
-
 const Header = () => {
   const { auth, logout, role, typeUtilisateur } = useAuth();
 
@@ -25,7 +19,7 @@ const Header = () => {
           </Link>
           {auth != null ? (
             <>
-              <Link className="menu" to="/mon-compte-parrain">
+              <Link className="menu" to="/mon-compte">
                 Mon compte
               </Link>
               {/* <Link className="menu" to="/profils">Profils disponibles</Link> */}
@@ -85,7 +79,7 @@ const Header = () => {
             <div className="logo-reseau logo-mobile" alt="logo_reseau" />
             <div className="logo-ttm" alt="logo_TTM" />
           </div>
-          <div className="colonne col-3">{connecter ? <div className="utlisateur" alt="logo_utlisateur" /> : null}</div>
+          <div className="colonne col-3">{auth != null && <div className="utlisateur" alt="logo_utlisateur" />}</div>
         </div>
         <div className="line" />
       </header>
