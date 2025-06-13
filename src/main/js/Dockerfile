@@ -19,6 +19,8 @@ RUN npm run build
 
 FROM nginx:1.27
 
+COPY ./nginx/* /etc/nginx/templates/
+
 WORKDIR /usr/share/nginx/html
 
 COPY --from=builder /home/node/app/build .

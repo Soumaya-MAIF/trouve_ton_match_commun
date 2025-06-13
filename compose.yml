@@ -8,13 +8,11 @@ services:
     networks:
       - back
       - traefik
+    environment:
+      API_HOST: back:8080
 
   back:
     image: registry.nocturlab.fr/dreamteam/trouve-ton-match-backend
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.ttm-back.rule=Host(`ttm-dreamteam.nocturlab.fr`) && Path(`/api`)
-      - traefik.http.services.ttm-back.loadbalancer.server.port=8080
     networks:
       - back
       - front
