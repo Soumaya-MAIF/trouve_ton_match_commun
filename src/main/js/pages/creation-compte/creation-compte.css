@@ -16,6 +16,7 @@
     background-color: #e7ffcc;
     padding: 0.3rem 3.1rem 0.3rem 0.6rem;
     margin-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
     border-radius: 0.3rem;
     width: fit-content;
     display: flex;
@@ -105,6 +106,7 @@
 }
  
 @media (max-width: 900px) {
+    .form-radio-type, .form-radio-role {
     .form-radio-type, .form-radio-role {
         font-size: 0.8rem; 
     }

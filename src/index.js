@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './../src/main/js/wrapper/index.css';
 import App from './main/js/App';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router';
 // import reportWebVitals from './main/js/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

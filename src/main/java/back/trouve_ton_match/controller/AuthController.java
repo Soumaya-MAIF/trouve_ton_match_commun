@@ -4,6 +4,7 @@ import back.trouve_ton_match.config.JwtAuthResponse;
 import back.trouve_ton_match.config.JwtTokenProvider;
 import back.trouve_ton_match.entity.*;
 import back.trouve_ton_match.entity.dto.FirstLoginDTO;
+import back.trouve_ton_match.entity.dto.PasswordDTO;
 import back.trouve_ton_match.entity.dto.LoginDTO;
 import back.trouve_ton_match.entity.dto.RegisterDTO;
 import back.trouve_ton_match.service.AuthService;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
