@@ -8,7 +8,8 @@ spring:
       database: ttm
 
   datasource:
-    url: jdbc:postgresql://db:5432/ttm_commun
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/ttm_commun
+    # url: jdbc:postgresql://db:5432/ttm_commun
     username: postgres
     password: postgres
 
