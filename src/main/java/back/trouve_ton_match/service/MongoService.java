@@ -78,39 +78,50 @@ public class MongoService {
     }
 
     public SendMessageDTO insert(User sender, User dest, String content) {
-        // var newMessage = new Message({})
         messageCollection.insertOne(
-            new Document("sender", sender.getId())
-                .append("dest", dest.getId())
+            new Document("senderId", sender.getId())
+                .append("destId", dest.getId())
                 .append("content", content)
-            );
+        );
 
         return new SendMessageDTO(dest.getId(), content, sender.getId());
     }
 
+
     public MongoIterable<Document> getMessagesForConversation(Long user1, Long user2) {
+
+        System.out.println("🔍 getMessagesForConversation appelée avec : " + user1 + " et " + user2);
+
         return messageCollection.aggregate(Arrays.asList(
-                        Aggregates.match(
+                Aggregates.match(
+                        Filters.or(
                                 Filters.and(
-                                        Filters.in("sender", user1, user2),
-                                        Filters.in("dest", user1, user2)))))
-                .map(document -> {
-                    ObjectId objectId = document.getObjectId("_id");
-                    if (objectId != null) {
-                        //conversion qui permet de passer l'ObjectId en string pour le front
-                        document.put("_id", objectId.toHexString());
-                    }
-                    return document;
-                });
+                                        Filters.eq("senderId", user1),
+                                        Filters.eq("destId", user2)
+                                ),
+                                Filters.and(
+                                        Filters.eq("senderId", user2),
+                                        Filters.eq("destId", user1)
+                                )
+                        )
+                )
+        )).map(document -> {
+            ObjectId objectId = document.getObjectId("_id");
+            if (objectId != null) {
+                document.put("_id", objectId.toHexString());
+            }
+            return document;
+        });
     }
+
 
     public ChangeStreamIterable<Document> listenForNewMessages(Long user1, Long user2) {
         return messageCollection
                 .watch(Arrays.asList(
                         Aggregates.match(
                                 Filters.and(
-                                        Filters.in("fullDocument.sender", user1, user2),
-                                        Filters.in("fullDocument.dest", user1, user2)))))
+                                        Filters.in("fullDocument.senderId", user1, user2),
+                                        Filters.in("fullDocument.destId", user1, user2)))))
                 .fullDocument(FullDocument.UPDATE_LOOKUP);
     }
 

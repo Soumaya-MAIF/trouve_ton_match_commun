@@ -43,7 +43,13 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                             auth
-                                    .requestMatchers("/","/user/password","/auth/login", "/auth/firstLogin", "/ws/**","/css/**", "/js/**", "/error")
+                                    .requestMatchers(
+                                            "/",
+                                            "/user/password",
+                                            "/auth/login",
+                                            "/auth/firstLogin",
+                                            "/ws/**","/css/**",
+                                            "/js/**", "/error")
                                      .permitAll()
                                     .anyRequest().authenticated();
                         }

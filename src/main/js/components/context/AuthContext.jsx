@@ -5,14 +5,11 @@ import { jwtDecode } from "../../service/jwtDecode";
 // Créer le contexte
 export const AuthContext = createContext();
 
-// et l'état admin (isAdmin) pour les utilisateurs ayant des privilèges d'administration
-// Gère les fonctions de connexion et de déconnexion
-
 // Fournisseur du contexte
 export const AuthProvider = ({ children }) => {
   const [role, setRole] = useState(null); // État admin ou non
   const [typeUtilisateur, setTypeUtilisateur] = useState(null);
-  const [idUtilisateur, setIdUtilisateur] = useState();
+  const [idUtilisateur, setIdUtilisateur] = useState(null);
 
   const [auth, setAuth] = useState(null);
   const navigate = useNavigate();
@@ -28,13 +25,14 @@ export const AuthProvider = ({ children }) => {
       setTypeUtilisateur(user.type);
       setIdUtilisateur(user.id);
     }
-  }, [setAuth]);
+  }, [setAuth, setIdUtilisateur, setTypeUtilisateur, setRole]);
 
   // fonction de connexion
   const login = (role, typeUtilisateur, token) => {
     setRole(role);
     setTypeUtilisateur(typeUtilisateur);
     setAuth(token);
+    setIdUtilisateur(jwtDecode(token).payload["user"].id);
   };
 
   // fonction de déconnexion

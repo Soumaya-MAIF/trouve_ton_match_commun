@@ -4,8 +4,11 @@ import back.trouve_ton_match.entity.dto.RequestMessageDTO;
 import back.trouve_ton_match.entity.dto.SendMessageDTO;
 import back.trouve_ton_match.entity.Message;
 import back.trouve_ton_match.entity.User;
+import back.trouve_ton_match.entity.dto.UserDTO;
 import back.trouve_ton_match.repository.UserRepository;
 import back.trouve_ton_match.service.MongoService;
+import back.trouve_ton_match.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.security.Principal;
@@ -16,27 +19,26 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.bson.BsonValue;
 import org.bson.Document;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class MessageController {
 
     private final MongoService mongoService;
     private final SimpMessagingTemplate template;
-    private final UserRepository userRepository;
-
-    public MessageController(MongoService mongoService, SimpMessagingTemplate template, UserRepository userRepository) {
-        this.mongoService = mongoService;
-        this.template = template;
-        this.userRepository = userRepository;
-    }
+    private final UserService userService;
 
     // Map qui permet de conserver une connexion entre 2 utilisateurs actifs (pour
     // ne pas la répéter)
@@ -44,10 +46,9 @@ public class MessageController {
     // ConcurrentHashMap<>();
 
     @MessageMapping("/requestMessages")
-    public void openMessagePage(RequestMessageDTO request) {
+    public void openMessagePage(RequestMessageDTO request, Authentication auth) {
         // public void openMessagePage(SendMessageDTO request) {
-        User sender = userRepository.findById(request.getSenderId())
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        User sender = userService.getUserByEmail(auth.getName()).orElseThrow();
         // Long senderId = 3L;
         // Long destId = request.getDestId();
 
@@ -119,48 +120,79 @@ public class MessageController {
 
     // }
 
+
     @MessageMapping("/send")
-    // public void sendMessage(SendMessageDTO message, Principal auth) throws Exception {
-    public void sendMessage(SendMessageDTO message) throws Exception {
-        
-        log.info("🔍 senderId: {}, destId: {}", message.getSenderId(), message.getDestId());
+    public void sendMessage(SendMessageDTO message, Authentication auth) throws Exception {
+        User sender = userService.getUserByEmail(auth.getName())
+                .orElseThrow(() -> new RuntimeException("Expéditeur non trouvé"));
 
-        User sender = userRepository.findById(message.getSenderId())
-            .orElseThrow(() -> new RuntimeException("Expéditeur non trouvé"));
+        log.info("senderId: {}, destId: {}", sender.getId(), message.getDestId());
 
-        User dest = userRepository.findById(message.getDestId())
-            .orElseThrow(() -> new RuntimeException("Destinataire non trouvé"));
+        User dest = userService.getUserById(message.getDestId())
+                .orElseThrow(() -> new RuntimeException("Destinataire non trouvé"));
 
-        // récupération de l'expéditeur et du destinataire
-        System.out.println("sender : " + sender);
-        System.out.println("dest : " + dest);
-        log.info("sender {}: " + sender);
-        log.info("dest {}: " + dest);
-
-
-        // Récupération du message
         String content = message.getContent();
+        log.info("Message envoyé de {} à {} : {}", sender.getId(), dest.getId(), content);
 
-        log.info("📤 Message envoyé de {} à {} : {}", sender.getId(), dest.getId(), content);
+        // Insertion du message
+        SendMessageDTO newMessage = mongoService.insert(sender, dest, content);
 
-        // Insertion du message dans la base de données
-        // mongoService.insert(sender, dest, content);
+        // Détermination du topic privé
+        String topic = sender.getId() < dest.getId()
+                ? "/topic/getMessages/" + sender.getId() + "_" + dest.getId()
+                : "/topic/getMessages/" + dest.getId() + "_" + sender.getId();
 
-        // Insertion du message et récupération de l'objet inséré
-        SendMessageDTO newMessage = mongoService.insert(sender, dest, message.getContent());
-
-        // Envoi du message au topic WebSocket
-        template.convertAndSend("/topic/newMessage", newMessage);
+        // Envoi du message uniquement sur le topic de la conversation
+        template.convertAndSend(topic, newMessage);
     }
 
+//    @MessageMapping("/send")
+//    // public void sendMessage(SendMessageDTO message, Principal auth) throws Exception {
+//    public void sendMessage(SendMessageDTO message) throws Exception {
+//
+//        log.info("🔍 senderId: {}, destId: {}", message.getSenderId(), message.getDestId());
+//
+//        User sender = userRepository.findById(message.getSenderId())
+//            .orElseThrow(() -> new RuntimeException("Expéditeur non trouvé"));
+//
+//        User dest = userRepository.findById(message.getDestId())
+//            .orElseThrow(() -> new RuntimeException("Destinataire non trouvé"));
+//
+//        // récupération de l'expéditeur et du destinataire
+//        System.out.println("sender : " + sender);
+//        System.out.println("dest : " + dest);
+//        log.info("sender {}: " + sender);
+//        log.info("dest {}: " + dest);
+//
+//
+//        // Récupération du message
+//        String content = message.getContent();
+//
+//        log.info("📤 Message envoyé de {} à {} : {}", sender.getId(), dest.getId(), content);
+//
+//        // Insertion du message dans la base de données
+//        // mongoService.insert(sender, dest, content);
+//
+//        // Insertion du message et récupération de l'objet inséré
+//        SendMessageDTO newMessage = mongoService.insert(sender, dest, message.getContent());
+//
+//        // Envoi du message au topic WebSocket
+//        String topic = message.getSenderId() < message.getDestId()
+//                ? "/topic/getMessages/" + message.getSenderId() + "_" + message.getDestId()
+//                : "/topic/getMessages/" + message.getDestId() + "_" + message.getSenderId();
+//
+//        template.convertAndSend(topic, newMessage);
+//
+//    }
+
     @MessageMapping("/delete")
-    public void deleteMessage(Map<String, String> payload, Principal auth) {
+    public void deleteMessage(Map<String, String> payload, Authentication auth) {
         // Récupération de l'objectId du message
         String objectId = payload.get("_id");
 
         // Récupérer l'utilisateur authentifié
         String nom = auth.getName();
-        User sender = userRepository.findByNom(nom).orElseThrow();
+        User sender = userService.getUserByEmail(nom).orElseThrow();
 
         Optional<Document> messageToDelete = mongoService.findMessageById(objectId);
 

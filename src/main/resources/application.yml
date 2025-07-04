@@ -25,12 +25,11 @@ spring:
 
 logging:
   level:
-#    org.springframework: INFO
+    #    org.springframework: INFO
     org:
       springframework:
         web:
           socket: DEBUG
-
 
 debug: false
 

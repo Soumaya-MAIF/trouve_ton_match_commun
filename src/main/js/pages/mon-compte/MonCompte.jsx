@@ -62,7 +62,7 @@ const MonCompte = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/user/${idUtilisateur}`, {
+        const response = await fetch(`/api/user/${idUtilisateur}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -147,7 +147,7 @@ const MonCompte = () => {
 
     console.log("Données envoyées:", monCompteDto);
     console.log("Données envoyées (JSON.stringify):", JSON.stringify(monCompteDto));
-    fetch(`http://localhost:8080/api/user/${idUtilisateur}`, {
+    fetch(`/api/user/${idUtilisateur}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
