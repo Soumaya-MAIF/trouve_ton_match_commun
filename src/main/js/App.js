@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router";
 import Accueil from "./pages/accueil/Accueil";
-// import MonCompteParrain from './pages/mon-compte-parrain/MonCompteParrain';
 import MonCompte from "./pages/mon-compte/MonCompte";
 import Profils from "./pages/profils/Profils";
 import Matchs from "./pages/matchs/Matchs";
@@ -10,14 +9,13 @@ import Ressources from "./pages/ressources/Ressources";
 import Indicateurs from "./pages/indicateurs/Indicateurs";
 import Connexion from "./pages/connexion/Connexion";
 import CreationCompte from "./pages/creation-compte/CreationCompte";
-import Filtres from "./pages/filtres/Filtres";
 import MenuBurger from "./pages/menu-burger/MenuBurger";
 import { useEffect, useState } from "react";
 import PremiereConnexion from "./pages/connexion/PremiereConnexion";
 import MotDePasseChangement from "./pages/connexion/MotDePasseChangement";
-import { AuthProvider } from "./components/context/components/context/AuthContext";
 import { UserProvider } from "./components/context/UserContext";
 import { ContactProvider } from "./components/context/ContactContext";
+import { AuthProvider } from "./components/context/AuthContext";
 
 function App() {
   let [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -51,7 +49,7 @@ function App() {
             <Route path="/indicateurs" element={<Indicateurs />}></Route>
             <Route path="/connexion" element={<Connexion />}></Route>
             <Route path="/premiere-connexion" element={<PremiereConnexion />}></Route>
-            <Route path="/mot-de-passe" element={<MotDePasse />}></Route>
+            <Route path="/mot-de-passe" element={<MotDePasseChangement />}></Route>
             <Route path="/creation-compte" element={<CreationCompte />}></Route>
           </Routes>
         </ContactProvider>

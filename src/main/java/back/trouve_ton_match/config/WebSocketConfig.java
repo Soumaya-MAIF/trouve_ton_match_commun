@@ -10,6 +10,12 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    private final JwtHandshakeInterceptor jwtHandshakeInterceptor;
+
+    public WebSocketConfig(final JwtHandshakeInterceptor jwtHandshakeInterceptor) {
+        this.jwtHandshakeInterceptor = jwtHandshakeInterceptor;
+    }
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/topic"); // définit le préfixe d’accès au flux émis par le broker pour les clients souhaitant s’y inscrire.
@@ -19,7 +25,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-            .setAllowedOriginPatterns("*") // définit le point d’entrée pour le handshake entre le client et le serveur. Cela permet d’établir la connexion ouverte entre les deux services. Remarquez le présence de setAllowedOrigins("*") permettant de gérer les CORS lors de l’appel.
+            .setAllowedOriginPatterns("http://localhost:3000"); // définit le point d’entrée pour le handshake entre le client et le serveur. Cela
+
+        registry.addEndpoint("/ws")
+//                .addInterceptors(jwtHandshakeInterceptor)
+                .setAllowedOriginPatterns("http://localhost:3000") // définit le point d’entrée pour le handshake entre le client et le serveur. Cela
+        // permet d’établir la connexion ouverte entre les deux services.
             .withSockJS();
     }
 }

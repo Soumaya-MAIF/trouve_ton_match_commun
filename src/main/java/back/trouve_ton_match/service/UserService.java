@@ -28,5 +28,7 @@ public interface UserService {
     public Optional<User> getByEmailPassword(String email, String password);
 
     public User saveUser(User user);
+
+    List<User> getAllUsers();
 }
 

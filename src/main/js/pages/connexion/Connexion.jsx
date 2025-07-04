@@ -2,7 +2,6 @@ import Wrapper from "../../wrapper/Index";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router";
-import { useAuth } from "../../AuthContext.jsx";
 import { useUser } from "../../components/context/UserContext.jsx";
 
 import { ChampSaisie } from "./../../components/champ-saisie/ChampSaisie.jsx";
@@ -38,8 +37,6 @@ const Connexion = () => {
   const [errors, setErrors] = useState({});
   const [userNotFound, setUserNotFound] = useState(false);
   const navigate = useNavigate();
-
-  const { login } = useAuth();
 
   const validate = () => {
     const newErrors = {};
