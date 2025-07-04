@@ -11,17 +11,14 @@ import { useAuth } from "../../components/context/AuthContext.jsx";
 
 const Connexion = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/; // Au moins une majuscule, un chiffre, un caractère spécial et 6 caractères minimum
 
   const { login } = useAuth(); // Récupérer la fonction login du contexte
-  const { setUser } = useUser(); // Récupérer la fonction setUser du contexte
 
   const [utilisateurDto, setUtilisateurDto] = useState({
     email: "",
     mot_de_passe: "",
   });
-
-  const location = useLocation(); // Pour suivre le changement de route
 
   // Créer une référence pour le champ 'email'
   const emailInputRef = useRef(null);
@@ -65,7 +62,7 @@ const Connexion = () => {
     setUserNotFound(false);
   };
 
-  const API_BASE_URL = "http://localhost:8080/api";
+  const API_BASE_URL = "/api";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,7 +91,7 @@ const Connexion = () => {
           setUserNotFound(true);
           throw new Error("Utilisateur inconnu");
         }
-        return response.json(); // ✅ Parse la réponse JSON ici
+        return response.json(); // Parse la réponse JSON ici
       })
 
       .then((data) => {
@@ -141,6 +138,7 @@ const Connexion = () => {
           value={utilisateurDto.mot_de_passe}
           regex={passwordRegex}
           placeholder="A123"
+          type="password"
         />
         <div className="espace"></div>
 

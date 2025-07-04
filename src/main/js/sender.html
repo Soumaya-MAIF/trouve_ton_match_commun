@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coucou</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script>
-        var stompClient = null;
+      var stompClient = null;
 
-        function connect() {
-            var socket = new SockJS('http://localhost:8080/ws');
-            stompClient = Stomp.over(socket);
-            console.log("stompClient", stompClient);
-        }
+      function connect() {
+        var socket = new SockJS("/ws");
+        stompClient = Stomp.over(socket);
+        console.log("stompClient", stompClient);
+      }
 
-        function sendMessage() {
-            // alert("Coucou Yohann Guirault!!")
-            // var message = document.getElementById('message').value;
-            var message = { 
-            "sender":"toto", 
-            "dest": "tata", 
-            "content":"Test"}
-            stompClient.send("/send", {}, JSON.stringify(message));
-        }
+      function sendMessage() {
+        // alert("Coucou Yohann Guirault!!")
+        // var message = document.getElementById('message').value;
+        var message = {
+          sender: "toto",
+          dest: "tata",
+          content: "Test",
+        };
+        stompClient.send("/send", {}, JSON.stringify(message));
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Démo WebSocket</h2>
     <input type="text" id="message" placeholder="tom message" />
     <button onclick="sendMessage()">Envoyer</button>
     <div id="response"></div>
 
     <script>
-        connect();
+      connect();
     </script>
-</body>
+  </body>
+</html>

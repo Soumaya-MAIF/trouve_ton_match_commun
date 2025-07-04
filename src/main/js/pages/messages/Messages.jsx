@@ -1,24 +1,16 @@
 import Wrapper from "../../wrapper/Index.jsx";
 import Message from "./Message.jsx";
+import Contact from "./Contact.jsx";
 import { useEffect, useState, useRef, useMemo, useContext } from "react";
-import { useLocation } from "react-router";
 import { useNavigate } from "react-router";
-import { Stomp } from "@stomp/stompjs"; // ---------------> à revoir
 
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
-
-// import { useAuth } from '../../components/context/AuthContext.jsx';
-import { useUser } from "../../components/context/UserContext.jsx";
-import { useContact } from "../../components/context/ContactContext.jsx";
 import { AuthContext } from "../../components/context/AuthContext.jsx";
 
 import "./messages.css";
 import "./../../components/global.css";
-import Contact from "./Contact.jsx";
 import { ZoneSaisie } from "../../components/zone-saisie/ZoneSaisie.jsx";
-import useWebSocket from "./useWebSocket.js";
-
 const otherRegex = /^[a-zA-ZÀ-ÿ\s\-\.,;:!?()'"]{1,}$/; // minimum 2 caractères pour les autres champs
 
 const Messages = ({ isMobile }) => {
@@ -29,48 +21,99 @@ const Messages = ({ isMobile }) => {
   const senderId = idUtilisateur;
   const messageInputRef = useRef(null); // Référence pour le champ de saisie du message
 
+  console.log("Utilisateur connecté : " + idUtilisateur);
+
   const [sendMessageDto, setSendMessageDto] = useState({
     content: "",
     senderId: null,
     destId: null,
   });
-
-  // const {user} = useUser(); // Récupération de l'utilisateur connecté depuis le contexte
-
   console.log("Utilisateur sélectionné:", senderId);
 
-  // const { selectedContact, setSelectedContact } = useContact(); // Récupération du contact sélectionné depuis le contexte
   const [selectedContact, setSelectedContact] = useState();
-  console.log("Contact sélectionné:", selectedContact);
+  // console.log("Contact sélectionné:", selectedContact);
 
-  // const client = useMemo(() => {
-  //   const socket = new WebSocket(`ws://localhost:8080/ws`);
-  //   let stompClientRef = null;
+  const [connected, setConnected] = useState(false);
 
-  //   const stompClient = new Client({
-  //     webSocketFactory: () => socket,
-  //     reconnectDelay: 5000,
-  //     onConnect: () => {
-  //       console.log("Connecté au serveur WebSocket");
+  const client = useMemo(() => {
+    const socket = new SockJS("http://localhost:8080/api/ws");
 
-  //       stompClientRef.subscribe("/topic/getMessages", (e) => {
-  //         console.log("Message reçu", e.body);
-  //         setMessages(JSON.parse(e.body));
-  //       });
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+      brokerURL: "http://localhost:8080/api/ws",
+      connectHeaders: {
+        Authorization: `Bearer ${auth}`,
+      },
+      debug: (str) => {
+        console.log("🪵 STOMP DEBUG:", str);
+      },
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log("✅ STOMP connecté");
+        setConnected(true);
+      },
+      onStompError: (frame) => {
+        console.error("❌ STOMP error:", frame);
+      },
+      onWebSocketError: (event) => {
+        console.error("❌ WebSocket error:", event);
+      },
+      onWebSocketClose: () => {
+        console.warn("⚠️ WebSocket fermé");
+        setConnected(false);
+      },
+    });
 
-  //       stompClientRef.subscribe("/topic/updateMessages", (e) => {
-  //         console.log("Message mis à jour", e.body);
-  //       });
-  //     },
-  //     onStompError: (frame) => {
-  //       console.error("Erreur STOMP", frame);
-  //     },
-  //   });
+    stompClient.activate();
+    return stompClient;
+  }, [auth]);
 
-  //   stompClientRef = stompClient;
-  //   stompClient.activate();
-  //   return stompClient;
-  // }, []);
+  const subscriptionRef = useRef(null);
+
+  useEffect(() => {
+    if (!client || !client.connected || !selectedContact || !senderId) return;
+
+    const topic =
+      senderId < selectedContact.id
+        ? `/topic/getMessages/${senderId}_${selectedContact.id}`
+        : `/topic/getMessages/${selectedContact.id}_${senderId}`;
+
+    // Désabonnement de l'ancien topic
+    if (subscriptionRef.current) {
+      subscriptionRef.current.unsubscribe();
+    }
+
+    const subscription = client.subscribe(topic, (message) => {
+      const newMessages = JSON.parse(message.body);
+      if (Array.isArray(newMessages)) {
+        setMessages(newMessages);
+      } else {
+        setMessages((prev) => [...prev, newMessages]);
+      }
+    });
+
+    subscriptionRef.current = subscription;
+
+    client.publish({
+      destination: "/app/requestMessages",
+      body: JSON.stringify({
+        senderId: senderId,
+        destId: selectedContact.id,
+      }),
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [client, selectedContact, senderId]);
+
+  useEffect(() => {
+    return () => {
+      if (client && client.deactivate) {
+        client.deactivate();
+      }
+    };
+  }, [client]);
 
   const handleContactClick = (contact) => {
     if (!client || !client.connected) {
@@ -81,18 +124,18 @@ const Messages = ({ isMobile }) => {
     setSelectedContact(contact);
     setMessages([]);
 
-    const topic = senderId < contact.id ? `/topic/getMessages/${senderId}_${contact.id}` : `/topic/getMessages/${contact.id}_${senderId}`; // S'abonner au topic
+    // const topic = senderId < contact.id ? `/topic/getMessages/${senderId}_${contact.id}` : `/topic/getMessages/${contact.id}_${senderId}`; // S'abonner au topic
 
-    client.subscribe(topic, (message) => {
-      const newMessages = JSON.parse(message.body);
-      console.log("Nouveau message reçu:", newMessages);
+    // client.subscribe(topic, (message) => {
+    //   const newMessages = JSON.parse(message.body);
+    //   console.log("Nouveau message reçu:", newMessages);
 
-      if (Array.isArray(newMessages)) {
-        setMessages(newMessages);
-      } else {
-        setMessages((prev) => [...prev, newMessages]);
-      }
-    });
+    //   if (Array.isArray(newMessages)) {
+    //     setMessages(newMessages);
+    //   } else {
+    //     setMessages((prev) => [...prev, newMessages]);
+    //   }
+    // });
 
     setSendMessageDto((prev) => ({
       ...prev,
@@ -124,7 +167,7 @@ const Messages = ({ isMobile }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/user/", {
+        const response = await fetch("/api/user/", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -145,8 +188,10 @@ const Messages = ({ isMobile }) => {
       }
     };
 
-    fetchUsers();
-  }, []);
+    if (auth) {
+      fetchUsers();
+    }
+  }, [auth]);
 
   const handleChange = (name, value) => {
     setSendMessageDto({
@@ -162,68 +207,6 @@ const Messages = ({ isMobile }) => {
     setErrors(newErrors);
   };
 
-  // const handleSendMessage = () => {
-  //   if (!sendMessageDto.content || !sendMessageDto.destId) {
-  //     console.warn("Message ou destinataire manquant");
-  //     return;
-  //   }
-
-  //   if (client && client.connected) {
-  //     client.publish({
-  //       destination: "/app/send",
-  //       body: JSON.stringify({
-  //         senderId: sendMessageDto.senderId,
-  //         destId: sendMessageDto.destId,
-  //         content: sendMessageDto.content,
-  //       }),
-  //     });
-  //     console.log("Message envoyé:", sendMessageDto.content);
-  //     console.log("Message envoyé objet:", sendMessageDto);
-
-  //     // Réinitialiser le champ après envoi
-  //     setSendMessageDto((prev) => ({
-  //       ...prev,
-  //       content: "",
-  //     }));
-
-  //     // Réinitialiser la hauteur du textarea
-  //     if (messageInputRef.current) {
-  //       messageInputRef.current.style.height = "auto";
-  //     }
-  //   } else {
-  //     console.warn("Client STOMP non connecté");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (client && client.connected && selectedContact) {
-  //     const abonnement = client.subscribe("/topic/newMessage", (message) => {
-  //       const newMessage = JSON.parse(message.body);
-  //       console.log("📥 Nouveau message reçu :", newMessage);
-
-  //       // Sécurise les IDs
-  //       const senderId = newMessage.senderId;
-  //       const destId = newMessage.destId;
-
-  //       // Vérifie que le message concerne la conversation en cours
-  //       const isCurrentConversation =
-  //         (senderId === senderId && destId === selectedContact.id) || (senderId === selectedContact.id && destId === senderId);
-
-  //       if (isCurrentConversation) {
-  //         console.log("✅ Message ajouté à la conversation en cours");
-  //         setMessages((prevMessages) => [...prevMessages, newMessage]);
-  //       } else {
-  //         console.log("ℹ️ Message reçu mais ne concerne pas la conversation en cours");
-  //       }
-  //     });
-
-  //     return () => {
-  //       console.log("🧹 Désabonnement WebSocket");
-  //       abonnement.unsubscribe();
-  //     };
-  //   }
-  // }, [client, selectedContact, senderId]);
-
   const finDesMessagesRef = useRef(null);
 
   useEffect(() => {
@@ -232,22 +215,16 @@ const Messages = ({ isMobile }) => {
     }
   }, [messages]);
 
-  const { sendMessage, isConnected } = useWebSocket({
-    senderId,
-    destId: selectedContact?.id,
-    onMessagesReceived: setMessages,
-    onNewMessage: (msg) => {
-      setMessages((prev) => (prev.some((m) => m._id === msg._id) ? prev : [...prev, msg]));
-    },
-  });
-
   const handleSendMessage = () => {
     if (!sendMessageDto.content || !sendMessageDto.destId) {
       console.warn("Message ou destinataire manquant");
       return;
     }
 
-    sendMessage(sendMessageDto.content);
+    client.publish({
+      destination: "/app/send",
+      body: JSON.stringify(sendMessageDto),
+    });
     setSendMessageDto((prev) => ({ ...prev, content: "" }));
 
     if (messageInputRef.current) {
@@ -257,6 +234,7 @@ const Messages = ({ isMobile }) => {
 
   return (
     <Wrapper>
+      <p>{connected ? "Websocket connecté" : "websocket non connecté"}</p>
       <section className="container-messages">
         {!isMobile && (
           <div className="contacts">
@@ -272,15 +250,14 @@ const Messages = ({ isMobile }) => {
                       prenom={contact.prenom}
                       nom={contact.nom}
                       onClick={() => {
-                        console.log("client : " + toString(client));
-                        if (client?.connected) {
+                        if (connected) {
                           handleContactClick(contact);
                         } else {
                           console.warn("Connexion WebSocket non encore prête.");
                         }
                         console.log("Contact sélectionné:", contact);
                         console.warn("JE CLIQUE SUR LE CONTACT");
-                        // setSelectedContact(contact)
+                        setSelectedContact(contact);
                       }}
                     />
                   )
@@ -289,46 +266,38 @@ const Messages = ({ isMobile }) => {
           </div>
         )}
         <div className="discussions">
-          {
-            selectedContact ? (
-              <>
-                <p className="titre-conversation">
-                  Conversation avec {selectedContact.prenom} {selectedContact.nom}
-                </p>
-                {messages.map((message) => {
-                  const senderId = message.senderId ?? message.sender;
-                  const estMoi = senderId === senderId;
-                  const nomAffiche = estMoi ? "Moi" : `${selectedContact.prenom} ${selectedContact.nom}`;
-                  console.log("estMoi:", estMoi);
-                  // console.log('user:', user);
-                  // console.log('user.nom:', user.nom);
-                  console.log("nomAffiche:", nomAffiche);
+          {selectedContact && (
+            <>
+              <p className="titre-conversation">
+                Conversation avec {selectedContact.prenom} {selectedContact.nom}
+              </p>
+              {messages.map((message) => {
+                console.log("Message:", message);
+                const estMoi = idUtilisateur === message.senderId;
+                const nomAffiche = estMoi ? "Moi" : `${selectedContact.prenom} ${selectedContact.nom}`;
+                return <Message key={message._id} nom={nomAffiche} contenuMessage={message.content} estMoi={estMoi} />;
+              })}
+              <div ref={finDesMessagesRef} />
 
-                  return <Message key={message._id} nom={nomAffiche} contenuMessage={message.content} estMoi={estMoi} />;
-                })}
-                <div ref={finDesMessagesRef} />
+              <div className="nouveau-message">
+                <ZoneSaisie
+                  setValue={(value) => handleChange("content", value)}
+                  label="Message :"
+                  name="content"
+                  value={sendMessageDto.content}
+                  regex={otherRegex}
+                  ref={messageInputRef}
+                  placeholder="Message ..."
+                />
 
-                <div className="nouveau-message">
-                  <ZoneSaisie
-                    setValue={(value) => handleChange("content", value)}
-                    label="Message :"
-                    name="message"
-                    value={sendMessageDto.content}
-                    regex={otherRegex}
-                    ref={messageInputRef}
-                    placeholder="Message ..."
-                  />
-
-                  <div className="position-bouton">
-                    <button onClick={handleSendMessage} type="submit" className="bouton-bas-page">
-                      Envoyer
-                    </button>
-                  </div>
+                <div className="position-bouton">
+                  <button onClick={handleSendMessage} type="submit" className="bouton-bas-page">
+                    Envoyer
+                  </button>
                 </div>
-              </>
-            ) : null
-            // <p className='titre-conversation'>Sélectionnez un contact pour commencer une conversation</p>
-          }
+              </div>
+            </>
+          )}
         </div>
       </section>
     </Wrapper>

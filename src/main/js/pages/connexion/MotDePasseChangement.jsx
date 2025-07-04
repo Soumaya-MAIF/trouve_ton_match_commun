@@ -5,7 +5,7 @@ import Wrapper from "../../wrapper/Index";
 
 const MotDePasseChangement = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/; // Au moins une majuscule, un chiffre, un caractère spécial et 6 caractères minimum
 
   const [utilisateurDto, setUtilisateurDto] = useState({
     email: "",
@@ -19,11 +19,6 @@ const MotDePasseChangement = () => {
 
   const validate = () => {
     const newErrors = {};
-
-    if (!utilisateurDto.email) newErrors.email = "L'email est requis";
-    if (!utilisateurDto.mot_de_passe) newErrors.mot_de_passe = "Le mot de passe est requis";
-    if (!utilisateurDto.confirmation_mot_de_passe) newErrors.confirmation_mot_de_passe = "Le mot de passe est requis";
-
     return newErrors;
   };
 
@@ -56,7 +51,7 @@ const MotDePasseChangement = () => {
     setUserNotFound(false);
   };
 
-  const API_BASE_URL = "http://localhost:8080/api";
+  const API_BASE_URL = "/api";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +62,6 @@ const MotDePasseChangement = () => {
       setErrors(validationErrors);
       return;
     }
-
     if (utilisateurDto.mot_de_passe != utilisateurDto.confirmation_mot_de_passe) {
       return "Données invalides";
     }

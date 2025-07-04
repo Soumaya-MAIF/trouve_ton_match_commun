@@ -18,13 +18,17 @@ public class JwtHandshakeInterceptor implements HandshakeInterceptor {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
 
         if (request instanceof ServletServerHttpRequest servletRequest) {
-            String token = servletRequest.getServletRequest().getParameter("token");
+            System.out.println(servletRequest.getServletRequest().getHeaderNames());
+            String[] authorization = servletRequest.getHeaders().getFirst("Authorization").split(" ");
+            String type = authorization[0];
+            String token = authorization[1];
             // Valider le token ici (ex: via JwtUtils) et stocker l'utilisateur dans les attributs
-            if (token != null && jwtTokenProvider.validateToken(token)) {
+            if (type != null && type.toLowerCase().equals("bearer") && token != null && jwtTokenProvider.validateToken(token)) {
                 String nom = jwtTokenProvider.getNomFromToken(token);
                 attributes.put("nom", nom);
             } else {
