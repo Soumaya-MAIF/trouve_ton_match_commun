@@ -114,9 +114,13 @@ Cependant, vous pouvez la créer manuellement à l’aide du shell MongoDB que v
 
 `mongosh`
 
-`use ttm`
+Puis dans le shell :
 
-`db.messages.insertOne({ message: "Bienvenue dans Trouve Ton Match !" })`
+`use ttm
+db.messages.insertOne({ message: "Bienvenue dans Trouve Ton Match !" })`
+
+#### d. Lancer MongoDB depuis un terminal :
+`mongod`
 
 #### e. Variables attendues
 
@@ -126,7 +130,7 @@ Cependant, vous pouvez la créer manuellement à l’aide du shell MongoDB que v
 | `SPRING_DATA_MONGODB_PORT`     | Port d'écoute de MongoDB          | `27017`     |
 | `SPRING_DATA_MONGODB_DATABASE` | Nom de la base de données MongoDB | `ttm`       |
 
-#### e. Exemple de fichier `.env`
+#### f. Exemple de fichier `.env`
 
 ```env
 SPRING_DATA_MONGODB_HOST=localhost
