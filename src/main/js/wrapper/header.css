@@ -89,6 +89,10 @@
     background-image: url('../../medias/images/logos/favicon_TTM_rose.png');
 }
 
+.bouton .btn-deconnexion {
+    background-color: #FF165D;
+}
+
 .bouton button {
     font-size: 0.95rem;
     padding: 0.1875rem 0.6rem;

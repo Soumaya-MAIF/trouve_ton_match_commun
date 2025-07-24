@@ -14,7 +14,11 @@ export const ZoneSaisie = forwardRef(({ setValue, label, name, value, regex, pla
     }, [value, regex]);
 
     const handleChange = (e) => {
-        setValue(e.target.value);
+        const textarea = e.target;
+        textarea.style.height = "auto"; // réinitialise la hauteur
+        textarea.style.height = `${textarea.scrollHeight}px`; // ajuste à la hauteur du contenu
+
+        setValue(textarea.value); // met à jour la valeur dans le parent
     };
 
     const addMsgError = (msgParam, focusSetter, validElement) => {
@@ -32,24 +36,8 @@ export const ZoneSaisie = forwardRef(({ setValue, label, name, value, regex, pla
                     </div>
                 }
                 <label htmlFor={name} className="form-label-type">{label}</label>
-                {/* <div className="custom-container">
-                    <input 
-                        ref={ref}
-                        onChange={handleChange}
-                        value={value}
-                        name={name}
-                        onBlur={() => addMsgError('Format de saisie non respecté !', setFocusInput, validInput)}
-                        onFocus={() => { setFocusInput(true) }}
-                        type="text-champ"
-                        className={`custom-input ${!value ? "" : validInput ? "is-valid" : "is-invalid"}`}
-                        disabled={false}
-                        id={name}
-                        placeholder={placeholder}
-                    />
-                </div> */}
                 <textarea 
-                    rows="10"
-                    // cols="33"
+                    id={name}
                     ref={ref}
                     onChange={handleChange}
                     value={value}
@@ -58,7 +46,6 @@ export const ZoneSaisie = forwardRef(({ setValue, label, name, value, regex, pla
                     onFocus={() => { setFocusInput(true) }}
                     className={`custom-input-zone ${!value ? "" : validInput ? "is-valid" : "is-invalid"}`}
                     disabled={false}
-                    id={name}
                     placeholder={placeholder}
                 />
             </div>

@@ -1,70 +1,207 @@
-# Getting Started with Create React App
+# Application Trouve Ton Match
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sommaire
 
-## Available Scripts
+- [Présentation](#présentation)
+- [Structure du projet](#structure-du-projet)
+- [Configuration minimale](#configuration-minimale)
+- [Prérequis](#prérequis)
+- [Frontend](#frontend)
+- [Backend](#backend-java--maven)
+- [Déploiement](#déploiement)
+- [Contributeurs](#contributeurs)
 
-In the project directory, you can run:
+# Présentation
 
-### `npm start`
+L'application Trouve Ton Match a pour but de favoriser les mises en relation et les échanges entre un porteur de projet (création d'entreprise par exemple) et un parrain (qui peut lui apporter son expertise, l'aider) dans ses démarches.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Lien vers l'application : [https://ttm-dreamteam.nocturlab.fr/](https://ttm-dreamteam.nocturlab.fr/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Structure du projet
 
-### `npm test`
+- `src/main/js` → Frontend : Application **React** (interface utilisateur)
+- `src/main/java` → Backend : Application **Spring Boot** (API, logique métier)
+- `/compose.yml` → Déploiement multi-conteneurs avec Docker
+- `/.env` → Variables d’environnement pour les bases de données
+- `/build.sh` → Script de construction des images Docker
+- `README.md` → Documentation du projet
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Configuration minimale
 
-### `npm run build`
+- React : 19.0.0
+- Java: 21.0.2
+- Maven: 3.9.8
+- Node: v18.20.8
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Prérequis
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Avant de lancer l'application, assurez-vous que les bases de données nécessaires sont installées et configurées localement ou accessibles à distance.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Bases de données requises
 
-### `npm run eject`
+### 1. PostgreSQL (relationnelle)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Utilisée pour la gestion des données structurées (utilisateurs, etc.).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### a. Installation de PostgreSQL
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Sous Windows
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Télécharge l’installeur depuis le site officiel : https://www.postgresql.org/download/windows/
 
-## Learn More
+- Lance l’installation avec les options par défaut ou définis le mot de passe PostgreSQL que tu utiliseras dans .env.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- pgAdmin est inclus dans l’installation pour l’administration graphique.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### b. Configuration de la base de données PostgreSQL via variables d’environnement
 
-### Code Splitting
+L'application utilise des variables d’environnement pour configurer l’accès à la base de données PostgreSQL. Ces variables sont définies dans un fichier `.env`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### c. Création de la base de données.
 
-### Analyzing the Bundle Size
+Il est possible de créer la base de données via le terminal et la commande:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+`createdb -U postgres ttm_commun`
 
-### Making a Progressive Web App
+ou bien en utilisant un outil graphique comme **pgAdmin**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### d. Variables attendues
 
-### Advanced Configuration
+| Variable                     | Description                  | Exemple                                       |
+| ---------------------------- | ---------------------------- | --------------------------------------------- |
+| `SPRING_DATASOURCE_URL`      | URL de connexion JDBC        | `jdbc:postgresql://localhost:5432/ttm_commun` |
+| `SPRING_DATASOURCE_USERNAME` | Nom d'utilisateur PostgreSQL | `postgres`                                    |
+| `SPRING_DATASOURCE_PASSWORD` | Mot de passe PostgreSQL      | `postgres`                                    |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### e. Exemple de fichier `.env`
 
-### Deployment
+```env
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/ttm_commun
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=postgres
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+> Vous pouvez modifier ces paramètres dans le fichier `application.yml` ou via des variables d’environnement.
 
-### `npm run build` fails to minify
+### 2. MongoDB (NoSQL)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Utilisée pour stocker des données de la messagerie.
+
+#### a. Installation de MongoDB
+
+Sous Windows
+
+- Télécharger l’installateur depuis : https://www.mongodb.com/try/download/community
+
+- Suivre les étapes d’installation.
+
+- Assurez-vous de cocher l’option pour installer MongoDB Compass (interface graphique).
+
+- Une fois installé, vous pouvez démarrer MongoDB depuis le Service Manager de Windows ou utiliser mongosh.
+
+#### b. Configuration de la base de données MongoDB via variables d’environnement
+
+L'application utilise des variables d’environnement pour configurer l’accès à la base de données MongoDB. Ces variables sont définies dans un fichier .env.
+
+#### c. Lancer MongoDB depuis un terminal :
+
+`mongod`
+
+#### d. Création de la base de données
+
+MongoDB crée automatiquement la base de données et les collections lors de la première insertion de données.
+Cependant, vous pouvez la créer manuellement à l’aide du shell MongoDB que vous pouvez lancer depuis un nouveau termianl powershell avec les commandes suivantes :
+
+`mongosh`
+
+Puis dans le shell :
+
+`use ttm
+db.messages.insertOne({ message: "Bienvenue dans Trouve Ton Match !" })`
+
+#### d. Lancer MongoDB depuis un terminal :
+`mongod`
+
+#### e. Variables attendues
+
+| Variable                       | Description                       | Exemple     |
+| ------------------------------ | --------------------------------- | ----------- |
+| `SPRING_DATA_MONGODB_HOST`     | Adresse du serveur MongoDB        | `localhost` |
+| `SPRING_DATA_MONGODB_PORT`     | Port d'écoute de MongoDB          | `27017`     |
+| `SPRING_DATA_MONGODB_DATABASE` | Nom de la base de données MongoDB | `ttm`       |
+
+#### f. Exemple de fichier `.env`
+
+```env
+SPRING_DATA_MONGODB_HOST=localhost
+SPRING_DATA_MONGODB_PORT=27017
+SPRING_DATA_MONGODB_DATABASE=ttm
+```
+
+> Assurez-vous que le service MongoDB est bien démarré avant de lancer l'application backend.
+
+---
+
+### Outils recommandés pour le développement
+
+- **pgAdmin** (ou DBeaver) pour gérer PostgreSQL
+- **MongoDB Compass** pour visualiser les collections MongoDB
+
+# Frontend
+
+### 1. Installer les dépendances
+
+`npm install`
+
+### 2. Démarrer
+
+`npm start`
+
+Exécute l'application en mode développement.\
+Ouvrez [http://localhost:3000](http://localhost:3000) pour l'afficher dans votre navigateur.
+
+La page se rechargera lorsque vous apporterez des modifications.
+
+# Backend (Java + Maven)
+
+### 1. Installation
+
+Pour nettoyer et compiler le backend :
+
+`mvn clean install`
+
+### 2. Démarrer
+
+`mvn spring-boot:run`
+
+# Déploiement
+
+### Docker
+
+Un fichier `docker-compose.yml` est disponible pour lancer l'application avec PostgreSQL et MongoDB.
+
+### Etapes de déploiement
+
+1. **Construire les images Docker**
+   `./build.sh`
+
+2. **Pousser les images vers le registre distant**
+
+   - push du dokerFile du frontend:
+     `registry.nocturlab.fr/dreamteam/trouve-ton-match-frontend`
+   - push du dokerFile du backend:
+     `registry.nocturlab.fr/dreamteam/trouve-ton-match-backend`
+
+3. **Récupérer les images sur le serveur distant**
+
+   `docker compose pull`
+
+4. **Lancer les conteneurs**
+
+   `docker compose up -d`
+
+# Contributeurs
+
+- Soumaya Belhachemi
+- Charlotte Charrier
+- Jérôme Bouhet

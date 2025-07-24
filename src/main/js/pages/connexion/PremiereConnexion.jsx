@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
+import { useAuth } from "../../components/context/AuthContext.jsx";
 import { ChampSaisie } from "../../components/champ-saisie/ChampSaisie";
 import Wrapper from "../../wrapper/Index";
 
@@ -56,7 +57,7 @@ const PremiereConnexion = () => {
     setUserNotFound(false);
   };
 
-  const API_BASE_URL = "http://localhost:8080/api";
+  const API_BASE_URL = "/api";
 
   const handleSubmit = (e) => {
     e.preventDefault();

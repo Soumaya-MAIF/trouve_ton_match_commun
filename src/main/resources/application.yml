@@ -1,9 +1,15 @@
 spring:
   application:
     name: trouve_ton_match_commun
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: ttm
 
   datasource:
-    url: jdbc:postgresql://db:5432/ttm_commun
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/ttm_commun
+    # url: jdbc:postgresql://db:5432/ttm_commun
     username: postgres
     password: postgres
 
@@ -19,16 +25,18 @@ spring:
 
 logging:
   level:
-    org.springframework: DEBUG
+    #    org.springframework: INFO
+    org:
+      springframework:
+        web:
+          socket: DEBUG
 
-debug: true
+debug: false
 
 jwt:
   secret: "kV73kRw7TaXECmsQ9854FuWsk3r655HMDFGkV73kRw7TaXECmsQ9854FuWsk3r655HMDFG"
   expiration: 3000000
 
-
 server:
   servlet:
     context-path: /api
-

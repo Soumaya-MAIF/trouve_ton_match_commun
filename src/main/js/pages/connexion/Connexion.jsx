@@ -1,7 +1,6 @@
 import Wrapper from "../../wrapper/Index";
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { ChampSaisie } from "./../../components/champ-saisie/ChampSaisie.jsx";
 import "./connexion.css";
@@ -10,14 +9,14 @@ import { useAuth } from "../../components/context/AuthContext.jsx";
 
 const Connexion = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/; // Au moins une majuscule, un chiffre, un caractère spécial et 6 caractères minimum
+
+  const { login } = useAuth(); // Récupérer la fonction login du contexte
 
   const [utilisateurDto, setUtilisateurDto] = useState({
     email: "",
     mot_de_passe: "",
   });
-
-  const location = useLocation(); // Pour suivre le changement de route
 
   // Créer une référence pour le champ 'email'
   const emailInputRef = useRef(null);
@@ -33,8 +32,6 @@ const Connexion = () => {
   const [errors, setErrors] = useState({});
   const [userNotFound, setUserNotFound] = useState(false);
   const navigate = useNavigate();
-
-  const { login } = useAuth();
 
   const validate = () => {
     const newErrors = {};
@@ -63,7 +60,7 @@ const Connexion = () => {
     setUserNotFound(false);
   };
 
-  const API_BASE_URL = "http://localhost:8080/api";
+  const API_BASE_URL = "/api";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,7 +89,7 @@ const Connexion = () => {
           setUserNotFound(true);
           throw new Error("Utilisateur inconnu");
         }
-        return response.json(); // ✅ Parse la réponse JSON ici
+        return response.json(); // Parse la réponse JSON ici
       })
 
       .then((data) => {
@@ -120,7 +117,6 @@ const Connexion = () => {
       <div className="espace"></div>
       <form onSubmit={handleSubmit} className="form-container">
         {errors.email && <div className="message-erreur">{errors.email}</div>}
-        {errors.email && <div className="message-erreur">{errors.email}</div>}
         <ChampSaisie
           setValue={(value) => handleChange("email", value)}
           label="Email :"
@@ -128,7 +124,7 @@ const Connexion = () => {
           value={utilisateurDto.email}
           regex={emailRegex}
           ref={emailInputRef}
-          placeholder="DUPONT"
+          placeholder="laurent.dupont@test.fr"
         />
         <div className="espace"></div>
 
@@ -140,6 +136,7 @@ const Connexion = () => {
           value={utilisateurDto.mot_de_passe}
           regex={passwordRegex}
           placeholder="A123"
+          type="password"
         />
         <div className="espace"></div>
 

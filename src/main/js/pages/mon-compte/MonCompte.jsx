@@ -7,6 +7,7 @@ import { ZoneSaisie } from "../../components/zone-saisie/ZoneSaisie";
 import "./../../components/global.css";
 import "./mon-compte.css";
 import { useAuth } from "../../components/context/AuthContext";
+import { useUser } from "../../components/context/UserContext.jsx";
 
 const otherRegex = /^[a-zA-ZÀ-ÿ\- ]{1,}$/; // minimum 2 caractères pour les autres champs
 
@@ -14,6 +15,8 @@ const MonCompte = () => {
   const { auth, idUtilisateur } = useAuth();
 
   console.log("id :" + idUtilisateur);
+
+  const { user } = useUser(); // Récupération de l'utilisateur connecté depuis le contexte
 
   const [monCompteDto, setMonCompteDto] = useState({
     id: "",
@@ -27,6 +30,10 @@ const MonCompte = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const location = useLocation(); // Ce hook permet d’accéder à l’objet location qui représente l’URL actuelle de l’application
   const navigate = useNavigate();
+
+  // const id = localStorage.getItem('id');
+  const id = user.id;
+  console.log("recupération de id:", id);
 
   // Créer une référence pour le champ 'nomUtilisateur'
   const presInputRef = useRef(null);
@@ -55,7 +62,7 @@ const MonCompte = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/user/${idUtilisateur}`, {
+        const response = await fetch(`/api/user/${idUtilisateur}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +147,7 @@ const MonCompte = () => {
 
     console.log("Données envoyées:", monCompteDto);
     console.log("Données envoyées (JSON.stringify):", JSON.stringify(monCompteDto));
-    fetch(`http://localhost:8080/api/user/${idUtilisateur}`, {
+    fetch(`/api/user/${idUtilisateur}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
