@@ -2,6 +2,7 @@ package back.trouve_ton_match.service;
 
 import back.trouve_ton_match.entity.User;
 import back.trouve_ton_match.entity.dto.ContactsDTO;
+import back.trouve_ton_match.entity.dto.PresentationDTO;
 import back.trouve_ton_match.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User patchPresentationUser(Long id, PresentationDTO presentationDTO) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setPresentation(presentationDTO.getPresentation());
+            return userRepository.save(user);
+        }
+        return null; 
     }
 }
 

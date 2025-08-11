@@ -5,6 +5,7 @@ import back.trouve_ton_match.entity.Type;
 import back.trouve_ton_match.entity.User;
 import back.trouve_ton_match.entity.dto.ContactsDTO;
 import back.trouve_ton_match.entity.dto.ParrainsDTO;
+import back.trouve_ton_match.entity.dto.PresentationDTO;
 import back.trouve_ton_match.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,7 @@ public interface UserService {
     public User saveUser(User user);
 
     List<User> getAllUsers();
+
+    User patchPresentationUser(Long id, PresentationDTO presentationDTO);
 }
 

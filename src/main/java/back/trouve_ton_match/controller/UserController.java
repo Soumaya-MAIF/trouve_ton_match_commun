@@ -50,6 +50,11 @@ public class UserController {
         return service.getUserById(id).orElse(null);
     }
 
+    @PatchMapping("/{id}")
+    public User patchPresentationUser(@PathVariable Long id, @RequestBody PresentationDTO presentationDTO) {
+        return service.patchPresentationUser(id, presentationDTO);
+    }
+
     @PatchMapping("/password")
     public ResponseEntity <String> updatePassword(@RequestBody PasswordDTO passwordDTO) {
         Optional<User> userConnu = service.getUserByEmail(passwordDTO.getEmail());

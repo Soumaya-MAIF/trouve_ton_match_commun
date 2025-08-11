@@ -31,10 +31,6 @@ const MonCompte = () => {
   const location = useLocation(); // Ce hook permet d’accéder à l’objet location qui représente l’URL actuelle de l’application
   const navigate = useNavigate();
 
-  // const id = localStorage.getItem('id');
-  const id = user.id;
-  console.log("recupération de id:", id);
-
   // Créer une référence pour le champ 'nomUtilisateur'
   const presInputRef = useRef(null);
 
