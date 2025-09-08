@@ -21,7 +21,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
@@ -36,29 +35,33 @@ public class AuthController {
 
     private final UserServiceImpl userServiceImpl;
 
-        private final UserService userService;
-//    private final AuthenticationManager authenticationManager;
-//    private final JwtTokenProvider jwtTokenProvider;
-//
-//    @Autowired
-//    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, JwtTokenProvider jwtTokenProvider1) {
-//        this.authenticationManager = authenticationManager;
-//        this.jwtTokenProvider = jwtTokenProvider;
-//        this.userService = userService;
-//    }
-//
-//    @PostMapping("/login")
-//    public String login(@RequestBody User user) {
-//        try {
-//            var authenticationToken = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
-//            var authentication = authenticationManager.authenticate(authenticationToken);
-//            var jwt = jwtTokenProvider.generateToken(authentication);
-//            return jwt;
-//        } catch (AuthenticationException e) {
-//            return "Invalid credentials";
-//        }
-//    }
-//
+    private final UserService userService;
+
+    // private final AuthenticationManager authenticationManager;
+    // private final JwtTokenProvider jwtTokenProvider;
+    //
+    // @Autowired
+    // public AuthController(AuthenticationManager authenticationManager,
+    // JwtTokenProvider jwtTokenProvider, UserService userService, JwtTokenProvider
+    // jwtTokenProvider1) {
+    // this.authenticationManager = authenticationManager;
+    // this.jwtTokenProvider = jwtTokenProvider;
+    // this.userService = userService;
+    // }
+    //
+    // @PostMapping("/login")
+    // public String login(@RequestBody User user) {
+    // try {
+    // var authenticationToken = new
+    // UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+    // var authentication = authenticationManager.authenticate(authenticationToken);
+    // var jwt = jwtTokenProvider.generateToken(authentication);
+    // return jwt;
+    // } catch (AuthenticationException e) {
+    // return "Invalid credentials";
+    // }
+    // }
+    //
     @PostMapping("/register")
     public User register(@RequestBody RegisterDTO user) {
         User newUser = User.builder()
@@ -78,12 +81,13 @@ public class AuthController {
     public ResponseEntity<String> firstLogin(@RequestBody FirstLoginDTO user) {
         Optional<User> userConnu = userService.getUserByEmail(user.getEmail());
         if (userConnu.isPresent()) {
-            if(userConnu.get().getCode_acces().equals(user.getCode_acces())) {
+            if (userConnu.get().getCode_acces().equals(user.getCode_acces())) {
                 return new ResponseEntity<>("Nous vous avons trouvé", HttpStatus.OK);
             }
-            return new ResponseEntity<>( "je connais le user mais c'est pas le bon code d'acces", HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>("je connais le user mais c'est pas le bon code d'acces",
+                    HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>( "Vous n'êtes pas connecté", HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity<>("Vous n'êtes pas connecté", HttpStatus.I_AM_A_TEAPOT);
     }
 
     @Autowired
@@ -91,11 +95,11 @@ public class AuthController {
 
     // Build Login REST API
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDTO loginDto){
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDTO loginDto) {
 
         try {
- String token = authService.login(loginDto);
- Optional<User> user = userService.getUserByEmail(loginDto.getEmail());
+            String token = authService.login(loginDto);
+            Optional<User> user = userService.getUserByEmail(loginDto.getEmail());
 
             JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
             jwtAuthResponse.setAccessToken(token);
@@ -122,9 +126,5 @@ public class AuthController {
             return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         }
 
-    }}
-
-
-
-
-
+    }
+}
